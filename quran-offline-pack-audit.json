@@ -1,0 +1,37 @@
+﻿{
+    "schema":  3,
+    "checked_utc":  "2026-09-11T13:33:46.8409338Z",
+    "complete":  true,
+    "expected_pages":  604,
+    "expected_assets":  1812,
+    "layout":  {
+                   "valid":  604,
+                   "missing_pages":  [
+
+                                     ],
+                   "invalid_pages":  [
+
+                                     ]
+               },
+    "v4_tajweed":  {
+                       "valid":  604,
+                       "missing_pages":  [
+
+                                         ],
+                       "invalid_pages":  [
+
+                                         ]
+                   },
+    "v2_plain":  {
+                     "valid":  604,
+                     "missing_pages":  [
+
+                                       ],
+                     "invalid_pages":  [
+
+                                       ]
+                 },
+    "incomplete_pages":  [
+
+                         ]
+}

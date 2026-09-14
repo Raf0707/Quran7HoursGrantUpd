@@ -1,0 +1,11 @@
+# Gradle / build
+/.gradle/
+/build/
+/app/build/
+/.kotlin/
+
+# Android Studio
+/.idea/
+
+# Local machine settings
+/local.properties

@@ -1,0 +1,169 @@
+{
+  "id": 100,
+  "nameAr": "العاديات",
+  "nameRu": "Аль-Адият",
+  "meaning": "Скачущие",
+  "revelation": "meccan",
+  "bismillah": {
+    "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+    "tw": "بِسْمِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_normal>ـٰ</tajweed>نِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّح<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>١</span>"
+  },
+  "intro": {
+    "translation": "Мчащиеся (кони)",
+    "tafsir": "Сура \"Аль-ʼАдият\" (\"Мчащиеся (кони)\") - мекканская сура. В ней 11 аятов.",
+    "page": 599,
+    "tafsirBlocks": [
+      {
+        "type": "paragraph",
+        "text": "Сура \"Аль-ʼАдият\" (\"Мчащиеся (кони)\") - мекканская сура. В ней 11 аятов.",
+        "sourceOrder": [
+          0
+        ]
+      }
+    ]
+  },
+  "ayahs": [
+    {
+      "a": 1,
+      "p": 599,
+      "j": 30,
+      "ar": "وَٱلْعَـٰدِيَـٰتِ ضَبْحًا",
+      "tw": "وَ<tajweed class=ham_wasl>ٱ</tajweed>لْعَ<tajweed class=madda_normal>ـٰ</tajweed>دِيَ<tajweed class=madda_normal>ـٰ</tajweed>تِ ضَ<tajweed class=qalaqah>بْ</tajweed>حًا <span class=end>١</span>",
+      "tr": "Клянусь мчащимися, тяжело дышащими (конями)!",
+      "tf": "Передается, что Посланник Аллаха (да благословит его Аллах и да приветствует) отправил военный отряд, и после этого от них в течение месяца не поступало никаких известий, из-за чего Пророк (да благословит его Аллах и да приветствует) очень огорчался. Тогда Всевышний ниспослал эту суру, где сообщается о победе мусульман.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Передается, что Посланник Аллаха (да благословит его Аллах и да приветствует) отправил военный отряд, и после этого от них в течение месяца не поступало никаких известий, из-за чего Пророк (да благословит его Аллах и да приветствует) очень огорчался. Тогда Всевышний ниспослал эту суру, где сообщается о победе мусульман.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 2,
+      "p": 599,
+      "j": 30,
+      "ar": "فَٱلْمُورِيَـٰتِ قَدْحًا",
+      "tw": "فَ<tajweed class=ham_wasl>ٱ</tajweed>لْمُورِيَ<tajweed class=madda_normal>ـٰ</tajweed>تِ قَ<tajweed class=qalaqah>دْ</tajweed>حًا <span class=end>٢</span>",
+      "tr": "Клянусь (конями) высекающими (копытами) искры!",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 3,
+      "p": 599,
+      "j": 30,
+      "ar": "فَٱلْمُغِيرَٲتِ صُبْحًا",
+      "tw": "فَ<tajweed class=ham_wasl>ٱ</tajweed>لْمُغِير<tajweed class=madda_normal>َٲ</tajweed>تِ صُ<tajweed class=qalaqah>بْ</tajweed>حًا <span class=end>٣</span>",
+      "tr": "Клянусь (конями) нападающими на заре,",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 4,
+      "p": 599,
+      "j": 30,
+      "ar": "فَأَثَرْنَ بِهِۦ نَقْعًا",
+      "tw": "فَأَثَرْنَ بِه<tajweed class=madda_normal>ِۦ</tajweed> نَ<tajweed class=qalaqah>قْ</tajweed>عًا <span class=end>٤</span>",
+      "tr": "которые окутывают (врагов густой) пылью,",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 5,
+      "p": 599,
+      "j": 30,
+      "ar": "فَوَسَطْنَ بِهِۦ جَمْعًا",
+      "tw": "فَوَسَ<tajweed class=qalaqah>طْ</tajweed>نَ بِه<tajweed class=madda_normal>ِۦ</tajweed> جَمْعًا <span class=end>٥</span>",
+      "tr": "врываясь прямо в центр толпы (врагов).",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 6,
+      "p": 599,
+      "j": 30,
+      "ar": "إِنَّ ٱلْإِنسَـٰنَ لِرَبِّهِۦ لَكَنُودٌ",
+      "tw": "إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>لْإِ<tajweed class=ikhafa>نس</tajweed>َ<tajweed class=madda_normal>ـٰ</tajweed>نَ لِرَبِّه<tajweed class=madda_normal>ِۦ</tajweed> لَكَن<tajweed class=madda_permissible>ُو</tajweed><tajweed class=qalaqah>د</tajweed>ٌ <span class=end>٦</span>",
+      "tr": "Поистине, человек своему Господу неблагодарен.",
+      "tf": "Всевышний Аллах клянется в том, что большинство людей проявляют неблагодарность Господу, Который наделяет их бесчисленными благами. Главная же неблагодарность - это неверие.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Всевышний Аллах клянется в том, что большинство людей проявляют неблагодарность Господу, Который наделяет их бесчисленными благами. Главная же неблагодарность - это неверие.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 7,
+      "p": 599,
+      "j": 30,
+      "ar": "وَإِنَّهُۥ عَلَىٰ ذَٲلِكَ لَشَهِيدٌ",
+      "tw": "وَإِ<tajweed class=ghunnah>نّ</tajweed>َهُ<tajweed class=madda_normal>ۥ</tajweed> عَلَىٰ ذ<tajweed class=madda_normal>َٲ</tajweed>لِكَ لَشَه<tajweed class=madda_permissible>ِي</tajweed><tajweed class=qalaqah>د</tajweed>ٌ <span class=end>٧</span>",
+      "tr": "И, поистине, он сам (человек) этому свидетель.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 8,
+      "p": 599,
+      "j": 30,
+      "ar": "وَإِنَّهُۥ لِحُبِّ ٱلْخَيْرِ لَشَدِيدٌ",
+      "tw": "وَإِ<tajweed class=ghunnah>نّ</tajweed>َهُ<tajweed class=madda_normal>ۥ</tajweed> لِحُبِّ <tajweed class=ham_wasl>ٱ</tajweed>لْخَيْرِ لَشَد<tajweed class=madda_permissible>ِي</tajweed><tajweed class=qalaqah>د</tajweed>ٌ <span class=end>٨</span>",
+      "tr": "Ведь он страстно любит (земные) блага.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 9,
+      "p": 599,
+      "j": 30,
+      "ar": "۞ أَفَلَا يَعْلَمُ إِذَا بُعْثِرَ مَا فِى ٱلْقُبُورِ",
+      "tw": "۞ أَفَلَا يَعْلَمُ إِذَا بُعْثِرَ مَا فِى <tajweed class=ham_wasl>ٱ</tajweed>لْقُب<tajweed class=madda_permissible>ُو</tajweed>رِ <span class=end>٩</span>",
+      "tr": "Разве он не знает, что, когда воскресят тех, что в могилах,",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 10,
+      "p": 600,
+      "j": 30,
+      "ar": "وَحُصِّلَ مَا فِى ٱلصُّدُورِ",
+      "tw": "وَحُصِّلَ مَا فِى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صُّد<tajweed class=madda_permissible>ُو</tajweed>رِ <span class=end>١٠</span>",
+      "tr": "и выявится все (тайное), что (было) в душах (людей),",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 11,
+      "p": 600,
+      "j": 30,
+      "ar": "إِنَّ رَبَّهُم بِهِمْ يَوْمَئِذٍ لَّخَبِيرُۢ",
+      "tw": "إِ<tajweed class=ghunnah>نّ</tajweed>َ رَبَّه<tajweed class=ikhafa_shafawi>ُم ب</tajweed>ِهِمْ يَوْمَئِ<tajweed class=idgham_wo_ghunnah>ذٍ ل</tajweed>َّخَب<tajweed class=madda_permissible>ِي</tajweed>رُۢ <span class=end>١١</span>",
+      "tr": "их Господь будет, поистине, знать обо всем (и воздаст им за их убеждения и дела)?!",
+      "tf": "Всевышний Аллах знает вечным и неизменным Знанием обо всем явном и скрытом, однако именно в этот день проявится то, о чем Господь знает в вечности. И праведных верующих ждет награда, а неверующих - вечное наказание.\n\nПо Милости Всевышнего Аллаха толкование суры \"Аль-ʼАдият\" завершено. Хвала Аллаху, Господу миров!",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Всевышний Аллах знает вечным и неизменным Знанием обо всем явном и скрытом, однако именно в этот день проявится то, о чем Господь знает в вечности. И праведных верующих ждет награда, а неверующих - вечное наказание.",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "По Милости Всевышнего Аллаха толкование суры \"Аль-ʼАдият\" завершено. Хвала Аллаху, Господу миров!",
+          "sourceOrder": [
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "tafsirSchemaVersion": 3
+}

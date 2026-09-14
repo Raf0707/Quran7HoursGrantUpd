@@ -1,0 +1,162 @@
+{
+  "id": 101,
+  "nameAr": "القارعة",
+  "nameRu": "Аль-Кариа",
+  "meaning": "Великое бедствие",
+  "revelation": "meccan",
+  "bismillah": {
+    "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+    "tw": "بِسْمِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_normal>ـٰ</tajweed>نِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّح<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>١</span>"
+  },
+  "intro": {
+    "translation": "Бедствие (Судный день)",
+    "tafsir": "Сура \"Аль-Кари'а - Бедствие (Судный день)\" - мекканская сура. В ней 11 аятов.",
+    "page": 600,
+    "tafsirBlocks": [
+      {
+        "type": "paragraph",
+        "text": "Сура \"Аль-Кари'а - Бедствие (Судный день)\" - мекканская сура. В ней 11 аятов.",
+        "sourceOrder": [
+          0
+        ]
+      }
+    ]
+  },
+  "ayahs": [
+    {
+      "a": 1,
+      "p": 600,
+      "j": 30,
+      "ar": "ٱلْقَارِعَةُ",
+      "tw": "ٱلْقَارِعَةُ <span class=end>١</span>",
+      "tr": "Бедствие (Судный день)!",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 2,
+      "p": 600,
+      "j": 30,
+      "ar": "مَا ٱلْقَارِعَةُ",
+      "tw": "مَا <tajweed class=ham_wasl>ٱ</tajweed>لْقَارِعَةُ <span class=end>٢</span>",
+      "tr": "Что такое Бедствие?",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 3,
+      "p": 600,
+      "j": 30,
+      "ar": "وَمَآ أَدْرَٮٰكَ مَا ٱلْقَارِعَةُ",
+      "tw": "وَم<tajweed class=madda_obligatory>َآ</tajweed> أَ<tajweed class=qalaqah>دْ</tajweed>رَ<tajweed class=madda_normal>ٮٰ</tajweed>كَ مَا <tajweed class=ham_wasl>ٱ</tajweed>لْقَارِعَةُ <span class=end>٣</span>",
+      "tr": "Откуда ты узнал, что такое Бедствие?",
+      "tf": "Имам Абу Сууд пишет, что Судный день назван \"аль-Кариʼа\" (Поражающее Бедствие), потому что поразит души и органы чувств людей ужасом и трепетом. Повтор этого слова в аятах служит указанием на важность, величие и ужас Судного дня.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Имам Абу Сууд пишет, что Судный день назван \"аль-Кариʼа\" (Поражающее Бедствие), потому что поразит души и органы чувств людей ужасом и трепетом. Повтор этого слова в аятах служит указанием на важность, величие и ужас Судного дня.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 4,
+      "p": 600,
+      "j": 30,
+      "ar": "يَوْمَ يَكُونُ ٱلنَّاسُ كَٱلْفَرَاشِ ٱلْمَبْثُوثِ",
+      "tw": "يَوْمَ يَكُونُ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َاسُ كَ<tajweed class=ham_wasl>ٱ</tajweed>لْفَرَاشِ <tajweed class=ham_wasl>ٱ</tajweed>لْمَ<tajweed class=qalaqah>بْ</tajweed>ث<tajweed class=madda_permissible>ُو</tajweed>ثِ <span class=end>٤</span>",
+      "tr": "В тот день люди будут похожи на разлетевшихся мотыльков.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 5,
+      "p": 600,
+      "j": 30,
+      "ar": "وَتَكُونُ ٱلْجِبَالُ كَٱلْعِهْنِ ٱلْمَنفُوشِ",
+      "tw": "وَتَكُونُ <tajweed class=ham_wasl>ٱ</tajweed>لْجِبَالُ كَ<tajweed class=ham_wasl>ٱ</tajweed>لْعِهْنِ <tajweed class=ham_wasl>ٱ</tajweed>لْمَ<tajweed class=ikhafa>نف</tajweed><tajweed class=madda_permissible>ُو</tajweed>شِ <span class=end>٥</span>",
+      "tr": "А горы будут как расчесанная шерсть.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 6,
+      "p": 600,
+      "j": 30,
+      "ar": "فَأَمَّا مَن ثَقُلَتْ مَوَٲزِينُهُۥ",
+      "tw": "فَأَ<tajweed class=ghunnah>مّ</tajweed>َا مَ<tajweed class=ikhafa>ن ث</tajweed>َقُلَتْ مَو<tajweed class=madda_normal>َٲ</tajweed>زِينُهُۥ <span class=end>٦</span>",
+      "tr": "Тот, чья чаша Весов окажется тяжелой,",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 7,
+      "p": 600,
+      "j": 30,
+      "ar": "فَهُوَ فِى عِيشَةٍ رَّاضِيَةٍ",
+      "tw": "فَهُوَ فِى عِيشَ<tajweed class=idgham_wo_ghunnah>ةٍ ر</tajweed>َّاضِيَةٍ <span class=end>٧</span>",
+      "tr": "будет доволен своей жизнью.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 8,
+      "p": 600,
+      "j": 30,
+      "ar": "وَأَمَّا مَنْ خَفَّتْ مَوَٲزِينُهُۥ",
+      "tw": "وَأَ<tajweed class=ghunnah>مّ</tajweed>َا مَنْ خَفَّتْ مَو<tajweed class=madda_normal>َٲ</tajweed>زِينُهُۥ <span class=end>٨</span>",
+      "tr": "Тому же, чья чаша Весов окажется легкой,",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 9,
+      "p": 600,
+      "j": 30,
+      "ar": "فَأُمُّهُۥ هَاوِيَةٌ",
+      "tw": "فَأُ<tajweed class=ghunnah>مّ</tajweed>ُهُ<tajweed class=madda_normal>ۥ</tajweed> هَاوِيَةٌ <span class=end>٩</span>",
+      "tr": "прибежищем станет Хавия.",
+      "tf": "\"Хавия\" - это одно из имен Ада.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"Хавия\" - это одно из имен Ада.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 10,
+      "p": 600,
+      "j": 30,
+      "ar": "وَمَآ أَدْرَٮٰكَ مَا هِيَهْ",
+      "tw": "وَم<tajweed class=madda_obligatory>َآ</tajweed> أَ<tajweed class=qalaqah>دْ</tajweed>رَ<tajweed class=madda_normal>ٮٰ</tajweed>كَ مَا هِيَهْ <span class=end>١٠</span>",
+      "tr": "Откуда ты мог знать, что это такое?",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 11,
+      "p": 600,
+      "j": 30,
+      "ar": "نَارٌ حَامِيَةُۢ",
+      "tw": "نَارٌ حَامِيَةُۢ <span class=end>١١</span>",
+      "tr": "Это - пылающий (жарко) Огонь!",
+      "tf": "Здесь заканчивается толкование суры \"Аль-Кариʼа\". Хвала Аллаху, Господу миров!",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Здесь заканчивается толкование суры \"Аль-Кариʼа\". Хвала Аллаху, Господу миров!",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "tafsirSchemaVersion": 3
+}

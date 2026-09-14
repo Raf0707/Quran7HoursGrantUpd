@@ -1,0 +1,5 @@
+﻿Quran7Hours complete offline QPC pack
+layouts=604
+v4_tajweed_fonts=604
+v2_plain_fonts=604
+installed_utc=2026-09-11T13:33:46.8508986Z

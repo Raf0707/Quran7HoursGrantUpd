@@ -1,0 +1,272 @@
+{
+  "id": 61,
+  "nameAr": "الصف",
+  "nameRu": "Ас-Сафф",
+  "meaning": "Ряд",
+  "revelation": "medinan",
+  "bismillah": {
+    "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+    "tw": "بِسْمِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_normal>ـٰ</tajweed>نِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّح<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>١</span>"
+  },
+  "intro": {
+    "translation": "Ряд",
+    "tafsir": "Сура \"Ас-Сафф\" (\"Ряд\") - мединская сура. В ней 14 аятов.",
+    "page": 551,
+    "tafsirBlocks": [
+      {
+        "type": "paragraph",
+        "text": "Сура \"Ас-Сафф\" (\"Ряд\") - мединская сура. В ней 14 аятов.",
+        "sourceOrder": [
+          0
+        ]
+      }
+    ]
+  },
+  "ayahs": [
+    {
+      "a": 1,
+      "p": 551,
+      "j": 28,
+      "ar": "سَبَّحَ لِلَّهِ مَا فِى ٱلسَّمَـٰوَٲتِ وَمَا فِى ٱلْأَرْضِ‌ۖ وَهُوَ ٱلْعَزِيزُ ٱلْحَكِيمُ",
+      "tw": "سَبَّحَ لِلَّهِ مَا فِى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّمَ<tajweed class=madda_normal>ـٰ</tajweed>و<tajweed class=madda_normal>َٲ</tajweed>تِ وَمَا فِى <tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضِ‌ۖ وَهُوَ <tajweed class=ham_wasl>ٱ</tajweed>لْعَزِيزُ <tajweed class=ham_wasl>ٱ</tajweed>لْحَك<tajweed class=madda_permissible>ِي</tajweed>مُ <span class=end>١</span>",
+      "tr": "Возвеличивает Аллаха все, что в небесах, и все, что на земле. Он - Могущественный, Мудрый.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 2,
+      "p": 551,
+      "j": 28,
+      "ar": "يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ لِمَ تَقُولُونَ مَا لَا تَفْعَلُونَ",
+      "tw": "يَ<tajweed class=madda_obligatory>ـٰٓ</tajweed>أَيُّهَا <tajweed class=ham_wasl>ٱ</tajweed>لَّذِينَ ءَامَنُو<tajweed class=slnt>اْ</tajweed> لِمَ تَقُولُونَ مَا لَا تَفْعَل<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٢</span>",
+      "tr": "О верующие! Почему вы говорите то, чего сами не делаете?",
+      "tf": "В соответствии с одним из риваятов, некоторые из сподвижников, до того как им был приказан джихад, говорили: \"Если бы мы знали, какое дело Аллах любит больше всего, то непременно сделали бы его\". Но когда был ниспослан аят о джихаде, некоторые из них бежали с поля боя в битве при Ухуде. Этот аят - предупреждение о том, что все сказанное имеет свойство обещания, а обещания необходимо выполнять.\n\nЭтот аят толковался и так: \"Почему вы говорите то, чего не сделали?\" Таким образом разъяснялось то, что верующему не подобает лгать. Были и те, кто говорил, что это обращение в виде порицания адресовано лицемерам, старающимся казаться верующими.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "В соответствии с одним из риваятов, некоторые из сподвижников, до того как им был приказан джихад, говорили: \"Если бы мы знали, какое дело Аллах любит больше всего, то непременно сделали бы его\". Но когда был ниспослан аят о джихаде, некоторые из них бежали с поля боя в битве при Ухуде. Этот аят - предупреждение о том, что все сказанное имеет свойство обещания, а обещания необходимо выполнять.",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Этот аят толковался и так: \"Почему вы говорите то, чего не сделали?\" Таким образом разъяснялось то, что верующему не подобает лгать. Были и те, кто говорил, что это обращение в виде порицания адресовано лицемерам, старающимся казаться верующими.",
+          "sourceOrder": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "a": 3,
+      "p": 551,
+      "j": 28,
+      "ar": "كَبُرَ مَقْتًا عِندَ ٱللَّهِ أَن تَقُولُواْ مَا لَا تَفْعَلُونَ",
+      "tw": "كَبُرَ مَ<tajweed class=qalaqah>قْ</tajweed>تًا عِ<tajweed class=ikhafa>ند</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ أَ<tajweed class=ikhafa>ن ت</tajweed>َقُولُو<tajweed class=slnt>اْ</tajweed> مَا لَا تَفْعَل<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٣</span>",
+      "tr": "Аллах сильно ненавидит, когда вы говорите то, чего сами не делаете.",
+      "tf": "Когда ваши слова расходятся с поступками.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Когда ваши слова расходятся с поступками.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 4,
+      "p": 551,
+      "j": 28,
+      "ar": "إِنَّ ٱللَّهَ يُحِبُّ ٱلَّذِينَ يُقَـٰتِلُونَ فِى سَبِيلِهِۦ صَفًّا كَأَنَّهُم بُنْيَـٰنٌ مَّرْصُوصٌ",
+      "tw": "إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ يُحِبُّ <tajweed class=ham_wasl>ٱ</tajweed>لَّذِينَ يُقَ<tajweed class=madda_normal>ـٰ</tajweed>تِلُونَ فِى سَبِيلِه<tajweed class=madda_normal>ِۦ</tajweed> صَف<tajweed class=ikhafa>ًّا ك</tajweed>َأَ<tajweed class=ghunnah>نّ</tajweed>َه<tajweed class=ikhafa_shafawi>ُم ب</tajweed>ُنْيَ<tajweed class=madda_normal>ـٰ</tajweed><tajweed class=idgham_ghunnah>نٌ م</tajweed>َّرْص<tajweed class=madda_permissible>ُو</tajweed>صٌ <span class=end>٤</span>",
+      "tr": "Аллах, поистине, любит тех, кто воюет на Его пути единым рядом, будто крепкое строение.",
+      "tf": "Аллах доволен этим их делом и вознаградит их за это.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Аллах доволен этим их делом и вознаградит их за это.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 5,
+      "p": 551,
+      "j": 28,
+      "ar": "وَإِذْ قَالَ مُوسَىٰ لِقَوْمِهِۦ يَـٰقَوْمِ لِمَ تُؤْذُونَنِى وَقَد تَّعْلَمُونَ أَنِّى رَسُولُ ٱللَّهِ إِلَيْكُمْ‌ۖ فَلَمَّا زَاغُوٓاْ أَزَاغَ ٱللَّهُ قُلُوبَهُمْ‌ۚ وَٱللَّهُ لَا يَهْدِى ٱلْقَوْمَ ٱلْفَـٰسِقِينَ",
+      "tw": "وَإِذْ قَالَ مُوسَىٰ لِقَوْمِه<tajweed class=madda_normal>ِۦ</tajweed> يَ<tajweed class=madda_normal>ـٰ</tajweed>قَوْمِ لِمَ تُؤْذُونَنِى وَقَ<tajweed class=idgham_mutajanisayn>د</tajweed> تَّعْلَمُونَ أَ<tajweed class=ghunnah>نّ</tajweed>ِى رَسُولُ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ إِلَيْكُمْ‌ۖ فَلَ<tajweed class=ghunnah>مّ</tajweed>َا زَاغ<tajweed class=madda_obligatory>ُوٓ</tajweed><tajweed class=slnt>اْ</tajweed> أَزَاغَ <tajweed class=ham_wasl>ٱ</tajweed>للَّهُ قُلُوبَهُمْ‌ۚ وَ<tajweed class=ham_wasl>ٱ</tajweed>للَّهُ لَا يَهْدِى <tajweed class=ham_wasl>ٱ</tajweed>لْقَوْمَ <tajweed class=ham_wasl>ٱ</tajweed>لْفَ<tajweed class=madda_normal>ـٰ</tajweed>سِق<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٥</span>",
+      "tr": "И Муса сказал своему народу: \"О мой народ! Почему вы вредите мне, хотя знаете, что меня отправил к вам Аллах (в качестве пророка)?!\" Когда же они отклонились (от истины), Аллах отклонил их сердца. Аллах не ведет прямым путем людей нечестивых.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 6,
+      "p": 552,
+      "j": 28,
+      "ar": "وَإِذْ قَالَ عِيسَى ٱبْنُ مَرْيَمَ يَـٰبَنِىٓ إِسْرَٲٓءِيلَ إِنِّى رَسُولُ ٱللَّهِ إِلَيْكُم مُّصَدِّقًا لِّمَا بَيْنَ يَدَىَّ مِنَ ٱلتَّوْرَٮٰةِ وَمُبَشِّرَۢا بِرَسُولٍ يَأْتِى مِنۢ بَعْدِى ٱسْمُهُۥٓ أَحْمَدُ‌ۖ فَلَمَّا جَآءَهُم بِٱلْبَيِّنَـٰتِ قَالُواْ هَـٰذَا سِحْرٌ مُّبِينٌ",
+      "tw": "وَإِذْ قَالَ عِيسَى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=qalaqah>بْ</tajweed>نُ مَرْيَمَ يَ<tajweed class=madda_normal>ـٰ</tajweed>بَن<tajweed class=madda_obligatory>ِىٓ</tajweed> إِسْر<tajweed class=madda_obligatory>َٲ</tajweed>ٓءِيلَ إِ<tajweed class=ghunnah>نّ</tajweed>ِى رَسُولُ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ إِلَيْك<tajweed class=idgham_shafawi>ُم م</tajweed>ُّصَدِّ<tajweed class=idgham_wo_ghunnah>قًا ل</tajweed>ِّمَا بَيْنَ يَدَىَّ مِنَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>تَّوْرَ<tajweed class=madda_normal>ٮٰ</tajweed>ةِ وَمُبَشِّر<tajweed class=iqlab>َۢا ب</tajweed>ِرَسُو<tajweed class=idgham_ghunnah>لٍ ي</tajweed>َأْتِى م<tajweed class=iqlab>ِنۢ ب</tajweed>َعْدِى <tajweed class=ham_wasl>ٱ</tajweed>سْمُهُ<tajweed class=madda_obligatory>ۥٓ</tajweed> أَحْمَدُ‌ۖ فَلَ<tajweed class=ghunnah>مّ</tajweed>َا ج<tajweed class=madda_obligatory>َا</tajweed>ٓءَه<tajweed class=ikhafa_shafawi>ُم ب</tajweed>ِ<tajweed class=ham_wasl>ٱ</tajweed>لْبَيِّنَ<tajweed class=madda_normal>ـٰ</tajweed>تِ قَالُو<tajweed class=slnt>اْ</tajweed> هَ<tajweed class=madda_normal>ـٰ</tajweed>ذَا سِحْ<tajweed class=idgham_ghunnah>رٌ م</tajweed>ُّب<tajweed class=madda_permissible>ِي</tajweed>نٌ <span class=end>٦</span>",
+      "tr": "И Иса, сын Марьям (посланник Аллаха к иудеям), сказал (обращаясь к ним): \"О потомки Исраиля! Меня отправил к вам Аллах, чтобы подтвердить правдивость того, что было (сказано) в Таурате до меня, и чтобы сообщить благую весть о Посланнике, который придет после меня, имя которого Ахмад\". А когда он пришел к ним с ясными знамениями, они сказали: \"Это - очевидное колдовство\".",
+      "tf": "\"А когда он пришел к ним с ясными знамениями\", - чудесами, такими как оживление мертвых, исцеление слепых и больных проказой.\n\nКак же могут иудеи уверовать в пророка конца света, если они не уверовали в Ису (мир ему), который сообщил им радостную весть о его приходе?\n\nВ тафсире Алюси сообщается, что в Евангелии упоминаются следующие слова Исы (мир ему):\n\n\"Мое вознесение к Аллаху будет благом для вас. Так как если я не уйду, то Параклит не придет к вам. Когда я уйду, то отправлю его к вам. Я мог бы многое вам сказать, но вы не вынесете этого. Но когда придет он, то поведет вас по прямому пути, показав всю истину, так как он не будет говорить от себя, наоборот, он разъяснит вам услышанные Откровения, расскажет вам о будущем и разъяснит вам качества, присущие вашему Господу. Если любите меня, то следуйте моему завещанию. Но я не оставлю вас сиротами, так как в скором времени вернусь к вам\".\n\nНекоторые из христианских ученых толковали слово \"параклит\", упоминаемое Исой (мир ему), как \"восхваляющий\", а это синоним имени Ахмад. Отныне те, с чьих глаз Всевышний Аллах сорвал завесу, легко поймут, что под словом \"Параклит\" подразумевается Посланник Аллаха (да благословит его Аллах и да приветствует). Радостная весть, сообщенная Исой (мир ему), что вскоре он вернется, указывает на то, что перед концом света он снизойдет с небес в качестве одного из членов общины Посланника Аллаха (да благословит его Аллах и да приветствует), чтобы убить Даджаля и утвердить господство Ислама на всей земле",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"А когда он пришел к ним с ясными знамениями\", - чудесами, такими как оживление мертвых, исцеление слепых и больных проказой.",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Как же могут иудеи уверовать в пророка конца света, если они не уверовали в Ису (мир ему), который сообщил им радостную весть о его приходе?",
+          "sourceOrder": [
+            1
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "В тафсире Алюси сообщается, что в Евангелии упоминаются следующие слова Исы (мир ему):",
+          "sourceOrder": [
+            2
+          ]
+        },
+        {
+          "type": "quote",
+          "kind": "scholar",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "\"Мое вознесение к Аллаху будет благом для вас. Так как если я не уйду, то Параклит не придет к вам. Когда я уйду, то отправлю его к вам. Я мог бы многое вам сказать, но вы не вынесете этого. Но когда придет он, то поведет вас по прямому пути, показав всю истину, так как он не будет говорить от себя, наоборот, он разъяснит вам услышанные Откровения, расскажет вам о будущем и разъяснит вам качества, присущие вашему Господу. Если любите меня, то следуйте моему завещанию. Но я не оставлю вас сиротами, так как в скором времени вернусь к вам\"."
+            }
+          ],
+          "sourceOrder": [
+            3
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Некоторые из христианских ученых толковали слово \"параклит\", упоминаемое Исой (мир ему), как \"восхваляющий\", а это синоним имени Ахмад. Отныне те, с чьих глаз Всевышний Аллах сорвал завесу, легко поймут, что под словом \"Параклит\" подразумевается Посланник Аллаха (да благословит его Аллах и да приветствует). Радостная весть, сообщенная Исой (мир ему), что вскоре он вернется, указывает на то, что перед концом света он снизойдет с небес в качестве одного из членов общины Посланника Аллаха (да благословит его Аллах и да приветствует), чтобы убить Даджаля и утвердить господство Ислама на всей земле",
+          "sourceOrder": [
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "a": 7,
+      "p": 552,
+      "j": 28,
+      "ar": "وَمَنْ أَظْلَمُ مِمَّنِ ٱفْتَرَىٰ عَلَى ٱللَّهِ ٱلْكَذِبَ وَهُوَ يُدْعَىٰٓ إِلَى ٱلْإِسْلَـٰمِ‌ۚ وَٱللَّهُ لَا يَهْدِى ٱلْقَوْمَ ٱلظَّـٰلِمِينَ",
+      "tw": "وَمَنْ أَظْلَمُ مِ<tajweed class=ghunnah>مّ</tajweed>َنِ <tajweed class=ham_wasl>ٱ</tajweed>فْتَرَىٰ عَلَى <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ <tajweed class=ham_wasl>ٱ</tajweed>لْكَذِبَ وَهُوَ يُ<tajweed class=qalaqah>دْ</tajweed>عَ<tajweed class=madda_obligatory>ىٰٓ</tajweed> إِلَى <tajweed class=ham_wasl>ٱ</tajweed>لْإِسْلَ<tajweed class=madda_normal>ـٰ</tajweed>مِ‌ۚ وَ<tajweed class=ham_wasl>ٱ</tajweed>للَّهُ لَا يَهْدِى <tajweed class=ham_wasl>ٱ</tajweed>لْقَوْمَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>ظَّ<tajweed class=madda_normal>ـٰ</tajweed>لِم<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٧</span>",
+      "tr": "Кто же несправедливее лгущего об Аллахе, когда его призывают к Исламу? Аллах не наставляет на верный путь (ведущий к вечному счастью) несправедливых людей.",
+      "tf": "Нет никого несправедливее того, кто называет Посланника Аллаха (да благословит его Аллах и да приветствует) лжецом, а его чудеса и аяты Корана - колдовством.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Нет никого несправедливее того, кто называет Посланника Аллаха (да благословит его Аллах и да приветствует) лжецом, а его чудеса и аяты Корана - колдовством.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 8,
+      "p": 552,
+      "j": 28,
+      "ar": "يُرِيدُونَ لِيُطْفِــُٔواْ نُورَ ٱللَّهِ بِأَفْوَٲهِهِمْ وَٱللَّهُ مُتِمُّ نُورِهِۦ وَلَوْ كَرِهَ ٱلْكَـٰفِرُونَ",
+      "tw": "يُرِيدُونَ لِيُ<tajweed class=qalaqah>طْ</tajweed>فِــُٔو<tajweed class=slnt>اْ</tajweed> نُورَ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ بِأَفْو<tajweed class=madda_normal>َٲ</tajweed>هِهِمْ وَ<tajweed class=ham_wasl>ٱ</tajweed>للَّهُ مُتِ<tajweed class=ghunnah>مّ</tajweed>ُ نُورِه<tajweed class=madda_normal>ِۦ</tajweed> وَلَوْ كَرِهَ <tajweed class=ham_wasl>ٱ</tajweed>لْكَ<tajweed class=madda_normal>ـٰ</tajweed>فِر<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٨</span>",
+      "tr": "Они хотят погасить свет Аллаха (свет пророчества и Корана) своими устами (произнося клевету и слова неверия). Но Аллах доведет Свой свет (свет Ислама) до полноты (дарует мусульманам победу), даже если это и не нравится неверующим.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 9,
+      "p": 552,
+      "j": 28,
+      "ar": "هُوَ ٱلَّذِىٓ أَرْسَلَ رَسُولَهُۥ بِٱلْهُدَىٰ وَدِينِ ٱلْحَقِّ لِيُظْهِرَهُۥ عَلَى ٱلدِّينِ كُلِّهِۦ وَلَوْ كَرِهَ ٱلْمُشْرِكُونَ",
+      "tw": "هُوَ <tajweed class=ham_wasl>ٱ</tajweed>لَّذ<tajweed class=madda_obligatory>ِىٓ</tajweed> أَرْسَلَ رَسُولَهُ<tajweed class=madda_normal>ۥ</tajweed> بِ<tajweed class=ham_wasl>ٱ</tajweed>لْهُدَىٰ وَدِينِ <tajweed class=ham_wasl>ٱ</tajweed>لْحَقِّ لِيُظْهِرَهُ<tajweed class=madda_normal>ۥ</tajweed> عَلَى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>دِّينِ كُلِّه<tajweed class=madda_normal>ِۦ</tajweed> وَلَوْ كَرِهَ <tajweed class=ham_wasl>ٱ</tajweed>لْمُشْرِك<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٩</span>",
+      "tr": "Он отправил Своего Посланника с верным руководством (Кораном) и истинной религией (Исламом), чтобы возвысить ее над всеми остальными религиями, даже если это и не нравится язычникам.",
+      "tf": "Это обещание Всевышнего Аллаха исполнилось, когда Ислам отменил все предыдущие религии. И когда перед наступлением конца света придет Иса (мир ему), то на земле не останется никакой другой религии, кроме Ислама.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Это обещание Всевышнего Аллаха исполнилось, когда Ислам отменил все предыдущие религии. И когда перед наступлением конца света придет Иса (мир ему), то на земле не останется никакой другой религии, кроме Ислама.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 10,
+      "p": 552,
+      "j": 28,
+      "ar": "يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ هَلْ أَدُلُّكُمْ عَلَىٰ تِجَـٰرَةٍ تُنجِيكُم مِّنْ عَذَابٍ أَلِيمٍ",
+      "tw": "يَ<tajweed class=madda_obligatory>ـٰٓ</tajweed>أَيُّهَا <tajweed class=ham_wasl>ٱ</tajweed>لَّذِينَ ءَامَنُو<tajweed class=slnt>اْ</tajweed> هَلْ أَدُلُّكُمْ عَلَىٰ تِجَ<tajweed class=madda_normal>ـٰ</tajweed>رَ<tajweed class=ikhafa>ةٍ ت</tajweed>ُ<tajweed class=ikhafa>نج</tajweed>ِيك<tajweed class=idgham_shafawi>ُم م</tajweed>ِّنْ عَذَابٍ أَل<tajweed class=madda_permissible>ِي</tajweed>مٍ <span class=end>١٠</span>",
+      "tr": "О верующие! Указать вам на торговую сделку, которая спасет вас от болезненного наказания?",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 11,
+      "p": 552,
+      "j": 28,
+      "ar": "تُؤْمِنُونَ بِٱللَّهِ وَرَسُولِهِۦ وَتُجَـٰهِدُونَ فِى سَبِيلِ ٱللَّهِ بِأَمْوَٲلِكُمْ وَأَنفُسِكُمْ‌ۚ ذَٲلِكُمْ خَيْرٌ لَّكُمْ إِن كُنتُمْ تَعْلَمُونَ",
+      "tw": "تُؤْمِنُونَ بِ<tajweed class=ham_wasl>ٱ</tajweed>للَّهِ وَرَسُولِه<tajweed class=madda_normal>ِۦ</tajweed> وَتُجَ<tajweed class=madda_normal>ـٰ</tajweed>هِدُونَ فِى سَبِيلِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ بِأَمْو<tajweed class=madda_normal>َٲ</tajweed>لِكُمْ وَأَ<tajweed class=ikhafa>نف</tajweed>ُسِكُمْ‌ۚ ذ<tajweed class=madda_normal>َٲ</tajweed>لِكُمْ خَيْ<tajweed class=idgham_wo_ghunnah>رٌ ل</tajweed>َّكُمْ إِ<tajweed class=ikhafa>ن ك</tajweed>ُ<tajweed class=ikhafa>نت</tajweed>ُمْ تَعْلَم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>١١</span>",
+      "tr": "Верьте в Аллаха и Его Посланника и усердствуйте на пути Аллаха своим имуществом и своей жизнью. Так будет лучше для вас, если бы вы только знали.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 12,
+      "p": 552,
+      "j": 28,
+      "ar": "يَغْفِرْ لَكُمْ ذُنُوبَكُمْ وَيُدْخِلْكُمْ جَنَّـٰتٍ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَـٰرُ وَمَسَـٰكِنَ طَيِّبَةً فِى جَنَّـٰتِ عَدْنٍ‌ۚ ذَٲلِكَ ٱلْفَوْزُ ٱلْعَظِيمُ",
+      "tw": "يَغْفِرْ لَكُمْ ذُنُوبَكُمْ وَيُ<tajweed class=qalaqah>دْ</tajweed>خِلْكُمْ جَ<tajweed class=ghunnah>نّ</tajweed>َ<tajweed class=madda_normal>ـٰ</tajweed><tajweed class=ikhafa>تٍ ت</tajweed>َ<tajweed class=qalaqah>جْ</tajweed>رِى مِ<tajweed class=ikhafa>ن ت</tajweed>َحْتِهَا <tajweed class=ham_wasl>ٱ</tajweed>لْأَنْهَ<tajweed class=madda_normal>ـٰ</tajweed>رُ وَمَسَ<tajweed class=madda_normal>ـٰ</tajweed>كِنَ طَيِّبَ<tajweed class=ikhafa>ةً ف</tajweed>ِى جَ<tajweed class=ghunnah>نّ</tajweed>َ<tajweed class=madda_normal>ـٰ</tajweed>تِ عَ<tajweed class=qalaqah>دْ</tajweed><tajweed class=ikhafa>نٍ‌ۚ ذ</tajweed><tajweed class=madda_normal>َٲ</tajweed>لِكَ <tajweed class=ham_wasl>ٱ</tajweed>لْفَوْزُ <tajweed class=ham_wasl>ٱ</tajweed>لْعَظ<tajweed class=madda_permissible>ِي</tajweed>مُ <span class=end>١٢</span>",
+      "tr": "(Если вы поступите так, то) Он (Аллах) простит вам ваши грехи, введет вас в (райские) сады, в которых (под деревьями и дворцами) текут реки, и в прекрасные жилища в садах Адна. Это - великий успех.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 13,
+      "p": 552,
+      "j": 28,
+      "ar": "وَأُخْرَىٰ تُحِبُّونَهَا‌ۖ نَصْرٌ مِّنَ ٱللَّهِ وَفَتْحٌ قَرِيبٌ‌ۗ وَبَشِّرِ ٱلْمُؤْمِنِينَ",
+      "tw": "وَأُخْرَىٰ تُحِبُّونَهَا‌ۖ نَصْ<tajweed class=idgham_ghunnah>رٌ م</tajweed>ِّنَ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ وَفَتْ<tajweed class=ikhafa>حٌ ق</tajweed>َرِي<tajweed class=idgham_ghunnah>بٌ‌ۗ و</tajweed>َبَشِّرِ <tajweed class=ham_wasl>ٱ</tajweed>لْمُؤْمِن<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>١٣</span>",
+      "tr": "(За вашу веру и усердие) будет и другое (из того), что вы любите: (вам будет дана) помощь от Аллаха и близкая победа. Сообщи же (Мухаммад) верующим радостное известие (о счастье в обоих мирах)!",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 14,
+      "p": 552,
+      "j": 28,
+      "ar": "يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ كُونُوٓاْ أَنصَارَ ٱللَّهِ كَمَا قَالَ عِيسَى ٱبْنُ مَرْيَمَ لِلْحَوَارِيِّــۧنَ مَنْ أَنصَارِىٓ إِلَى ٱللَّهِ‌ۖ قَالَ ٱلْحَوَارِيُّونَ نَحْنُ أَنصَارُ ٱللَّهِ‌ۖ فَـَٔـامَنَت طَّآئِفَةٌ مِّنۢ بَنِىٓ إِسْرَٲٓءِيلَ وَكَفَرَت طَّآئِفَةٌ‌ۖ فَأَيَّدْنَا ٱلَّذِينَ ءَامَنُواْ عَلَىٰ عَدُوِّهِمْ فَأَصْبَحُواْ ظَـٰهِرِينَ",
+      "tw": "يَ<tajweed class=madda_obligatory>ـٰٓ</tajweed>أَيُّهَا <tajweed class=ham_wasl>ٱ</tajweed>لَّذِينَ ءَامَنُو<tajweed class=slnt>اْ</tajweed> كُون<tajweed class=madda_obligatory>ُوٓ</tajweed><tajweed class=slnt>اْ</tajweed> أَ<tajweed class=ikhafa>نص</tajweed>َارَ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ كَمَا قَالَ عِيسَى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=qalaqah>بْ</tajweed>نُ مَرْيَمَ لِلْحَوَارِيِّـ<tajweed class=madda_normal>ـۧ</tajweed>نَ مَنْ أَ<tajweed class=ikhafa>نص</tajweed>َار<tajweed class=madda_obligatory>ِىٓ</tajweed> إِلَى <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ‌ۖ قَالَ <tajweed class=ham_wasl>ٱ</tajweed>لْحَوَارِيُّونَ نَحْنُ أَ<tajweed class=ikhafa>نص</tajweed>َارُ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ‌ۖ فَـَٔـامَنَ<tajweed class=idgham_mutajanisayn>ت</tajweed> طّ<tajweed class=madda_obligatory>َا</tajweed>ٓئِفَ<tajweed class=idgham_ghunnah>ةٌ م</tajweed>ّ<tajweed class=iqlab>ِنۢ ب</tajweed>َن<tajweed class=madda_obligatory>ِىٓ</tajweed> إِسْر<tajweed class=madda_obligatory>َٲ</tajweed>ٓءِيلَ وَكَفَرَ<tajweed class=idgham_mutajanisayn>ت</tajweed> طّ<tajweed class=madda_obligatory>َا</tajweed>ٓئِفَ<tajweed class=ikhafa>ةٌ‌ۖ ف</tajweed>َأَيَّ<tajweed class=qalaqah>دْ</tajweed>نَا <tajweed class=ham_wasl>ٱ</tajweed>لَّذِينَ ءَامَنُو<tajweed class=slnt>اْ</tajweed> عَلَىٰ عَدُوِّهِمْ فَأَصْبَحُو<tajweed class=slnt>اْ</tajweed> ظَ<tajweed class=madda_normal>ـٰ</tajweed>هِر<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>١٤</span>",
+      "tr": "О верующие! Будьте помощниками (религии) Аллаха. Иса, сын Марьям, спросил апостолов (своих сподвижников): \"Кто станет моим помощником (на пути) к Аллаху?\" Апостолы ответили: \"Мы - помощники (религии) Аллаха\". Часть иудеев поверила (в Ису (мир ему)), а другая часть не поверила. Мы укрепили верующих в борьбе с врагами, и они вышли победителями.",
+      "tf": "По мнению некоторых толкователей Корана, эта победа была осуществлена путем предоставления доказательств и доводов. А по мнению другой части толкователей Корана, после того как Иса (мир ему) был вознесен на небеса, между верующими и неверующими началась война, в которой победу одержали верующие.\n\nКомментарий к суре \"Ас-Сафф\" завершен. Хвала Аллаху, Господу миров!",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "По мнению некоторых толкователей Корана, эта победа была осуществлена путем предоставления доказательств и доводов. А по мнению другой части толкователей Корана, после того как Иса (мир ему) был вознесен на небеса, между верующими и неверующими началась война, в которой победу одержали верующие.",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Комментарий к суре \"Ас-Сафф\" завершен. Хвала Аллаху, Господу миров!",
+          "sourceOrder": [
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "tafsirSchemaVersion": 3
+}

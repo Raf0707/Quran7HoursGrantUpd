@@ -1,0 +1,769 @@
+{
+  "id": 77,
+  "nameAr": "المرسلات",
+  "nameRu": "Аль-Мурсалят",
+  "meaning": "Посланные",
+  "revelation": "meccan",
+  "bismillah": {
+    "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+    "tw": "بِسْمِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_normal>ـٰ</tajweed>نِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّح<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>١</span>"
+  },
+  "intro": {
+    "translation": "Посылаемые",
+    "tafsir": "Сура \"Аль-Мурсалят\" (\"Посылаемые\") - мекканская сура. Её темы характерны для сур мекканского периода: речь идёт о таких положениях исламского вероучения, как безграничность Могущества Всевышнего Аллаха, истинность Корана, вера в Судный день и вечную жизнь. В ней 50 аятов.",
+    "page": 580,
+    "tafsirBlocks": [
+      {
+        "type": "paragraph",
+        "text": "Сура \"Аль-Мурсалят\" (\"Посылаемые\") - мекканская сура. Её темы характерны для сур мекканского периода: речь идёт о таких положениях исламского вероучения, как безграничность Могущества Всевышнего Аллаха, истинность Корана, вера в Судный день и вечную жизнь. В ней 50 аятов.",
+        "sourceOrder": [
+          0
+        ]
+      }
+    ]
+  },
+  "ayahs": [
+    {
+      "a": 1,
+      "p": 580,
+      "j": 29,
+      "ar": "وَٱلْمُرْسَلَـٰتِ عُرْفًا",
+      "tw": "وَ<tajweed class=ham_wasl>ٱ</tajweed>لْمُرْسَلَ<tajweed class=madda_normal>ـٰ</tajweed>تِ عُرْفًا <span class=end>١</span>",
+      "tr": "Клянусь (ветрами) посылаемыми друг за другом,",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 2,
+      "p": 580,
+      "j": 29,
+      "ar": "فَٱلْعَـٰصِفَـٰتِ عَصْفًا",
+      "tw": "فَ<tajweed class=ham_wasl>ٱ</tajweed>لْعَ<tajweed class=madda_normal>ـٰ</tajweed>صِفَ<tajweed class=madda_normal>ـٰ</tajweed>تِ عَصْفًا <span class=end>٢</span>",
+      "tr": "(клянусь ветрами) дующими сильно,",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 3,
+      "p": 580,
+      "j": 29,
+      "ar": "وَٱلنَّـٰشِرَٲتِ نَشْرًا",
+      "tw": "وَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َ<tajweed class=madda_normal>ـٰ</tajweed>شِر<tajweed class=madda_normal>َٲ</tajweed>تِ نَشْرًا <span class=end>٣</span>",
+      "tr": "(клянусь ветрами) разносящими (дожди),",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 4,
+      "p": 580,
+      "j": 29,
+      "ar": "فَٱلْفَـٰرِقَـٰتِ فَرْقًا",
+      "tw": "فَ<tajweed class=ham_wasl>ٱ</tajweed>لْفَ<tajweed class=madda_normal>ـٰ</tajweed>رِقَ<tajweed class=madda_normal>ـٰ</tajweed>تِ فَرْقًا <span class=end>٤</span>",
+      "tr": "(клянусь аятами Корана) различающими (истину и ложь, запретное и дозволенное),",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 5,
+      "p": 580,
+      "j": 29,
+      "ar": "فَٱلْمُلْقِيَـٰتِ ذِكْرًا",
+      "tw": "فَ<tajweed class=ham_wasl>ٱ</tajweed>لْمُلْقِيَ<tajweed class=madda_normal>ـٰ</tajweed>تِ ذِكْرًا <span class=end>٥</span>",
+      "tr": "(клянусь ангелами) передающими наставление (пророкам и посланникам, а те в свою очередь - людям)",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 6,
+      "p": 580,
+      "j": 29,
+      "ar": "عُذْرًا أَوْ نُذْرًا",
+      "tw": "عُذْرًا أَوْ نُذْرًا <span class=end>٦</span>",
+      "tr": "(наставление) для поиска прощения или предостережения.",
+      "tf": "Откровение, переданное пророками людям, побуждает верующих каяться и просить у Аллаха прощения за свои грехи, а также предупреждает грешников и неверующих о печальной участи, если они не покаются.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Откровение, переданное пророками людям, побуждает верующих каяться и просить у Аллаха прощения за свои грехи, а также предупреждает грешников и неверующих о печальной участи, если они не покаются.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 7,
+      "p": 580,
+      "j": 29,
+      "ar": "إِنَّمَا تُوعَدُونَ لَوَٲقِعٌ",
+      "tw": "إِ<tajweed class=ghunnah>نّ</tajweed>َمَا تُوعَدُونَ لَو<tajweed class=madda_normal>َٲ</tajweed>قِعٌ <span class=end>٧</span>",
+      "tr": "Поистине, обещанное вам (Судный день) непременно настанет.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 8,
+      "p": 580,
+      "j": 29,
+      "ar": "فَإِذَا ٱلنُّجُومُ طُمِسَتْ",
+      "tw": "فَإِذَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>ُجُومُ طُمِسَتْ <span class=end>٨</span>",
+      "tr": "Когда звезды погаснут.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 9,
+      "p": 580,
+      "j": 29,
+      "ar": "وَإِذَا ٱلسَّمَآءُ فُرِجَتْ",
+      "tw": "وَإِذَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّم<tajweed class=madda_obligatory>َا</tajweed>ٓءُ فُرِجَتْ <span class=end>٩</span>",
+      "tr": "Когда небо разверзнется.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 10,
+      "p": 580,
+      "j": 29,
+      "ar": "وَإِذَا ٱلْجِبَالُ نُسِفَتْ",
+      "tw": "وَإِذَا <tajweed class=ham_wasl>ٱ</tajweed>لْجِبَالُ نُسِفَتْ <span class=end>١٠</span>",
+      "tr": "Когда горы обрушатся (в пыль, и ветры их развеют).",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 11,
+      "p": 580,
+      "j": 29,
+      "ar": "وَإِذَا ٱلرُّسُلُ أُقِّتَتْ",
+      "tw": "وَإِذَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رُّسُلُ أُقِّتَتْ <span class=end>١١</span>",
+      "tr": "Когда посланникам будет определен срок.",
+      "tf": "Всевышний Аллах установил Судный день в качестве срока для вынесения окончательного решения в конфликте каждого пророка с его народом.\n\nМуджахид говорил, что Судный день - \"это день, когда пророки соберутся, чтобы выступить свидетелями против своих общин\", то есть против неверующих из этих общин.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Всевышний Аллах установил Судный день в качестве срока для вынесения окончательного решения в конфликте каждого пророка с его народом.",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Муджахид говорил, что Судный день - \"это день, когда пророки соберутся, чтобы выступить свидетелями против своих общин\", то есть против неверующих из этих общин.",
+          "sourceOrder": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "a": 12,
+      "p": 580,
+      "j": 29,
+      "ar": "لِأَىِّ يَوْمٍ أُجِّلَتْ",
+      "tw": "لِأَىِّ يَوْمٍ أُجِّلَتْ <span class=end>١٢</span>",
+      "tr": "До какого дня отсрочка?",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 13,
+      "p": 580,
+      "j": 29,
+      "ar": "لِيَوْمِ ٱلْفَصْلِ",
+      "tw": "لِيَوْمِ <tajweed class=ham_wasl>ٱ</tajweed>لْفَصْلِ <span class=end>١٣</span>",
+      "tr": "До Дня разделения (между творениями)!",
+      "tf": "День разделения - это день великого Суда, отчета и воздаяния. Аллах называет его \"Днем разделения\", поскольку в Судный день все творения будут разделены на группы.\n\nИ этот великий день уже установлен, ничто не может ни приблизить его, ни отдалить. И время его наступления известно лишь Всевышнему Аллаху.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "День разделения - это день великого Суда, отчета и воздаяния. Аллах называет его \"Днем разделения\", поскольку в Судный день все творения будут разделены на группы.",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "И этот великий день уже установлен, ничто не может ни приблизить его, ни отдалить. И время его наступления известно лишь Всевышнему Аллаху.",
+          "sourceOrder": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "a": 14,
+      "p": 580,
+      "j": 29,
+      "ar": "وَمَآ أَدْرَٮٰكَ مَا يَوْمُ ٱلْفَصْلِ",
+      "tw": "وَم<tajweed class=madda_obligatory>َآ</tajweed> أَ<tajweed class=qalaqah>دْ</tajweed>رَ<tajweed class=madda_normal>ٮٰ</tajweed>كَ مَا يَوْمُ <tajweed class=ham_wasl>ٱ</tajweed>لْفَصْلِ <span class=end>١٤</span>",
+      "tr": "Откуда ты мог знать, что такое День разделения?",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 15,
+      "p": 580,
+      "j": 29,
+      "ar": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "tw": "وَيْ<tajweed class=idgham_ghunnah>لٌ ي</tajweed>َوْمَئِ<tajweed class=idgham_wo_ghunnah>ذٍ ل</tajweed>ِّلْمُكَذِّب<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>١٥</span>",
+      "tr": "Горе в тот день отрицающим!",
+      "tf": "Страшная участь ожидает в Судный день тех, кто не поверил своему пророку.\n\nИмам аль-Куртуби считал, что этот аят, который десять раз встречается в суре, это повтор угрозы в адрес неверующих, которые не приняли пророков и отрицают все, что они передали людям от Аллаха. Другие же ученые считали, что это не является повтором и каждый раз под этими словами: \"Горе в тот день отрицающим\", - подразумевается разное, исходя из контекста окружающих аятов.\n\nМы выбрали такой метод перевода, чтобы сохранить обе точки зрения муфассиров: в переводе смыслов мы повторяем общий смысл предостережения неверующим, а в комментарии каждый раз даем то толкование, которое привели ученые для конкретного случая.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Страшная участь ожидает в Судный день тех, кто не поверил своему пророку.",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Имам аль-Куртуби считал, что этот аят, который десять раз встречается в суре, это повтор угрозы в адрес неверующих, которые не приняли пророков и отрицают все, что они передали людям от Аллаха. Другие же ученые считали, что это не является повтором и каждый раз под этими словами: \"Горе в тот день отрицающим\", - подразумевается разное, исходя из контекста окружающих аятов.",
+          "sourceOrder": [
+            1
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Мы выбрали такой метод перевода, чтобы сохранить обе точки зрения муфассиров: в переводе смыслов мы повторяем общий смысл предостережения неверующим, а в комментарии каждый раз даем то толкование, которое привели ученые для конкретного случая.",
+          "sourceOrder": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "a": 16,
+      "p": 580,
+      "j": 29,
+      "ar": "أَلَمْ نُهْلِكِ ٱلْأَوَّلِينَ",
+      "tw": "أَلَمْ نُهْلِكِ <tajweed class=ham_wasl>ٱ</tajweed>لْأَوَّل<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>١٦</span>",
+      "tr": "Разве мы не уничтожили прежние народы (отвергнувшие своих пророков)?!",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 17,
+      "p": 580,
+      "j": 29,
+      "ar": "ثُمَّ نُتْبِعُهُمُ ٱلْأَخِرِينَ",
+      "tw": "ثُ<tajweed class=ghunnah>مّ</tajweed>َ نُتْبِعُهُمُ <tajweed class=ham_wasl>ٱ</tajweed>لْأَخِر<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>١٧</span>",
+      "tr": "Затем вслед за ними Мы уничтожили последующие (народы).",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 18,
+      "p": 580,
+      "j": 29,
+      "ar": "كَذَٲلِكَ نَفْعَلُ بِٱلْمُجْرِمِينَ",
+      "tw": "كَذ<tajweed class=madda_normal>َٲ</tajweed>لِكَ نَفْعَلُ بِ<tajweed class=ham_wasl>ٱ</tajweed>لْمُ<tajweed class=qalaqah>جْ</tajweed>رِم<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>١٨</span>",
+      "tr": "Так поступаем Мы с грешниками.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 19,
+      "p": 580,
+      "j": 29,
+      "ar": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "tw": "وَيْ<tajweed class=idgham_ghunnah>لٌ ي</tajweed>َوْمَئِ<tajweed class=idgham_wo_ghunnah>ذٍ ل</tajweed>ِّلْمُكَذِّب<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>١٩</span>",
+      "tr": "Горе в тот день отрицающим!",
+      "tf": "Страшная участь ожидает в Судный день тех, кто не верил в наступление Судного дня.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Страшная участь ожидает в Судный день тех, кто не верил в наступление Судного дня.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 20,
+      "p": 581,
+      "j": 29,
+      "ar": "أَلَمْ نَخْلُقكُّم مِّن مَّآءٍ مَّهِينٍ",
+      "tw": "أَلَمْ نَخْلُ<tajweed class=idgham_mutaqaribayn>ق</tajweed>كّ<tajweed class=idgham_shafawi>ُم م</tajweed>ّ<tajweed class=idgham_ghunnah>ِن م</tajweed>ّ<tajweed class=madda_obligatory>َا</tajweed>ٓ<tajweed class=idgham_ghunnah>ءٍ م</tajweed>َّه<tajweed class=madda_permissible>ِي</tajweed>نٍ <span class=end>٢٠</span>",
+      "tr": "Разве Мы не создали вас (люди) из презренной жидкости (семени),",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 21,
+      "p": 581,
+      "j": 29,
+      "ar": "فَجَعَلْنَـٰهُ فِى قَرَارٍ مَّكِينٍ",
+      "tw": "فَجَعَلْنَ<tajweed class=madda_normal>ـٰ</tajweed>هُ فِى قَرَا<tajweed class=idgham_ghunnah>رٍ م</tajweed>َّك<tajweed class=madda_permissible>ِي</tajweed>نٍ <span class=end>٢١</span>",
+      "tr": "которую поместили в надежном месте (в матке)",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 22,
+      "p": 581,
+      "j": 29,
+      "ar": "إِلَىٰ قَدَرٍ مَّعْلُومٍ",
+      "tw": "إِلَىٰ قَدَ<tajweed class=idgham_ghunnah>رٍ م</tajweed>َّعْل<tajweed class=madda_permissible>ُو</tajweed>مٍ <span class=end>٢٢</span>",
+      "tr": "до установленного срока (появления на свет)?!",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 23,
+      "p": 581,
+      "j": 29,
+      "ar": "فَقَدَرْنَا فَنِعْمَ ٱلْقَـٰدِرُونَ",
+      "tw": "فَقَدَرْنَا فَنِعْمَ <tajweed class=ham_wasl>ٱ</tajweed>لْقَ<tajweed class=madda_normal>ـٰ</tajweed>دِر<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٢٣</span>",
+      "tr": "Мы предопределили (для него все), и как прекрасно Мы предопределяем!",
+      "tf": "Поистине, Всемогущий Аллах, Который сотворил вас из капли нечистой жидкости, а затем провел через все стадии творения, способен еще раз воссоздать вас и воскресить для вечной жизни. В этом нет сомнений!\n\n\"Мы предопределили...\"\n\nИмам аль-Куртуби так толкует этот аят:\n\n\"Мы предопределили для него (человека) время рождения и все стадии плода, который он прошел до того, как стать сформировавшимся человеком. И Мы предопределили, умрет он верующим или неверующим, будет он высокого или низкого роста\".",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Поистине, Всемогущий Аллах, Который сотворил вас из капли нечистой жидкости, а затем провел через все стадии творения, способен еще раз воссоздать вас и воскресить для вечной жизни. В этом нет сомнений!",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "\"Мы предопределили...\"",
+          "sourceOrder": [
+            1
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Имам аль-Куртуби так толкует этот аят:",
+          "sourceOrder": [
+            2
+          ]
+        },
+        {
+          "type": "quote",
+          "kind": "scholar",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "\"Мы предопределили для него (человека) время рождения и все стадии плода, который он прошел до того, как стать сформировавшимся человеком. И Мы предопределили, умрет он верующим или неверующим, будет он высокого или низкого роста\"."
+            }
+          ],
+          "sourceOrder": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "a": 24,
+      "p": 581,
+      "j": 29,
+      "ar": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "tw": "وَيْ<tajweed class=idgham_ghunnah>لٌ ي</tajweed>َوْمَئِ<tajweed class=idgham_wo_ghunnah>ذٍ ل</tajweed>ِّلْمُكَذِّب<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٢٤</span>",
+      "tr": "Горе в тот день отрицающим!",
+      "tf": "Страшная участь ожидает в Судный день не верящих в безграничность Нашего Могущества и в Нашу способность воскресить людей.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Страшная участь ожидает в Судный день не верящих в безграничность Нашего Могущества и в Нашу способность воскресить людей.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 25,
+      "p": 581,
+      "j": 29,
+      "ar": "أَلَمْ نَجْعَلِ ٱلْأَرْضَ كِفَاتًا",
+      "tw": "أَلَمْ نَ<tajweed class=qalaqah>جْ</tajweed>عَلِ <tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضَ كِفَاتًا <span class=end>٢٥</span>",
+      "tr": "Разве Мы не сделали землю вместилищем",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 26,
+      "p": 581,
+      "j": 29,
+      "ar": "أَحْيَآءً وَأَمْوَٲتًا",
+      "tw": "أَحْي<tajweed class=madda_obligatory>َا</tajweed>ٓ<tajweed class=idgham_ghunnah>ءً و</tajweed>َأَمْو<tajweed class=madda_normal>َٲ</tajweed>تًا <span class=end>٢٦</span>",
+      "tr": "для живых и мертвых?",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 27,
+      "p": 581,
+      "j": 29,
+      "ar": "وَجَعَلْنَا فِيهَا رَوَٲسِىَ شَـٰمِخَـٰتٍ وَأَسْقَيْنَـٰكُم مَّآءً فُرَاتًا",
+      "tw": "وَجَعَلْنَا فِيهَا رَو<tajweed class=madda_normal>َٲ</tajweed>سِىَ شَ<tajweed class=madda_normal>ـٰ</tajweed>مِخَ<tajweed class=madda_normal>ـٰ</tajweed><tajweed class=idgham_ghunnah>تٍ و</tajweed>َأَسْقَيْنَ<tajweed class=madda_normal>ـٰ</tajweed>ك<tajweed class=idgham_shafawi>ُم م</tajweed>ّ<tajweed class=madda_obligatory>َا</tajweed>ٓ<tajweed class=ikhafa>ءً ف</tajweed>ُرَاتًا <span class=end>٢٧</span>",
+      "tr": "И Мы расположили на ней (на земле) высокие и прочные горы и напоили вас (всех, люди) пресной водой?",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 28,
+      "p": 581,
+      "j": 29,
+      "ar": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "tw": "وَيْ<tajweed class=idgham_ghunnah>لٌ ي</tajweed>َوْمَئِ<tajweed class=idgham_wo_ghunnah>ذٍ ل</tajweed>ِّلْمُكَذِّب<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٢٨</span>",
+      "tr": "Горе в тот день отрицающим!",
+      "tf": "Страшная участь ожидает в Судный день тех, кто не поверил в безграничность Могущества Аллаха.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Страшная участь ожидает в Судный день тех, кто не поверил в безграничность Могущества Аллаха.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 29,
+      "p": 581,
+      "j": 29,
+      "ar": "ٱنطَلِقُوٓاْ إِلَىٰ مَا كُنتُم بِهِۦ تُكَذِّبُونَ",
+      "tw": "ٱ<tajweed class=ikhafa>نط</tajweed>َلِق<tajweed class=madda_obligatory>ُوٓ</tajweed><tajweed class=slnt>اْ</tajweed> إِلَىٰ مَا كُ<tajweed class=ikhafa>نت</tajweed><tajweed class=ikhafa_shafawi>ُم ب</tajweed>ِه<tajweed class=madda_normal>ِۦ</tajweed> تُكَذِّب<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٢٩</span>",
+      "tr": "(В Судный день неверующим скажут:) \"Идите к тому, что вы отрицали! (Отправляйтесь в Ад!)",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 30,
+      "p": 581,
+      "j": 29,
+      "ar": "ٱنطَلِقُوٓاْ إِلَىٰ ظِلٍّ ذِى ثَلَـٰثِ شُعَبٍ",
+      "tw": "ٱ<tajweed class=ikhafa>نط</tajweed>َلِق<tajweed class=madda_obligatory>ُوٓ</tajweed><tajweed class=slnt>اْ</tajweed> إِلَىٰ ظِ<tajweed class=ikhafa>لٍّ ذ</tajweed>ِى ثَلَ<tajweed class=madda_normal>ـٰ</tajweed>ثِ شُعَ<tajweed class=qalaqah>ب</tajweed>ٍ <span class=end>٣٠</span>",
+      "tr": "Идите к (жаркой) тени (из дыма Ада, извергающейся) тремя потоками.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 31,
+      "p": 581,
+      "j": 29,
+      "ar": "لَّا ظَلِيلٍ وَلَا يُغْنِى مِنَ ٱللَّهَبِ",
+      "tw": "لَّا ظَلِي<tajweed class=idgham_ghunnah>لٍ و</tajweed>َلَا يُغْنِى مِنَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>لَّهَ<tajweed class=qalaqah>ب</tajweed>ِ <span class=end>٣١</span>",
+      "tr": "Нет (облегчающей) тени (под этой пламенной тенью) и не защищает (она) от пламени.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 32,
+      "p": 581,
+      "j": 29,
+      "ar": "إِنَّهَا تَرْمِى بِشَرَرٍ كَٱلْقَصْرِ",
+      "tw": "إِ<tajweed class=ghunnah>نّ</tajweed>َهَا تَرْمِى بِشَرَ<tajweed class=ikhafa>رٍ ك</tajweed>َ<tajweed class=ham_wasl>ٱ</tajweed>لْقَصْرِ <span class=end>٣٢</span>",
+      "tr": "Ведь оно (пламя Ада) испускает искры размером с дворец,",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 33,
+      "p": 581,
+      "j": 29,
+      "ar": "كَأَنَّهُۥ جِمَـٰلَتٌ صُفْرٌ",
+      "tw": "كَأَ<tajweed class=ghunnah>نّ</tajweed>َهُ<tajweed class=madda_normal>ۥ</tajweed> جِمَ<tajweed class=madda_normal>ـٰ</tajweed>لَ<tajweed class=ikhafa>تٌ ص</tajweed>ُفْرٌ <span class=end>٣٣</span>",
+      "tr": "подобные черно-желтым верблюдицам.",
+      "tf": "Имам Фахруддин ар-Рази пишет:\n\n\"Всевышний Аллах уподобил искры адского пламени дворцам по размеру, а в цвете, быстроте и обилии - верблюдицам\".",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Имам Фахруддин ар-Рази пишет:",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "quote",
+          "kind": "scholar",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "\"Всевышний Аллах уподобил искры адского пламени дворцам по размеру, а в цвете, быстроте и обилии - верблюдицам\"."
+            }
+          ],
+          "sourceOrder": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "a": 34,
+      "p": 581,
+      "j": 29,
+      "ar": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "tw": "وَيْ<tajweed class=idgham_ghunnah>لٌ ي</tajweed>َوْمَئِ<tajweed class=idgham_wo_ghunnah>ذٍ ل</tajweed>ِّلْمُكَذِّب<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٣٤</span>",
+      "tr": "Горе в тот день отрицающим!",
+      "tf": "Страшная участь ожидает в Судный день тех, кто отрицал существование вечной жизни.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Страшная участь ожидает в Судный день тех, кто отрицал существование вечной жизни.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 35,
+      "p": 581,
+      "j": 29,
+      "ar": "هَـٰذَا يَوْمُ لَا يَنطِقُونَ",
+      "tw": "هَ<tajweed class=madda_normal>ـٰ</tajweed>ذَا يَوْمُ لَا يَ<tajweed class=ikhafa>نط</tajweed>ِق<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٣٥</span>",
+      "tr": "В тот день (в Судный день) они не смогут говорить.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 36,
+      "p": 581,
+      "j": 29,
+      "ar": "وَلَا يُؤْذَنُ لَهُمْ فَيَعْتَذِرُونَ",
+      "tw": "وَلَا يُؤْذَنُ لَهُمْ فَيَعْتَذِر<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٣٦</span>",
+      "tr": "И не будет им разрешено (говорить), и они не смогут оправдаться.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 37,
+      "p": 581,
+      "j": 29,
+      "ar": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "tw": "وَيْ<tajweed class=idgham_ghunnah>لٌ ي</tajweed>َوْمَئِ<tajweed class=idgham_wo_ghunnah>ذٍ ل</tajweed>ِّلْمُكَذِّب<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٣٧</span>",
+      "tr": "Горе в тот день отрицающим!",
+      "tf": "Страшная участь ожидает в Судный день неверующих.\n\nПередается, что неверующим в Судный день не дадут говорить. Их рты будут запечатаны, а свидетельские показания против них начнут давать их части тела - руки, ноги, языки и т. д.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Страшная участь ожидает в Судный день неверующих.",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Передается, что неверующим в Судный день не дадут говорить. Их рты будут запечатаны, а свидетельские показания против них начнут давать их части тела - руки, ноги, языки и т. д.",
+          "sourceOrder": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "a": 38,
+      "p": 581,
+      "j": 29,
+      "ar": "هَـٰذَا يَوْمُ ٱلْفَصْلِ‌ۖ جَمَعْنَـٰكُمْ وَٱلْأَوَّلِينَ",
+      "tw": "هَ<tajweed class=madda_normal>ـٰ</tajweed>ذَا يَوْمُ <tajweed class=ham_wasl>ٱ</tajweed>لْفَصْلِ‌ۖ جَمَعْنَ<tajweed class=madda_normal>ـٰ</tajweed>كُمْ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْأَوَّل<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٣٨</span>",
+      "tr": "Это День различения! Мы собрали вас и всех, кто был раньше (все предыдущие народы).",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 39,
+      "p": 581,
+      "j": 29,
+      "ar": "فَإِن كَانَ لَكُمْ كَيْدٌ فَكِيدُونِ",
+      "tw": "فَإِ<tajweed class=ikhafa>ن ك</tajweed>َانَ لَكُمْ كَيْ<tajweed class=ikhafa>دٌ ف</tajweed>َكِيد<tajweed class=madda_permissible>ُو</tajweed>نِ <span class=end>٣٩</span>",
+      "tr": "Если у вас есть какая-то хитрость, то попробуйте Меня перехитрить!",
+      "tf": "Если вы - неверующие - знаете какой-то способ, чтобы избежать назначенного Мной наказания, то попробуйте, если можете!\n\nРазумеется, они не смогут!",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Если вы - неверующие - знаете какой-то способ, чтобы избежать назначенного Мной наказания, то попробуйте, если можете!",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Разумеется, они не смогут!",
+          "sourceOrder": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "a": 40,
+      "p": 581,
+      "j": 29,
+      "ar": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "tw": "وَيْ<tajweed class=idgham_ghunnah>لٌ ي</tajweed>َوْمَئِ<tajweed class=idgham_wo_ghunnah>ذٍ ل</tajweed>ِّلْمُكَذِّب<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٤٠</span>",
+      "tr": "Горе в тот день отрицающим!",
+      "tf": "Страшная участь ожидает в Судный день тех, кто не верил в его наступление.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Страшная участь ожидает в Судный день тех, кто не верил в его наступление.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 41,
+      "p": 581,
+      "j": 29,
+      "ar": "إِنَّ ٱلْمُتَّقِينَ فِى ظِلَـٰلٍ وَعُيُونٍ",
+      "tw": "إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>لْمُتَّقِينَ فِى ظِلَ<tajweed class=madda_normal>ـٰ</tajweed><tajweed class=idgham_ghunnah>لٍ و</tajweed>َعُي<tajweed class=madda_permissible>ُو</tajweed>نٍ <span class=end>٤١</span>",
+      "tr": "Поистине, богобоязненные будут под сенью (тенистых деревьев) и (среди райских) источников",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 42,
+      "p": 581,
+      "j": 29,
+      "ar": "وَفَوَٲكِهَ مِمَّا يَشْتَهُونَ",
+      "tw": "وَفَو<tajweed class=madda_normal>َٲ</tajweed>كِهَ مِ<tajweed class=ghunnah>مّ</tajweed>َا يَشْتَه<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤٢</span>",
+      "tr": "и плодов, каких пожелают.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 43,
+      "p": 581,
+      "j": 29,
+      "ar": "كُلُواْ وَٱشْرَبُواْ هَنِيٓـــَٔۢا بِمَا كُنتُمْ تَعْمَلُونَ",
+      "tw": "كُلُو<tajweed class=slnt>اْ</tajweed> وَ<tajweed class=ham_wasl>ٱ</tajweed>شْرَبُو<tajweed class=slnt>اْ</tajweed> هَنِ<tajweed class=madda_obligatory>يٓـ</tajweed>ـ<tajweed class=iqlab>ـَٔۢا ب</tajweed>ِمَا كُ<tajweed class=ikhafa>نت</tajweed>ُمْ تَعْمَل<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤٣</span>",
+      "tr": "(Им скажут:) \"Ешьте и пейте на здоровье! Это вам (награда) за то, что вы совершали (в земной жизни)!",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 44,
+      "p": 581,
+      "j": 29,
+      "ar": "إِنَّا كَذَٲلِكَ نَجْزِى ٱلْمُحْسِنِينَ",
+      "tw": "إِ<tajweed class=ghunnah>نّ</tajweed>َا كَذ<tajweed class=madda_normal>َٲ</tajweed>لِكَ نَ<tajweed class=qalaqah>جْ</tajweed>زِى <tajweed class=ham_wasl>ٱ</tajweed>لْمُحْسِن<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٤٤</span>",
+      "tr": "Поистине, так Мы вознаграждаем благодетельных\".",
+      "tf": "Участь же праведных верующих будет иной - их ожидает Рай и все его неописуемые прекрасные блага.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Участь же праведных верующих будет иной - их ожидает Рай и все его неописуемые прекрасные блага.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 45,
+      "p": 581,
+      "j": 29,
+      "ar": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "tw": "وَيْ<tajweed class=idgham_ghunnah>لٌ ي</tajweed>َوْمَئِ<tajweed class=idgham_wo_ghunnah>ذٍ ل</tajweed>ِّلْمُكَذِّب<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٤٥</span>",
+      "tr": "Горе в тот день отрицающим!",
+      "tf": "Страшная участь ожидает в Судный день тех, кто добровольно отказался от Рая и его благ.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Страшная участь ожидает в Судный день тех, кто добровольно отказался от Рая и его благ.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 46,
+      "p": 581,
+      "j": 29,
+      "ar": "كُلُواْ وَتَمَتَّعُواْ قَلِيلاً إِنَّكُم مُّجْرِمُونَ",
+      "tw": "كُلُو<tajweed class=slnt>اْ</tajweed> وَتَمَتَّعُو<tajweed class=slnt>اْ</tajweed> قَلِيلاً إِ<tajweed class=ghunnah>نّ</tajweed>َك<tajweed class=idgham_shafawi>ُم م</tajweed>ُّ<tajweed class=qalaqah>جْ</tajweed>رِم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤٦</span>",
+      "tr": "Ешьте и наслаждайтесь недолго (до смерти), ведь вы - грешники!",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 47,
+      "p": 581,
+      "j": 29,
+      "ar": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "tw": "وَيْ<tajweed class=idgham_ghunnah>لٌ ي</tajweed>َوْمَئِ<tajweed class=idgham_wo_ghunnah>ذٍ ل</tajweed>ِّلْمُكَذِّب<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٤٧</span>",
+      "tr": "Горе в тот день отрицающим!",
+      "tf": "Страшная участь ожидает в Судный день тех, кто предпочел бренные земные наслаждения вечному счастью.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Страшная участь ожидает в Судный день тех, кто предпочел бренные земные наслаждения вечному счастью.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 48,
+      "p": 581,
+      "j": 29,
+      "ar": "وَإِذَا قِيلَ لَهُمُ ٱرْكَعُواْ لَا يَرْكَعُونَ",
+      "tw": "وَإِذَا قِيلَ لَهُمُ <tajweed class=ham_wasl>ٱ</tajweed>رْكَعُو<tajweed class=slnt>اْ</tajweed> لَا يَرْكَع<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤٨</span>",
+      "tr": "Когда им говорят: \"Склонитесь (в поясном поклоне перед Аллахом)!\" - они не кланяются (не совершают намаз).",
+      "tf": "\"Склонитесь\", - то есть умерьте гордыню, подчинитесь Господу и поклонитесь Ему, выполняя намаз.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"Склонитесь\", - то есть умерьте гордыню, подчинитесь Господу и поклонитесь Ему, выполняя намаз.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 49,
+      "p": 581,
+      "j": 29,
+      "ar": "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
+      "tw": "وَيْ<tajweed class=idgham_ghunnah>لٌ ي</tajweed>َوْمَئِ<tajweed class=idgham_wo_ghunnah>ذٍ ل</tajweed>ِّلْمُكَذِّب<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٤٩</span>",
+      "tr": "Горе в тот день отрицающим!",
+      "tf": "Страшная участь ожидает в Судный день тех, кто не верил в Священный Коран.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Страшная участь ожидает в Судный день тех, кто не верил в Священный Коран.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 50,
+      "p": 581,
+      "j": 29,
+      "ar": "فَبِأَىِّ حَدِيثِۭ بَعْدَهُۥ يُؤْمِنُونَ",
+      "tw": "فَبِأَىِّ حَدِي<tajweed class=iqlab>ثِۭ ب</tajweed>َعْدَهُ<tajweed class=madda_normal>ۥ</tajweed> يُؤْمِن<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٥٠</span>",
+      "tr": "И какой же речи после него (Корана) вы поверите?",
+      "tf": "Чего вам еще нужно? Во что же вы поверите тогда, раз не верите в Коран, ниспосланный от Аллаха?\n\nНа этом по Милости Всевышнего завершается толкование суры \"Аль-Мурсалят\". Хвала Аллаху, Господу миров!",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Чего вам еще нужно? Во что же вы поверите тогда, раз не верите в Коран, ниспосланный от Аллаха?",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "На этом по Милости Всевышнего завершается толкование суры \"Аль-Мурсалят\". Хвала Аллаху, Господу миров!",
+          "sourceOrder": [
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "tafsirSchemaVersion": 3
+}

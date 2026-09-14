@@ -1,0 +1,974 @@
+{
+  "id": 31,
+  "nameAr": "لقمان",
+  "nameRu": "Лукман",
+  "meaning": "Лукман",
+  "revelation": "meccan",
+  "bismillah": {
+    "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+    "tw": "بِسْمِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_normal>ـٰ</tajweed>نِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّح<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>١</span>"
+  },
+  "intro": {
+    "translation": "Лукман",
+    "tafsir": "Ниспослана в Мекке. В ней 34 аята.",
+    "page": 411,
+    "tafsirBlocks": [
+      {
+        "type": "paragraph",
+        "text": "Ниспослана в Мекке. В ней 34 аята.",
+        "sourceOrder": [
+          0
+        ]
+      }
+    ]
+  },
+  "ayahs": [
+    {
+      "a": 1,
+      "p": 411,
+      "j": 21,
+      "ar": "الٓمٓ",
+      "tw": "ا<tajweed class=madda_necessary>لٓ</tajweed><tajweed class=madda_necessary>مٓ</tajweed> <span class=end>١</span>",
+      "tr": "Алиф. Лям. Мим.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 2,
+      "p": 411,
+      "j": 21,
+      "ar": "تِلْكَ ءَايَـٰتُ ٱلْكِتَـٰبِ ٱلْحَكِيمِ",
+      "tw": "تِلْكَ ءَايَ<tajweed class=madda_normal>ـٰ</tajweed>تُ <tajweed class=ham_wasl>ٱ</tajweed>لْكِتَ<tajweed class=madda_normal>ـٰ</tajweed>بِ <tajweed class=ham_wasl>ٱ</tajweed>لْحَك<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>٢</span>",
+      "tr": "Это - аяты мудрой Книги,",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 3,
+      "p": 411,
+      "j": 21,
+      "ar": "هُدًى وَرَحْمَةً لِّلْمُحْسِنِينَ",
+      "tw": "هُ<tajweed class=idgham_ghunnah>دًى و</tajweed>َرَحْمَ<tajweed class=idgham_wo_ghunnah>ةً ل</tajweed>ِّلْمُحْسِن<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٣</span>",
+      "tr": "руководство и милость для благодетельных,",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 4,
+      "p": 411,
+      "j": 21,
+      "ar": "ٱلَّذِينَ يُقِيمُونَ ٱلصَّلَوٲةَ وَيُؤْتُونَ ٱلزَّكَوٲةَ وَهُم بِٱلْأَخِرَةِ هُمْ يُوقِنُونَ",
+      "tw": "ٱلَّذِينَ يُقِيمُونَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صَّلَ<tajweed class=slnt>و</tajweed><tajweed class=madda_normal>ٲ</tajweed>ةَ وَيُؤْتُونَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>زَّكَ<tajweed class=slnt>و</tajweed><tajweed class=madda_normal>ٲ</tajweed>ةَ وَه<tajweed class=ikhafa_shafawi>ُم ب</tajweed>ِ<tajweed class=ham_wasl>ٱ</tajweed>لْأَخِرَةِ هُمْ يُوقِن<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤</span>",
+      "tr": "которые (полноценно) совершают намаз, выплачивают закят и убеждены в Вечной жизни.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 5,
+      "p": 411,
+      "j": 21,
+      "ar": "أُوْلَـٰٓئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ‌ۖ وَأُوْلَـٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ",
+      "tw": "أُ<tajweed class=slnt>وْ</tajweed>لَ<tajweed class=madda_obligatory>ـٰٓ</tajweed>ئِكَ عَلَىٰ هُ<tajweed class=idgham_ghunnah>دًى م</tajweed>ّ<tajweed class=idgham_wo_ghunnah>ِن ر</tajweed>َّبِّهِمْ‌ۖ وَأُ<tajweed class=slnt>وْ</tajweed>لَ<tajweed class=madda_obligatory>ـٰٓ</tajweed>ئِكَ هُمُ <tajweed class=ham_wasl>ٱ</tajweed>لْمُفْلِح<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٥</span>",
+      "tr": "Они (следуют) руководству от их Господа, и они - обретшие счастье.",
+      "tf": "Начало этой суры очень напоминает начало суры \"Аль-Бакара\"1.\n\n1 См. комментарии к Корану (2:1-5).",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Начало этой суры очень напоминает начало суры \"Аль-Бакара\".",
+          "sourceOrder": [
+            0
+          ],
+          "refs": [
+            1
+          ]
+        },
+        {
+          "type": "footnotes",
+          "items": [
+            {
+              "id": 1,
+              "text": "См. комментарии к Корану (2:1-5)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "a": 6,
+      "p": 411,
+      "j": 21,
+      "ar": "وَمِنَ ٱلنَّاسِ مَن يَشْتَرِى لَهْوَ ٱلْحَدِيثِ لِيُضِلَّ عَن سَبِيلِ ٱللَّهِ بِغَيْرِ عِلْمٍ وَيَتَّخِذَهَا هُزُوًا‌ۚ أُوْلَـٰٓئِكَ لَهُمْ عَذَابٌ مُّهِينٌ",
+      "tw": "وَمِنَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َاسِ م<tajweed class=idgham_ghunnah>َن ي</tajweed>َشْتَرِى لَهْوَ <tajweed class=ham_wasl>ٱ</tajweed>لْحَدِيثِ لِيُضِلَّ عَ<tajweed class=ikhafa>ن س</tajweed>َبِيلِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ بِغَيْرِ عِلْ<tajweed class=idgham_ghunnah>مٍ و</tajweed>َيَتَّخِذَهَا هُزُوًا‌ۚ أُ<tajweed class=slnt>وْ</tajweed>لَ<tajweed class=madda_obligatory>ـٰٓ</tajweed>ئِكَ لَهُمْ عَذَا<tajweed class=idgham_ghunnah>بٌ م</tajweed>ُّه<tajweed class=madda_permissible>ِي</tajweed>نٌ <span class=end>٦</span>",
+      "tr": "Среди людей есть те, кто покупает праздные речи (все, что отвлекает от полезного), чтобы сбивать с пути Аллаха без знания, и делает его (путь Аллаха) предметом насмешек. Им - унизительное наказание.",
+      "tf": "Одно из значений слова \"покупать\" в Коране - выбирать одно вместо другого, как, например, в суре \"Аль-Бакара\":\n\nأُوْلَئِكَ الَّذِينَ اشْتَرَوُاْ الضَّلاَلَةَ بِالْهُدَى\n\n\"Они - те, кто купил заблуждение ценой правильного пути\"1.\n\nВ обоих случаях имеется в виду, что люди выбрали вредное вместо полезного2. Такое толкование подтверждается значением слова \"لَهْوَ\": это все, что отвлекает от действительно приносящего человеку пользу, от того, что его напрямую касается (\"Джалялейн\"). В данном случае человек любил исторические анекдоты и отвергал аяты Корана.\n\nПередается, что этот аят был ниспослан о человеке по имени Надр ибн Харис. Этот богатый язычник коллекционировал книги и занимательные истории прошлого, особенно иранского происхождения. Он говорил мекканцам: \"Мухаммад рассказывает вам истории прошлого - про адитов и самудян. Я буду рассказывать вам истории интереснее - про Рустама, Исфандияра и других персидских царей и воинов\". Эти занимательные истории простые люди слушали даже охотнее, чем чтение Корана3.\n\nОт Ибн Аббаса и других толкователей Корана передается, что речь идет о песнях и музыке4.\n\nИмам аль-Байдави же указывает, что имеются в виду любые безосновательные и бесполезные формы речи5: песни, сказки, анекдоты и т. п.\n\n1 Коран, 2:16; 2:175.\n\n2 Маʼариф аль-Куран, 7/26.\n\n3 Аль-Байдави, 4/212.\n\n4 Ибн Касир (Тайба), 6/330-331.\n\n5 Аль-Байдави, 4/212.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Одно из значений слова \"покупать\" в Коране - выбирать одно вместо другого, как, например, в суре \"Аль-Бакара\":",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "quote",
+          "kind": "ayah",
+          "content": [
+            {
+              "type": "arabic",
+              "text": "أُوْلَئِكَ الَّذِينَ اشْتَرَوُاْ الضَّلاَلَةَ بِالْهُدَى",
+              "sourceOrder": [
+                1
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "\"Они - те, кто купил заблуждение ценой правильного пути\".",
+              "refs": [
+                1
+              ]
+            }
+          ],
+          "sourceOrder": [
+            1,
+            2
+          ],
+          "refs": [
+            1
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "В обоих случаях имеется в виду, что люди выбрали вредное вместо полезного. Такое толкование подтверждается значением слова \"لَهْوَ\": это все, что отвлекает от действительно приносящего человеку пользу, от того, что его напрямую касается (\"Джалялейн\"). В данном случае человек любил исторические анекдоты и отвергал аяты Корана.",
+          "sourceOrder": [
+            3
+          ],
+          "refs": [
+            2
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Передается, что этот аят был ниспослан о человеке по имени Надр ибн Харис. Этот богатый язычник коллекционировал книги и занимательные истории прошлого, особенно иранского происхождения. Он говорил мекканцам: \"Мухаммад рассказывает вам истории прошлого - про адитов и самудян. Я буду рассказывать вам истории интереснее - про Рустама, Исфандияра и других персидских царей и воинов\". Эти занимательные истории простые люди слушали даже охотнее, чем чтение Корана.",
+          "sourceOrder": [
+            4
+          ],
+          "refs": [
+            3
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "От Ибн Аббаса и других толкователей Корана передается, что речь идет о песнях и музыке.",
+          "sourceOrder": [
+            5
+          ],
+          "refs": [
+            4
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Имам аль-Байдави же указывает, что имеются в виду любые безосновательные и бесполезные формы речи: песни, сказки, анекдоты и т. п.",
+          "sourceOrder": [
+            6
+          ],
+          "refs": [
+            5
+          ]
+        },
+        {
+          "type": "footnotes",
+          "items": [
+            {
+              "id": 1,
+              "text": "Коран, 2:16; 2:175."
+            },
+            {
+              "id": 2,
+              "text": "Маʼариф аль-Куран, 7/26."
+            },
+            {
+              "id": 3,
+              "text": "Аль-Байдави, 4/212."
+            },
+            {
+              "id": 4,
+              "text": "Ибн Касир (Тайба), 6/330-331."
+            },
+            {
+              "id": 5,
+              "text": "Аль-Байдави, 4/212."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "a": 7,
+      "p": 411,
+      "j": 21,
+      "ar": "وَإِذَا تُتْلَىٰ عَلَيْهِ ءَايَـٰتُنَا وَلَّىٰ مُسْتَكْبِرًا كَأَن لَّمْ يَسْمَعْهَا كَأَنَّ فِىٓ أُذُنَيْهِ وَقْرًا‌ۖ فَبَشِّرْهُ بِعَذَابٍ أَلِيمٍ",
+      "tw": "وَإِذَا تُتْلَىٰ عَلَيْهِ ءَايَ<tajweed class=madda_normal>ـٰ</tajweed>تُنَا وَلَّىٰ مُسْتَكْبِ<tajweed class=ikhafa>رًا ك</tajweed>َأ<tajweed class=idgham_wo_ghunnah>َن ل</tajweed>َّمْ يَسْمَعْهَا كَأَ<tajweed class=ghunnah>نّ</tajweed>َ ف<tajweed class=madda_obligatory>ِىٓ</tajweed> أُذُنَيْهِ وَ<tajweed class=qalaqah>قْ</tajweed><tajweed class=ikhafa>رًا‌ۖ ف</tajweed>َبَشِّرْهُ بِعَذَابٍ أَل<tajweed class=madda_permissible>ِي</tajweed>مٍ <span class=end>٧</span>",
+      "tr": "Когда ему читают Наши аяты, он с высокомерием отворачивается, как будто не слышал их, как будто он глухой. Обрадуй же его (известием) о мучительном наказании.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 8,
+      "p": 411,
+      "j": 21,
+      "ar": "إِنَّ ٱلَّذِينَ ءَامَنُواْ وَعَمِلُواْ ٱلصَّـٰلِحَـٰتِ لَهُمْ جَنَّـٰتُ ٱلنَّعِيمِ",
+      "tw": "إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>لَّذِينَ ءَامَنُو<tajweed class=slnt>اْ</tajweed> وَعَمِلُو<tajweed class=slnt>اْ</tajweed> <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صَّ<tajweed class=madda_normal>ـٰ</tajweed>لِحَ<tajweed class=madda_normal>ـٰ</tajweed>تِ لَهُمْ جَ<tajweed class=ghunnah>نّ</tajweed>َ<tajweed class=madda_normal>ـٰ</tajweed>تُ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َع<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>٨</span>",
+      "tr": "Поистине, верующим, совершавшим благие дела, - Сады блаженства.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 9,
+      "p": 411,
+      "j": 21,
+      "ar": "خَـٰلِدِينَ فِيهَا‌ۖ وَعْدَ ٱللَّهِ حَقًّا‌ۚ وَهُوَ ٱلْعَزِيزُ ٱلْحَكِيمُ",
+      "tw": "خَ<tajweed class=madda_normal>ـٰ</tajweed>لِدِينَ فِيهَا‌ۖ وَعْدَ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ حَق<tajweed class=idgham_ghunnah>ًّا‌ۚ و</tajweed>َهُوَ <tajweed class=ham_wasl>ٱ</tajweed>لْعَزِيزُ <tajweed class=ham_wasl>ٱ</tajweed>لْحَك<tajweed class=madda_permissible>ِي</tajweed>مُ <span class=end>٩</span>",
+      "tr": "Они пребудут там вечно. (Это) - правдивое обещание Аллаха. Он - Могущественный, Мудрый.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 10,
+      "p": 411,
+      "j": 21,
+      "ar": "خَلَقَ ٱلسَّمَـٰوَٲتِ بِغَيْرِ عَمَدٍ تَرَوْنَهَا‌ۖ وَأَلْقَىٰ فِى ٱلْأَرْضِ رَوَٲسِىَ أَن تَمِيدَ بِكُمْ وَبَثَّ فِيهَا مِن كُلِّ دَآبَّةٍ‌ۚ وَأَنزَلْنَا مِنَ ٱلسَّمَآءِ مَآءً فَأَنۢبَتْنَا فِيهَا مِن كُلِّ زَوْجٍ كَرِيمٍ",
+      "tw": "خَلَقَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّمَ<tajweed class=madda_normal>ـٰ</tajweed>و<tajweed class=madda_normal>َٲ</tajweed>تِ بِغَيْرِ عَمَ<tajweed class=ikhafa>دٍ ت</tajweed>َرَوْنَهَا‌ۖ وَأَلْقَىٰ فِى <tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضِ رَو<tajweed class=madda_normal>َٲ</tajweed>سِىَ أَ<tajweed class=ikhafa>ن ت</tajweed>َمِيدَ بِكُمْ وَبَثَّ فِيهَا مِ<tajweed class=ikhafa>ن ك</tajweed>ُلِّ د<tajweed class=madda_necessary>َا</tajweed>ٓبَّ<tajweed class=idgham_ghunnah>ةٍ‌ۚ و</tajweed>َأَ<tajweed class=ikhafa>نز</tajweed>َلْنَا مِنَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّم<tajweed class=madda_obligatory>َا</tajweed>ٓءِ م<tajweed class=madda_obligatory>َا</tajweed>ٓ<tajweed class=ikhafa>ءً ف</tajweed>َأَ<tajweed class=iqlab>نۢب</tajweed>َتْنَا فِيهَا مِ<tajweed class=ikhafa>ن ك</tajweed>ُلِّ زَوْ<tajweed class=ikhafa>جٍ ك</tajweed>َر<tajweed class=madda_permissible>ِي</tajweed>مٍ <span class=end>١٠</span>",
+      "tr": "Он сотворил небеса без опор, которые бы вы могли увидеть. Он возвел тут и там на земле высокие горы, чтобы она не колебалась вместе с вами. Он расселил на ней разных животных. Мы низвели с неба воду и взрастили на ней (на земле) различные благородные (полезные) виды (растений).",
+      "tf": "Всевышний Аллах приводит доказательства Своего Могущества, Знания, Единственности.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Всевышний Аллах приводит доказательства Своего Могущества, Знания, Единственности.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 11,
+      "p": 411,
+      "j": 21,
+      "ar": "هَـٰذَا خَلْقُ ٱللَّهِ فَأَرُونِى مَاذَا خَلَقَ ٱلَّذِينَ مِن دُونِهِۦ‌ۚ بَلِ ٱلظَّـٰلِمُونَ فِى ضَلَـٰلٍ مُّبِينٍ",
+      "tw": "هَ<tajweed class=madda_normal>ـٰ</tajweed>ذَا خَلْقُ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ فَأَرُونِى مَاذَا خَلَقَ <tajweed class=ham_wasl>ٱ</tajweed>لَّذِينَ مِ<tajweed class=ikhafa>ن د</tajweed>ُونِه<tajweed class=madda_normal>ِۦ</tajweed>‌ۚ بَلِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>ظَّ<tajweed class=madda_normal>ـٰ</tajweed>لِمُونَ فِى ضَلَ<tajweed class=madda_normal>ـٰ</tajweed><tajweed class=idgham_ghunnah>لٍ م</tajweed>ُّب<tajweed class=madda_permissible>ِي</tajweed>نٍ <span class=end>١١</span>",
+      "tr": "Это (все) - творение Аллаха! Покажите же Мне, что создали все другие (божества, которым вы, язычники, поклоняетесь помимо Аллаха). Но нет (ничего они не создали)! Несправедливые (язычники) - в явном заблуждении.",
+      "tf": "После того как Всевышний привел доводы в опровержение ложных убеждений язычников, Он рассказывает о мудреце Лукмане и передает его наставление сыну. Важное место в этом завещании также занимает предупреждение о несправедливости язычества.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "После того как Всевышний привел доводы в опровержение ложных убеждений язычников, Он рассказывает о мудреце Лукмане и передает его наставление сыну. Важное место в этом завещании также занимает предупреждение о несправедливости язычества.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 12,
+      "p": 412,
+      "j": 21,
+      "ar": "وَلَقَدْ ءَاتَيْنَا لُقْمَـٰنَ ٱلْحِكْمَةَ أَنِ ٱشْكُرْ لِلَّهِ‌ۚ وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ‌ۖ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِىٌّ حَمِيدٌ",
+      "tw": "وَلَقَ<tajweed class=qalaqah>دْ</tajweed> ءَاتَيْنَا لُ<tajweed class=qalaqah>قْ</tajweed>مَ<tajweed class=madda_normal>ـٰ</tajweed>نَ <tajweed class=ham_wasl>ٱ</tajweed>لْحِكْمَةَ أَنِ <tajweed class=ham_wasl>ٱ</tajweed>شْكُرْ لِلَّهِ‌ۚ وَم<tajweed class=idgham_ghunnah>َن ي</tajweed>َشْكُرْ فَإِ<tajweed class=ghunnah>نّ</tajweed>َمَا يَشْكُرُ لِنَفْسِه<tajweed class=madda_normal>ِۦ</tajweed>‌ۖ وَمَ<tajweed class=ikhafa>ن ك</tajweed>َفَرَ فَإِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ غَنِىٌّ حَم<tajweed class=madda_permissible>ِي</tajweed><tajweed class=qalaqah>د</tajweed>ٌ <span class=end>١٢</span>",
+      "tr": "Мы даровали Лукману мудрость (и приказали ему): \"Благодари Аллаха!\" Благодарный (Аллаху) приносит (этим) пользу самому себе. А неблагодарный (пусть знает), что, поистине, Аллах - Тот, кто ни в ком и ни в чем не нуждается, Восхваляемый.",
+      "tf": "Имам аль-Байдави пишет, что Лукман приходился родственником пророку Айюбу (мир ему) и прожил очень долгую жизнь, застав в конце ее пророка Дауда (мир ему) и учился у него1.\n\n\"Аллах - Тот, кто ни в ком и ни в чем не нуждается, Восхваляемый\": Он не нуждается, помимо прочего, в благодарности и хвале от своих Творений. Аллах достоин хвалы в любом случае2.\n\n1 Аль-Байдави, 4/213.\n\n2 Там же, 4/214.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Имам аль-Байдави пишет, что Лукман приходился родственником пророку Айюбу (мир ему) и прожил очень долгую жизнь, застав в конце ее пророка Дауда (мир ему) и учился у него.",
+          "sourceOrder": [
+            0
+          ],
+          "refs": [
+            1
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "\"Аллах - Тот, кто ни в ком и ни в чем не нуждается, Восхваляемый\": Он не нуждается, помимо прочего, в благодарности и хвале от своих Творений. Аллах достоин хвалы в любом случае.",
+          "sourceOrder": [
+            1
+          ],
+          "refs": [
+            2
+          ]
+        },
+        {
+          "type": "footnotes",
+          "items": [
+            {
+              "id": 1,
+              "text": "Аль-Байдави, 4/213."
+            },
+            {
+              "id": 2,
+              "text": "Там же, 4/214."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "a": 13,
+      "p": 412,
+      "j": 21,
+      "ar": "وَإِذْ قَالَ لُقْمَـٰنُ لِٱبْنِهِۦ وَهُوَ يَعِظُهُۥ يَـٰبُنَىَّ لَا تُشْرِكْ بِٱللَّهِ‌ۖ إِنَّ ٱلشِّرْكَ لَظُلْمٌ عَظِيمٌ",
+      "tw": "وَإِذْ قَالَ لُ<tajweed class=qalaqah>قْ</tajweed>مَ<tajweed class=madda_normal>ـٰ</tajweed>نُ لِ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=qalaqah>بْ</tajweed>نِه<tajweed class=madda_normal>ِۦ</tajweed> وَهُوَ يَعِظُهُ<tajweed class=madda_normal>ۥ</tajweed> يَ<tajweed class=madda_normal>ـٰ</tajweed>بُنَىَّ لَا تُشْرِكْ بِ<tajweed class=ham_wasl>ٱ</tajweed>للَّهِ‌ۖ إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>شِّرْكَ لَظُلْمٌ عَظ<tajweed class=madda_permissible>ِي</tajweed>مٌ <span class=end>١٣</span>",
+      "tr": "И сказал Лукман своему сыну, наставляя его: \"Сын мой! Не приобщай к Аллаху сотоварищей! Поистине, язычество - великая несправедливость\".",
+      "tf": "Язычество - это возведение беспомощного творения на уровень Творца, Который создал это творение, поддерживает в нем жизнь и наделяет его всем, чем это творение обладает. Разве приравнивание его к Аллаху будет справедливым?!",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Язычество - это возведение беспомощного творения на уровень Творца, Который создал это творение, поддерживает в нем жизнь и наделяет его всем, чем это творение обладает. Разве приравнивание его к Аллаху будет справедливым?!",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 14,
+      "p": 412,
+      "j": 21,
+      "ar": "وَوَصَّيْنَا ٱلْإِنسَـٰنَ بِوَٲلِدَيْهِ حَمَلَتْهُ أُمُّهُۥ وَهْنًا عَلَىٰ وَهْنٍ وَفِصَـٰلُهُۥ فِى عَامَيْنِ أَنِ ٱشْكُرْ لِى وَلِوَٲلِدَيْكَ إِلَىَّ ٱلْمَصِيرُ",
+      "tw": "وَوَصَّيْنَا <tajweed class=ham_wasl>ٱ</tajweed>لْإِ<tajweed class=ikhafa>نس</tajweed>َ<tajweed class=madda_normal>ـٰ</tajweed>نَ بِو<tajweed class=madda_normal>َٲ</tajweed>لِدَيْهِ حَمَلَتْهُ أُ<tajweed class=ghunnah>مّ</tajweed>ُهُ<tajweed class=madda_normal>ۥ</tajweed> وَهْنًا عَلَىٰ وَهْ<tajweed class=idgham_ghunnah>نٍ و</tajweed>َفِصَ<tajweed class=madda_normal>ـٰ</tajweed>لُهُ<tajweed class=madda_normal>ۥ</tajweed> فِى عَامَيْنِ أَنِ <tajweed class=ham_wasl>ٱ</tajweed>شْكُرْ لِى وَلِو<tajweed class=madda_normal>َٲ</tajweed>لِدَيْكَ إِلَىَّ <tajweed class=ham_wasl>ٱ</tajweed>لْمَص<tajweed class=madda_permissible>ِي</tajweed>رُ <span class=end>١٤</span>",
+      "tr": "Мы приказали человеку быть добрым со своими родителями. Его мать носила его (в утробе), испытывая слабость за слабостью, и она отняла его от груди (только) через два года. Благодари Меня и своих родителей, ибо ко Мне - возвращение.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 15,
+      "p": 412,
+      "j": 21,
+      "ar": "وَإِن جَـٰهَدَاكَ عَلَىٰٓ أَن تُشْرِكَ بِى مَا لَيْسَ لَكَ بِهِۦ عِلْمٌ فَلَا تُطِعْهُمَا‌ۖ وَصَاحِبْهُمَا فِى ٱلدُّنْيَا مَعْرُوفًا‌ۖ وَٱتَّبِعْ سَبِيلَ مَنْ أَنَابَ إِلَىَّ‌ۚ ثُمَّ إِلَىَّ مَرْجِعُكُمْ فَأُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ",
+      "tw": "وَإِ<tajweed class=ikhafa>ن ج</tajweed>َ<tajweed class=madda_normal>ـٰ</tajweed>هَدَاكَ عَلَ<tajweed class=madda_obligatory>ىٰٓ</tajweed> أَ<tajweed class=ikhafa>ن ت</tajweed>ُشْرِكَ بِى مَا لَيْسَ لَكَ بِه<tajweed class=madda_normal>ِۦ</tajweed> عِلْ<tajweed class=ikhafa>مٌ ف</tajweed>َلَا تُطِعْهُمَا‌ۖ وَصَاحِ<tajweed class=qalaqah>بْ</tajweed>هُمَا فِى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>دُّنْيَا مَعْرُو<tajweed class=idgham_ghunnah>فًا‌ۖ و</tajweed>َ<tajweed class=ham_wasl>ٱ</tajweed>تَّبِعْ سَبِيلَ مَنْ أَنَابَ إِلَىَّ‌ۚ ثُ<tajweed class=ghunnah>مّ</tajweed>َ إِلَىَّ مَرْجِعُكُمْ فَأُنَبِّئُك<tajweed class=ikhafa_shafawi>ُم ب</tajweed>ِمَا كُ<tajweed class=ikhafa>نت</tajweed>ُمْ تَعْمَل<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>١٥</span>",
+      "tr": "А если они (родители) будут принуж­дать тебя поклоняться помимо Меня кому-либо, о ком ты не знаешь (кто не достоин поклонения), то не подчиняйся им. Относись к ним всю эту жизнь по-доброму. Иди путем тех, кто обратился ко Мне (с поклонением, подчинившись Моим повелениям). Затем вы все вернетесь ко Мне, и Я расскажу вам обо всем, что вы делали (в земной жизни, и воздам вам по вашим поступкам).",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 16,
+      "p": 412,
+      "j": 21,
+      "ar": "يَـٰبُنَىَّ إِنَّهَآ إِن تَكُ مِثْقَالَ حَبَّةٍ مِّنْ خَرْدَلٍ فَتَكُن فِى صَخْرَةٍ أَوْ فِى ٱلسَّمَـٰوَٲتِ أَوْ فِى ٱلْأَرْضِ يَأْتِ بِهَا ٱللَّهُ‌ۚ إِنَّ ٱللَّهَ لَطِيفٌ خَبِيرٌ",
+      "tw": "يَ<tajweed class=madda_normal>ـٰ</tajweed>بُنَىَّ إِ<tajweed class=ghunnah>نّ</tajweed>َه<tajweed class=madda_obligatory>َآ</tajweed> إِ<tajweed class=ikhafa>ن ت</tajweed>َكُ مِثْقَالَ حَبَّ<tajweed class=idgham_ghunnah>ةٍ م</tajweed>ِّنْ خَرْدَ<tajweed class=ikhafa>لٍ ف</tajweed>َتَكُ<tajweed class=ikhafa>ن ف</tajweed>ِى صَخْرَةٍ أَوْ فِى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّمَ<tajweed class=madda_normal>ـٰ</tajweed>و<tajweed class=madda_normal>َٲ</tajweed>تِ أَوْ فِى <tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضِ يَأْتِ بِهَا <tajweed class=ham_wasl>ٱ</tajweed>للَّهُ‌ۚ إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ لَطِيفٌ خَب<tajweed class=madda_permissible>ِي</tajweed>رٌ <span class=end>١٦</span>",
+      "tr": "Сын мой! Если что-либо (размером) с горчичное зерно будет внутри скалы, или на небесах, или в земле, - Аллах принесет это. Поистине, Аллах знает итог всего, знает обо всем.",
+      "tf": "Значение имени Всевышнего \"Аль-Латыф\" - \"Знающий обо всех нюансах скрытого\". А \"Аль-Хабир\" - \"Знающий о сути всех вещей\" или \"Тот, от Знания Которого ничего не скроется\". Оба этих имени указывают на Всезнание Господа.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Значение имени Всевышнего \"Аль-Латыф\" - \"Знающий обо всех нюансах скрытого\". А \"Аль-Хабир\" - \"Знающий о сути всех вещей\" или \"Тот, от Знания Которого ничего не скроется\". Оба этих имени указывают на Всезнание Господа.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 17,
+      "p": 412,
+      "j": 21,
+      "ar": "يَـٰبُنَىَّ أَقِمِ ٱلصَّلَوٲةَ وَأْمُرْ بِٱلْمَعْرُوفِ وَٱنْهَ عَنِ ٱلْمُنكَرِ وَٱصْبِرْ عَلَىٰ مَآ أَصَابَكَ‌ۖ إِنَّ ذَٲلِكَ مِنْ عَزْمِ ٱلْأُمُورِ",
+      "tw": "يَ<tajweed class=madda_normal>ـٰ</tajweed>بُنَىَّ أَقِمِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صَّلَ<tajweed class=slnt>و</tajweed><tajweed class=madda_normal>ٲ</tajweed>ةَ وَأْمُرْ بِ<tajweed class=ham_wasl>ٱ</tajweed>لْمَعْرُوفِ وَ<tajweed class=ham_wasl>ٱ</tajweed>نْهَ عَنِ <tajweed class=ham_wasl>ٱ</tajweed>لْمُ<tajweed class=ikhafa>نك</tajweed>َرِ وَ<tajweed class=ham_wasl>ٱ</tajweed>صْبِرْ عَلَىٰ م<tajweed class=madda_obligatory>َآ</tajweed> أَصَابَكَ‌ۖ إِ<tajweed class=ghunnah>نّ</tajweed>َ ذ<tajweed class=madda_normal>َٲ</tajweed>لِكَ مِنْ عَزْمِ <tajweed class=ham_wasl>ٱ</tajweed>لْأُم<tajweed class=madda_permissible>ُو</tajweed>رِ <span class=end>١٧</span>",
+      "tr": "Сын мой! (Полноценно) совершай намаз, призывай к благому, запрещай порицаемое и терпеливо переноси все, что постигает тебя. Поистине, все это (упомянутое выше) - из важнейших дел (в числе самых важных обязательств, возложенных Аллахом на человека).",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 18,
+      "p": 412,
+      "j": 21,
+      "ar": "وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِى ٱلْأَرْضِ مَرَحًا‌ۖ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ مُخْتَالٍ فَخُورٍ",
+      "tw": "وَلَا تُصَعِّرْ خَدَّكَ لِل<tajweed class=ghunnah>نّ</tajweed>َاسِ وَلَا تَمْشِ فِى <tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضِ مَرَحًا‌ۖ إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ لَا يُحِبُّ كُلَّ مُخْتَا<tajweed class=ikhafa>لٍ ف</tajweed>َخ<tajweed class=madda_permissible>ُو</tajweed>رٍ <span class=end>١٨</span>",
+      "tr": "Не отворачивайся от людей с высокомерием и не ходи по земле надменно. Поистине, Аллах не любит самодовольных хвастунов.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 19,
+      "p": 412,
+      "j": 21,
+      "ar": "وَٱقْصِدْ فِى مَشْيِكَ وَٱغْضُضْ مِن صَوْتِكَ‌ۚ إِنَّ أَنكَرَ ٱلْأَصْوَٲتِ لَصَوْتُ ٱلْحَمِيرِ",
+      "tw": "وَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=qalaqah>قْ</tajweed>صِ<tajweed class=qalaqah>دْ</tajweed> فِى مَشْيِكَ وَ<tajweed class=ham_wasl>ٱ</tajweed>غْضُضْ مِ<tajweed class=ikhafa>ن ص</tajweed>َوْتِكَ‌ۚ إِ<tajweed class=ghunnah>نّ</tajweed>َ أَ<tajweed class=ikhafa>نك</tajweed>َرَ <tajweed class=ham_wasl>ٱ</tajweed>لْأَصْو<tajweed class=madda_normal>َٲ</tajweed>تِ لَصَوْتُ <tajweed class=ham_wasl>ٱ</tajweed>لْحَم<tajweed class=madda_permissible>ِي</tajweed>رِ <span class=end>١٩</span>",
+      "tr": "Ходи размеренно и понижай голос, ведь самый неприятный голос - рев осла.",
+      "tf": "\"Ходи размеренно\": не слишком быстро, но и не слишком медленно, спокойно и с достоинством (\"Джалялейн\").\n\nВсевышний Аллах уподобляет здесь громкий голос реву осла: не кричите подобно тому, как ревет осел.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"Ходи размеренно\": не слишком быстро, но и не слишком медленно, спокойно и с достоинством (\"Джалялейн\").",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Всевышний Аллах уподобляет здесь громкий голос реву осла: не кричите подобно тому, как ревет осел.",
+          "sourceOrder": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "a": 20,
+      "p": 413,
+      "j": 21,
+      "ar": "أَلَمْ تَرَوْاْ أَنَّ ٱللَّهَ سَخَّرَ لَكُم مَّا فِى ٱلسَّمَـٰوَٲتِ وَمَا فِى ٱلْأَرْضِ وَأَسْبَغَ عَلَيْكُمْ نِعَمَهُۥ ظَـٰهِرَةً وَبَاطِنَةً‌ۗ وَمِنَ ٱلنَّاسِ مَن يُجَـٰدِلُ فِى ٱللَّهِ بِغَيْرِ عِلْمٍ وَلَا هُدًى وَلَا كِتَـٰبٍ مُّنِيرٍ",
+      "tw": "أَلَمْ تَرَوْ<tajweed class=slnt>اْ</tajweed> أَ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ سَخَّرَ لَك<tajweed class=idgham_shafawi>ُم م</tajweed>َّا فِى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّمَ<tajweed class=madda_normal>ـٰ</tajweed>و<tajweed class=madda_normal>َٲ</tajweed>تِ وَمَا فِى <tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضِ وَأَسْبَغَ عَلَيْكُمْ نِعَمَهُ<tajweed class=madda_normal>ۥ</tajweed> ظَ<tajweed class=madda_normal>ـٰ</tajweed>هِرَ<tajweed class=idgham_ghunnah>ةً و</tajweed>َبَاطِنَ<tajweed class=idgham_ghunnah>ةً‌ۗ و</tajweed>َمِنَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َاسِ م<tajweed class=idgham_ghunnah>َن ي</tajweed>ُجَ<tajweed class=madda_normal>ـٰ</tajweed>دِلُ فِى <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ بِغَيْرِ عِلْ<tajweed class=idgham_ghunnah>مٍ و</tajweed>َلَا هُ<tajweed class=idgham_ghunnah>دًى و</tajweed>َلَا كِتَ<tajweed class=madda_normal>ـٰ</tajweed><tajweed class=idgham_ghunnah>بٍ م</tajweed>ُّن<tajweed class=madda_permissible>ِي</tajweed>رٍ <span class=end>٢٠</span>",
+      "tr": "Разве вы не видите, что Аллах подчинил вам все, что на небесах, и все, что на земле?! Он осыпал вас Своими благами - заметными и незаметными. Но среди людей есть такие, кто спорит об Аллахе без знания и верного руководства, а также без освещающей (путь) Книги.",
+      "tf": "Всевышний Аллах дал весь мир в пользование человеку, осыпал его бесчисленными благами: как заметными, явными вроде здоровья, достатка, зрения и т. п., так и незаметными, скрытыми - разумом, пониманием, душевными качествами и т. д.\n\nНо, несмотря на это, многие люди спорят о Боге, отстаивая свои ошибочные представления о Нем, не имея правильных знаний об Аллахе, не опираясь ни на переданное пророком, ни на написанное в священном Писании.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Всевышний Аллах дал весь мир в пользование человеку, осыпал его бесчисленными благами: как заметными, явными вроде здоровья, достатка, зрения и т. п., так и незаметными, скрытыми - разумом, пониманием, душевными качествами и т. д.",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Но, несмотря на это, многие люди спорят о Боге, отстаивая свои ошибочные представления о Нем, не имея правильных знаний об Аллахе, не опираясь ни на переданное пророком, ни на написанное в священном Писании.",
+          "sourceOrder": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "a": 21,
+      "p": 413,
+      "j": 21,
+      "ar": "وَإِذَا قِيلَ لَهُمُ ٱتَّبِعُواْ مَآ أَنزَلَ ٱللَّهُ قَالُواْ بَلْ نَتَّبِعُ مَا وَجَدْنَا عَلَيْهِ ءَابَآءَنَآ‌ۚ أَوَلَوْ كَانَ ٱلشَّيْطَـٰنُ يَدْعُوهُمْ إِلَىٰ عَذَابِ ٱلسَّعِيرِ",
+      "tw": "وَإِذَا قِيلَ لَهُمُ <tajweed class=ham_wasl>ٱ</tajweed>تَّبِعُو<tajweed class=slnt>اْ</tajweed> م<tajweed class=madda_obligatory>َآ</tajweed> أَ<tajweed class=ikhafa>نز</tajweed>َلَ <tajweed class=ham_wasl>ٱ</tajweed>للَّهُ قَالُو<tajweed class=slnt>اْ</tajweed> بَلْ نَتَّبِعُ مَا وَجَ<tajweed class=qalaqah>دْ</tajweed>نَا عَلَيْهِ ءَاب<tajweed class=madda_obligatory>َا</tajweed>ٓءَن<tajweed class=madda_obligatory>َآ‌ۚ</tajweed> أَوَلَوْ كَانَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>شَّيْطَ<tajweed class=madda_normal>ـٰ</tajweed>نُ يَ<tajweed class=qalaqah>دْ</tajweed>عُوهُمْ إِلَىٰ عَذَابِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّع<tajweed class=madda_permissible>ِي</tajweed>رِ <span class=end>٢١</span>",
+      "tr": "Когда им говорят: \"Следуйте за тем, что ниспослал Аллах!\" - они отвечают: \"Лучше мы будем следовать тому, что получили мы от наших предков\". А если шайтан призовет их к адскому наказанию?!",
+      "tf": "Когда говорят спорщикам, о которых сказано в предыдущем аяте: \"Оставьте свои ложные убеждения и примите то, что пророки достоверно передают от Всевышнего Аллаха\", - они отвечают, что лучше будут продолжать следовать акыде своих предков. Неужели же они готовы следовать за предками, даже если тех обманул шайтан, чтобы ввести в Ад?! Риторический вопрос имеет здесь значение порицания и упрека1.\n\n1 Сафват ат-тафасир, 2/495.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Когда говорят спорщикам, о которых сказано в предыдущем аяте: \"Оставьте свои ложные убеждения и примите то, что пророки достоверно передают от Всевышнего Аллаха\", - они отвечают, что лучше будут продолжать следовать акыде своих предков. Неужели же они готовы следовать за предками, даже если тех обманул шайтан, чтобы ввести в Ад?! Риторический вопрос имеет здесь значение порицания и упрека.",
+          "sourceOrder": [
+            0
+          ],
+          "refs": [
+            1
+          ]
+        },
+        {
+          "type": "footnotes",
+          "items": [
+            {
+              "id": 1,
+              "text": "Сафват ат-тафасир, 2/495."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "a": 22,
+      "p": 413,
+      "j": 21,
+      "ar": "۞ وَمَن يُسْلِمْ وَجْهَهُۥٓ إِلَى ٱللَّهِ وَهُوَ مُحْسِنٌ فَقَدِ ٱسْتَمْسَكَ بِٱلْعُرْوَةِ ٱلْوُثْقَىٰ‌ۗ وَإِلَى ٱللَّهِ عَـٰقِبَةُ ٱلْأُمُورِ",
+      "tw": "۞ وَم<tajweed class=idgham_ghunnah>َن ي</tajweed>ُسْلِمْ وَ<tajweed class=qalaqah>جْ</tajweed>هَهُ<tajweed class=madda_obligatory>ۥٓ</tajweed> إِلَى <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ وَهُوَ مُحْسِ<tajweed class=ikhafa>نٌ ف</tajweed>َقَدِ <tajweed class=ham_wasl>ٱ</tajweed>سْتَمْسَكَ بِ<tajweed class=ham_wasl>ٱ</tajweed>لْعُرْوَةِ <tajweed class=ham_wasl>ٱ</tajweed>لْوُثْقَىٰ‌ۗ وَإِلَى <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ عَ<tajweed class=madda_normal>ـٰ</tajweed>قِبَةُ <tajweed class=ham_wasl>ٱ</tajweed>لْأُم<tajweed class=madda_permissible>ُو</tajweed>رِ <span class=end>٢٢</span>",
+      "tr": "Кто подчинился Аллаху, совершая хорошие поступки, тот держится за крепчайшую рукоять, а итог всех дел - у Аллаха.",
+      "tf": "Всевышний Аллах говорит в суре \"Аль-Бакара\":\n\nفَمَنْ يَكْفُرْ بِالطَّاغُوتِ وَيُؤْمِن بِاللّهِ فَقَدِ اسْتَمْسَكَ بِالْعُرْوَةِ الْوُثْقَىَ لاَ انفِصَامَ لَهَا\n\n\"Кто не верит в ложные божества (в тагута), а верит в Аллаха, тот держится за крепчайшую рукоять, которая никогда не сломается\"1.\n\nИмам аль-Алюси пишет, что \"крепчайшая рукоять\" - это иман, согласно мнению Муджахида, либо Коран, и это мнение Анаса ибн Малика, либо шахада, и это мнение Ибн Аббаса, либо истинные убеждения, либо причина, ведущая к довольству Аллаха\"2. Очевидно, что между этими толкованиями нет противоречия.\n\n\"А итог всех дел - у Аллаха\": именно Господь - и никто другой - воздаст каждому за его дела.\n\n1 Коран, 2:256.\n\n2 Рух аль-маʼани, 3/13-14.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Всевышний Аллах говорит в суре \"Аль-Бакара\":",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "quote",
+          "kind": "ayah",
+          "content": [
+            {
+              "type": "arabic",
+              "text": "فَمَنْ يَكْفُرْ بِالطَّاغُوتِ وَيُؤْمِن بِاللّهِ فَقَدِ اسْتَمْسَكَ بِالْعُرْوَةِ الْوُثْقَىَ لاَ انفِصَامَ لَهَا",
+              "sourceOrder": [
+                1
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "\"Кто не верит в ложные божества (в тагута), а верит в Аллаха, тот держится за крепчайшую рукоять, которая никогда не сломается\".",
+              "refs": [
+                1
+              ]
+            }
+          ],
+          "sourceOrder": [
+            1,
+            2
+          ],
+          "refs": [
+            1
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Имам аль-Алюси пишет, что \"крепчайшая рукоять\" - это иман, согласно мнению Муджахида, либо Коран, и это мнение Анаса ибн Малика, либо шахада, и это мнение Ибн Аббаса, либо истинные убеждения, либо причина, ведущая к довольству Аллаха\". Очевидно, что между этими толкованиями нет противоречия.",
+          "sourceOrder": [
+            3
+          ],
+          "refs": [
+            2
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "\"А итог всех дел - у Аллаха\": именно Господь - и никто другой - воздаст каждому за его дела.",
+          "sourceOrder": [
+            4
+          ]
+        },
+        {
+          "type": "footnotes",
+          "items": [
+            {
+              "id": 1,
+              "text": "Коран, 2:256."
+            },
+            {
+              "id": 2,
+              "text": "Рух аль-маʼани, 3/13-14."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "a": 23,
+      "p": 413,
+      "j": 21,
+      "ar": "وَمَن كَفَرَ فَلَا يَحْزُنكَ كُفْرُهُۥٓ‌ۚ إِلَيْنَا مَرْجِعُهُمْ فَنُنَبِّئُهُم بِمَا عَمِلُوٓاْ‌ۚ إِنَّ ٱللَّهَ عَلِيمُۢ بِذَاتِ ٱلصُّدُورِ",
+      "tw": "وَمَ<tajweed class=ikhafa>ن ك</tajweed>َفَرَ فَلَا يَحْزُ<tajweed class=ikhafa>نك</tajweed>َ كُفْرُهُ<tajweed class=madda_obligatory>ۥٓ‌ۚ</tajweed> إِلَيْنَا مَرْجِعُهُمْ فَنُنَبِّئُه<tajweed class=ikhafa_shafawi>ُم ب</tajweed>ِمَا عَمِل<tajweed class=madda_obligatory>ُوٓ<tajweed class=slnt>اْ</tajweed>‌ۚ</tajweed> إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ عَلِي<tajweed class=iqlab>مُۢ ب</tajweed>ِذَاتِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صُّد<tajweed class=madda_permissible>ُو</tajweed>رِ <span class=end>٢٣</span>",
+      "tr": "А если кто-то не уверовал, то пусть его неверие не огорчает тебя. Они вернутся к Нам, и Мы расскажем им о том, что они делали. Поистине, Аллах знает, что (у вас) в душе.",
+      "tf": "Всевышний Аллах говорит в другом аяте:\n\nوَلاَ يَحْزُنكَ الَّذِينَ يُسَارِعُونَ فِي الْكُفْرِ إِنَّهُمْ لَن يَضُرُّواْ اللّهَ شَيْئاً يُرِيدُ اللّهُ أَلاَّ يَجْعَلَ لَهُمْ حَظًّا فِي الآخِرَةِ وَلَهُمْ عَذَابٌ عَظِيمٌ\n\n\"И пусть не печалят тебя спешащие к неверию. Они ничем не навредят Аллаху. Аллах желает лишить их счастья в вечной жизни, и им - великое наказание\"1.\n\nИбн Касир пишет:\n\n\"Посланник Аллаха (да благословит его Аллах и да приветствует) очень сильно переживал и заботился о людях, и его сильно печалило, что они спешат к неверию, проявляя невероятное упорство в отрицании (истины)\"2.\n\nВ Судный день все люди - и неверующие в том числе - предстанут перед Господом, и Он явит им Свое всезнание, а затем воздаст им за неверие и грехи.\n\n1 Коран, 3:176.\n\n2 Ибн Касир (Дар Ибн аль-Джаузи), 2/476.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Всевышний Аллах говорит в другом аяте:",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "quote",
+          "kind": "ayah",
+          "content": [
+            {
+              "type": "arabic",
+              "text": "وَلاَ يَحْزُنكَ الَّذِينَ يُسَارِعُونَ فِي الْكُفْرِ إِنَّهُمْ لَن يَضُرُّواْ اللّهَ شَيْئاً يُرِيدُ اللّهُ أَلاَّ يَجْعَلَ لَهُمْ حَظًّا فِي الآخِرَةِ وَلَهُمْ عَذَابٌ عَظِيمٌ",
+              "sourceOrder": [
+                1
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "\"И пусть не печалят тебя спешащие к неверию. Они ничем не навредят Аллаху. Аллах желает лишить их счастья в вечной жизни, и им - великое наказание\".",
+              "refs": [
+                1
+              ]
+            }
+          ],
+          "sourceOrder": [
+            1,
+            2
+          ],
+          "refs": [
+            1
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Ибн Касир пишет:",
+          "sourceOrder": [
+            3
+          ]
+        },
+        {
+          "type": "quote",
+          "kind": "scholar",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "\"Посланник Аллаха (да благословит его Аллах и да приветствует) очень сильно переживал и заботился о людях, и его сильно печалило, что они спешат к неверию, проявляя невероятное упорство в отрицании (истины)\".",
+              "refs": [
+                2
+              ]
+            }
+          ],
+          "sourceOrder": [
+            4
+          ],
+          "refs": [
+            2
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "В Судный день все люди - и неверующие в том числе - предстанут перед Господом, и Он явит им Свое всезнание, а затем воздаст им за неверие и грехи.",
+          "sourceOrder": [
+            5
+          ]
+        },
+        {
+          "type": "footnotes",
+          "items": [
+            {
+              "id": 1,
+              "text": "Коран, 3:176."
+            },
+            {
+              "id": 2,
+              "text": "Ибн Касир (Дар Ибн аль-Джаузи), 2/476."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "a": 24,
+      "p": 413,
+      "j": 21,
+      "ar": "نُمَتِّعُهُمْ قَلِيلاً ثُمَّ نَضْطَرُّهُمْ إِلَىٰ عَذَابٍ غَلِيظٍ",
+      "tw": "نُمَتِّعُهُمْ قَلِيل<tajweed class=ikhafa>اً ث</tajweed>ُ<tajweed class=ghunnah>مّ</tajweed>َ نَضْطَرُّهُمْ إِلَىٰ عَذَابٍ غَل<tajweed class=madda_permissible>ِي</tajweed>ظٍ <span class=end>٢٤</span>",
+      "tr": "Мы дадим им возможность недолго насладиться (земными) благами, а затем подвергнем их тяжелейшему наказанию.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 25,
+      "p": 413,
+      "j": 21,
+      "ar": "وَلَئِن سَأَلْتَهُم مَّنْ خَلَقَ ٱلسَّمَـٰوَٲتِ وَٱلْأَرْضَ لَيَقُولُنَّ ٱللَّهُ‌ۚ قُلِ ٱلْحَمْدُ لِلَّهِ‌ۚ بَلْ أَكْثَرُهُمْ لَا يَعْلَمُونَ",
+      "tw": "وَلَئِ<tajweed class=ikhafa>ن س</tajweed>َأَلْتَه<tajweed class=idgham_shafawi>ُم م</tajweed>َّنْ خَلَقَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّمَ<tajweed class=madda_normal>ـٰ</tajweed>و<tajweed class=madda_normal>َٲ</tajweed>تِ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضَ لَيَقُولُ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهُ‌ۚ قُلِ <tajweed class=ham_wasl>ٱ</tajweed>لْحَمْدُ لِلَّهِ‌ۚ بَلْ أَكْثَرُهُمْ لَا يَعْلَم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٢٥</span>",
+      "tr": "Если ты спросишь их: \"Кто создал небеса и землю?\" - они обязательно ответят: \"Аллах\". Скажи: \"Хвала Аллаху!\" Но большая их часть не знает (истины).",
+      "tf": "\"Скажи: \"Хвала Аллаху!\"\" - то есть восхвали Всевышнего за то, что сделал тебя мусульманином.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "\"Скажи: \"Хвала Аллаху!\"\" - то есть восхвали Всевышнего за то, что сделал тебя мусульманином.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 26,
+      "p": 413,
+      "j": 21,
+      "ar": "لِلَّهِ مَا فِى ٱلسَّمَـٰوَٲتِ وَٱلْأَرْضِ‌ۚ إِنَّ ٱللَّهَ هُوَ ٱلْغَنِىُّ ٱلْحَمِيدُ",
+      "tw": "لِلَّهِ مَا فِى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّمَ<tajweed class=madda_normal>ـٰ</tajweed>و<tajweed class=madda_normal>َٲ</tajweed>تِ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضِ‌ۚ إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ هُوَ <tajweed class=ham_wasl>ٱ</tajweed>لْغَنِىُّ <tajweed class=ham_wasl>ٱ</tajweed>لْحَم<tajweed class=madda_permissible>ِي</tajweed><tajweed class=qalaqah>د</tajweed>ُ <span class=end>٢٦</span>",
+      "tr": "Аллаху принадлежит все, что на небесах и на земле. Поистине, Аллах - Тот, кто ни в ком и ни в чем не нуждается, Восхваляемый.",
+      "tf": "Он не нуждается, помимо прочего, в благодарности и хвале от своих Творений. Аллах достоин хвалы в любом случае1.\n\n1 Там же, 4/214.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Он не нуждается, помимо прочего, в благодарности и хвале от своих Творений. Аллах достоин хвалы в любом случае.",
+          "sourceOrder": [
+            0
+          ],
+          "refs": [
+            1
+          ]
+        },
+        {
+          "type": "footnotes",
+          "items": [
+            {
+              "id": 1,
+              "text": "Там же, 4/214."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "a": 27,
+      "p": 413,
+      "j": 21,
+      "ar": "وَلَوْ أَنَّمَا فِى ٱلْأَرْضِ مِن شَجَرَةٍ أَقْلَـٰمٌ وَٱلْبَحْرُ يَمُدُّهُۥ مِنۢ بَعْدِهِۦ سَبْعَةُ أَبْحُرٍ مَّا نَفِدَتْ كَلِمَـٰتُ ٱللَّهِ‌ۗ إِنَّ ٱللَّهَ عَزِيزٌ حَكِيمٌ",
+      "tw": "وَلَوْ أَ<tajweed class=ghunnah>نّ</tajweed>َمَا فِى <tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضِ مِ<tajweed class=ikhafa>ن ش</tajweed>َجَرَةٍ أَ<tajweed class=qalaqah>قْ</tajweed>لَ<tajweed class=madda_normal>ـٰ</tajweed><tajweed class=idgham_ghunnah>مٌ و</tajweed>َ<tajweed class=ham_wasl>ٱ</tajweed>لْبَحْرُ يَمُدُّهُ<tajweed class=madda_normal>ۥ</tajweed> م<tajweed class=iqlab>ِنۢ ب</tajweed>َعْدِه<tajweed class=madda_normal>ِۦ</tajweed> سَ<tajweed class=qalaqah>بْ</tajweed>عَةُ أَ<tajweed class=qalaqah>بْ</tajweed>حُ<tajweed class=idgham_ghunnah>رٍ م</tajweed>َّا نَفِدَتْ كَلِمَ<tajweed class=madda_normal>ـٰ</tajweed>تُ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ‌ۗ إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ عَزِيزٌ حَك<tajweed class=madda_permissible>ِي</tajweed>مٌ <span class=end>٢٧</span>",
+      "tr": "Если даже все деревья земли превратились бы в каламы (палочки для письма), а море - и семь морей после него - в чернила, то не закончатся слова Аллаха (не смогут все эти каламы и чернила записать их все). Поистине, Аллах - Могущественный, Мудрый.",
+      "tf": "Даже если бы все деревья мира стали бы палочками для письма, а вся вода Земли -- чернилами, они все равно бы не смогли описать все удивительные чудеса созданной Господом вселенной, указывающие на Его Единственность, Могущество и Знание1.\n\n1 Сафват ат-тафасир, 2/496.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Даже если бы все деревья мира стали бы палочками для письма, а вся вода Земли -- чернилами, они все равно бы не смогли описать все удивительные чудеса созданной Господом вселенной, указывающие на Его Единственность, Могущество и Знание.",
+          "sourceOrder": [
+            0
+          ],
+          "refs": [
+            1
+          ]
+        },
+        {
+          "type": "footnotes",
+          "items": [
+            {
+              "id": 1,
+              "text": "Сафват ат-тафасир, 2/496."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "a": 28,
+      "p": 413,
+      "j": 21,
+      "ar": "مَّا خَلْقُكُمْ وَلَا بَعْثُكُمْ إِلَّا كَنَفْسٍ وَٲحِدَةٍ‌ۗ إِنَّ ٱللَّهَ سَمِيعُۢ بَصِيرٌ",
+      "tw": "مَّا خَلْقُكُمْ وَلَا بَعْثُكُمْ إِلَّا كَنَفْ<tajweed class=idgham_ghunnah>سٍ و</tajweed><tajweed class=madda_normal>َٲ</tajweed>حِدَةٍ‌ۗ إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ سَمِي<tajweed class=iqlab>عُۢ ب</tajweed>َص<tajweed class=madda_permissible>ِي</tajweed>رٌ <span class=end>٢٨</span>",
+      "tr": "Сотворение и воскрешение вас (всех не труднее для Аллаха, чем сотворение и воскрешение) одного человека. Поистине, Аллах - Слышащий, Видящий.",
+      "tf": "Для Всевышнего Аллаха одинаково легко создать и воскресить одного единственного человека и все человечество целиком.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Для Всевышнего Аллаха одинаково легко создать и воскресить одного единственного человека и все человечество целиком.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 29,
+      "p": 414,
+      "j": 21,
+      "ar": "أَلَمْ تَرَ أَنَّ ٱللَّهَ يُولِجُ ٱلَّيْلَ فِى ٱلنَّهَارِ وَيُولِجُ ٱلنَّهَارَ فِى ٱلَّيْلِ وَسَخَّرَ ٱلشَّمْسَ وَٱلْقَمَرَ كُلٌّ يَجْرِىٓ إِلَىٰٓ أَجَلٍ مُّسَمًّى وَأَنَّ ٱللَّهَ بِمَا تَعْمَلُونَ خَبِيرٌ",
+      "tw": "أَلَمْ تَرَ أَ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ يُولِجُ <tajweed class=ham_wasl>ٱ</tajweed>لَّيْلَ فِى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َهَارِ وَيُولِجُ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َهَارَ فِى <tajweed class=ham_wasl>ٱ</tajweed>لَّيْلِ وَسَخَّرَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>شَّمْسَ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْقَمَرَ كُ<tajweed class=idgham_ghunnah>لٌّ ي</tajweed>َ<tajweed class=qalaqah>جْ</tajweed>ر<tajweed class=madda_obligatory>ِىٓ</tajweed> إِلَ<tajweed class=madda_obligatory>ىٰٓ</tajweed> أَجَ<tajweed class=idgham_ghunnah>لٍ م</tajweed>ُّسَم<tajweed class=idgham_ghunnah>ًّى و</tajweed>َأَ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ بِمَا تَعْمَلُونَ خَب<tajweed class=madda_permissible>ِي</tajweed>رٌ <span class=end>٢٩</span>",
+      "tr": "Разве ты не видишь, что Аллах удлиняет день за счет ночи и удлиняет ночь за счет дня?! Он подчинил солнце и луну, которые движутся (по своей орбите) к названному сроку (к Судному дню). (И разве ты не видишь) что Аллах знает обо всем, что вы делаете?!",
+      "tf": "Всевышний Аллах распоряжается в сотворенном Им мире как пожелает. Он устанавливает смену дня и ночи, которые плавно переходят друг в друга, Он удлиняет ночь и укорачивает день, а потом наоборот. Также Господь установил смену времен года. И все в мире происходит на основе Его Воли, Мудрости и предопределения1.\n\n1 Ибн Касир (Тайба), 8/10.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Всевышний Аллах распоряжается в сотворенном Им мире как пожелает. Он устанавливает смену дня и ночи, которые плавно переходят друг в друга, Он удлиняет ночь и укорачивает день, а потом наоборот. Также Господь установил смену времен года. И все в мире происходит на основе Его Воли, Мудрости и предопределения.",
+          "sourceOrder": [
+            0
+          ],
+          "refs": [
+            1
+          ]
+        },
+        {
+          "type": "footnotes",
+          "items": [
+            {
+              "id": 1,
+              "text": "Ибн Касир (Тайба), 8/10."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "a": 30,
+      "p": 414,
+      "j": 21,
+      "ar": "ذَٲلِكَ بِأَنَّ ٱللَّهَ هُوَ ٱلْحَقُّ وَأَنَّ مَا يَدْعُونَ مِن دُونِهِ ٱلْبَـٰطِلُ وَأَنَّ ٱللَّهَ هُوَ ٱلْعَلِىُّ ٱلْكَبِيرُ",
+      "tw": "ذ<tajweed class=madda_normal>َٲ</tajweed>لِكَ بِأَ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ هُوَ <tajweed class=ham_wasl>ٱ</tajweed>لْحَقُّ وَأَ<tajweed class=ghunnah>نّ</tajweed>َ مَا يَ<tajweed class=qalaqah>دْ</tajweed>عُونَ مِ<tajweed class=ikhafa>ن د</tajweed>ُونِهِ <tajweed class=ham_wasl>ٱ</tajweed>لْبَ<tajweed class=madda_normal>ـٰ</tajweed>طِلُ وَأَ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ هُوَ <tajweed class=ham_wasl>ٱ</tajweed>لْعَلِىُّ <tajweed class=ham_wasl>ٱ</tajweed>لْكَب<tajweed class=madda_permissible>ِي</tajweed>رُ <span class=end>٣٠</span>",
+      "tr": "Это потому, что Аллах - аль-Хакк (Тот, чье существование - истина), а все, к чему взывают помимо Него, - ложь, и потому, что Аллах - Возвышенный, Великий.",
+      "tf": "Всевышний Аллах - единственный, кто достоин поклонения. Все остальное, чему поклоняются язычники, - это ложные божества, не обладающие качествами величия и совершенства.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Всевышний Аллах - единственный, кто достоин поклонения. Все остальное, чему поклоняются язычники, - это ложные божества, не обладающие качествами величия и совершенства.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 31,
+      "p": 414,
+      "j": 21,
+      "ar": "أَلَمْ تَرَ أَنَّ ٱلْفُلْكَ تَجْرِى فِى ٱلْبَحْرِ بِنِعْمَتِ ٱللَّهِ لِيُرِيَكُم مِّنْ ءَايَـٰتِهِۦٓ‌ۚ إِنَّ فِى ذَٲلِكَ لَأَيَـٰتٍ لِّكُلِّ صَبَّارٍ شَكُورٍ",
+      "tw": "أَلَمْ تَرَ أَ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>لْفُلْكَ تَ<tajweed class=qalaqah>جْ</tajweed>رِى فِى <tajweed class=ham_wasl>ٱ</tajweed>لْبَحْرِ بِنِعْمَتِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ لِيُرِيَك<tajweed class=idgham_shafawi>ُم م</tajweed>ِّنْ ءَايَ<tajweed class=madda_normal>ـٰ</tajweed>تِه<tajweed class=madda_obligatory>ِۦٓ‌ۚ</tajweed> إِ<tajweed class=ghunnah>نّ</tajweed>َ فِى ذ<tajweed class=madda_normal>َٲ</tajweed>لِكَ لَأَيَ<tajweed class=madda_normal>ـٰ</tajweed><tajweed class=idgham_wo_ghunnah>تٍ ل</tajweed>ِّكُلِّ صَبَّا<tajweed class=ikhafa>رٍ ش</tajweed>َك<tajweed class=madda_permissible>ُو</tajweed>رٍ <span class=end>٣١</span>",
+      "tr": "Разве ты не видишь, что корабль плывет по морю по милости Аллаха, и в этом одно из Его знамений? Поистине, в этом - знамения для каждого, кто терпелив и благодарен.",
+      "tf": "",
+      "tfBlocks": []
+    },
+    {
+      "a": 32,
+      "p": 414,
+      "j": 21,
+      "ar": "وَإِذَا غَشِيَهُم مَّوْجٌ كَٱلظُّلَلِ دَعَوُاْ ٱللَّهَ مُخْلِصِينَ لَهُ ٱلدِّينَ فَلَمَّا نَجَّـٰهُمْ إِلَى ٱلْبَرِّ فَمِنْهُم مُّقْتَصِدٌ‌ۚ وَمَا يَجْحَدُ بِـَٔـايَـٰتِنَآ إِلَّا كُلُّ خَتَّارٍ كَفُورٍ",
+      "tw": "وَإِذَا غَشِيَه<tajweed class=idgham_shafawi>ُم م</tajweed>َّوْ<tajweed class=ikhafa>جٌ ك</tajweed>َ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>ظُّلَلِ دَعَوُ<tajweed class=slnt>اْ</tajweed> <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ مُخْلِصِينَ لَهُ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>دِّينَ فَلَ<tajweed class=ghunnah>مّ</tajweed>َا نَجَّ<tajweed class=madda_normal>ـٰ</tajweed>هُمْ إِلَى <tajweed class=ham_wasl>ٱ</tajweed>لْبَرِّ فَمِنْه<tajweed class=idgham_shafawi>ُم م</tajweed>ُّ<tajweed class=qalaqah>قْ</tajweed>تَصِ<tajweed class=idgham_ghunnah>دٌ‌ۚ و</tajweed>َمَا يَ<tajweed class=qalaqah>جْ</tajweed>حَدُ بِـَٔـايَ<tajweed class=madda_normal>ـٰ</tajweed>تِن<tajweed class=madda_obligatory>َآ</tajweed> إِلَّا كُلُّ خَتَّا<tajweed class=ikhafa>رٍ ك</tajweed>َف<tajweed class=madda_permissible>ُو</tajweed>رٍ <span class=end>٣٢</span>",
+      "tr": "Когда волна накрывает их (неверующих), (огромная) будто тень (высокой горы), они обращаются с мольбами (о спасении) исключительно к Аллаху. А когда Он спасает их (возвратив) на сушу, то среди них есть такие, кто проявляет справедливость (таухид). Отвергают же Наши знамения лишь неблагодарные предатели.",
+      "tf": "Верующие видят во всем вокруг милость от Аллаха и благодарны своему Создателю. Неверующие же проявляют неблагодарность. Но, оказываясь на грани гибели, они забывают о своих идолах и молят о спасении единственного Господа. Пережив критическую ситуацию, некоторые остаются истинно верующими, другие же возвращаются к привычному для них язычеству.",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Верующие видят во всем вокруг милость от Аллаха и благодарны своему Создателю. Неверующие же проявляют неблагодарность. Но, оказываясь на грани гибели, они забывают о своих идолах и молят о спасении единственного Господа. Пережив критическую ситуацию, некоторые остаются истинно верующими, другие же возвращаются к привычному для них язычеству.",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 33,
+      "p": 414,
+      "j": 21,
+      "ar": "يَـٰٓأَيُّهَا ٱلنَّاسُ ٱتَّقُواْ رَبَّكُمْ وَٱخْشَوْاْ يَوْمًا لَّا يَجْزِى وَالِدٌ عَن وَلَدِهِۦ وَلَا مَوْلُودٌ هُوَ جَازٍ عَن وَالِدِهِۦ شَيْــًٔا‌ۚ إِنَّ وَعْدَ ٱللَّهِ حَقٌّ‌ۖ فَلَا تَغُرَّنَّكُمُ ٱلْحَيَوٲةُ ٱلدُّنْيَا وَلَا يَغُرَّنَّكُم بِٱللَّهِ ٱلْغَرُورُ",
+      "tw": "يَ<tajweed class=madda_obligatory>ـٰٓ</tajweed>أَيُّهَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َاسُ <tajweed class=ham_wasl>ٱ</tajweed>تَّقُو<tajweed class=slnt>اْ</tajweed> رَبَّكُمْ وَ<tajweed class=ham_wasl>ٱ</tajweed>خْشَوْ<tajweed class=slnt>اْ</tajweed> يَوْ<tajweed class=idgham_wo_ghunnah>مًا ل</tajweed>َّا يَ<tajweed class=qalaqah>جْ</tajweed>زِى وَالِدٌ ع<tajweed class=idgham_ghunnah>َن و</tajweed>َلَدِه<tajweed class=madda_normal>ِۦ</tajweed> وَلَا مَوْلُودٌ هُوَ جَازٍ ع<tajweed class=idgham_ghunnah>َن و</tajweed>َالِدِه<tajweed class=madda_normal>ِۦ</tajweed> شَيْــًٔا‌ۚ إِ<tajweed class=ghunnah>نّ</tajweed>َ وَعْدَ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ حَ<tajweed class=ikhafa>قٌّ‌ۖ ف</tajweed>َلَا تَغُرَّ<tajweed class=ghunnah>نّ</tajweed>َكُمُ <tajweed class=ham_wasl>ٱ</tajweed>لْحَيَ<tajweed class=slnt>و</tajweed><tajweed class=madda_normal>ٲ</tajweed>ةُ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>دُّنْيَا وَلَا يَغُرَّ<tajweed class=ghunnah>نّ</tajweed>َك<tajweed class=ikhafa_shafawi>ُم ب</tajweed>ِ<tajweed class=ham_wasl>ٱ</tajweed>للَّهِ <tajweed class=ham_wasl>ٱ</tajweed>لْغَر<tajweed class=madda_permissible>ُو</tajweed>رُ <span class=end>٣٣</span>",
+      "tr": "О люди! Бойтесь вашего Господа и страшитесь Дня, когда родитель (ничем) не сможет помочь своему ребенку, а ребенок - своему родителю. Обещание Аллаха - истина! Пусть же не обманет вас земная жизнь, и пусть обманщик (шайтан) не обманет вас относительно Аллаха!",
+      "tf": "Бойтесь испытаний Судного дня и наказания. Все, что Всевышний обещал вам: воскрешение, Суд, Ад и Рай, - непременно сбудется. Пусть же не отвратит вас земная жизнь от Ислама! Не позволяйте же шайтану обмануть вас!",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Бойтесь испытаний Судного дня и наказания. Все, что Всевышний обещал вам: воскрешение, Суд, Ад и Рай, - непременно сбудется. Пусть же не отвратит вас земная жизнь от Ислама! Не позволяйте же шайтану обмануть вас!",
+          "sourceOrder": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "a": 34,
+      "p": 414,
+      "j": 21,
+      "ar": "إِنَّ ٱللَّهَ عِندَهُۥ عِلْمُ ٱلسَّاعَةِ وَيُنَزِّلُ ٱلْغَيْثَ وَيَعْلَمُ مَا فِى ٱلْأَرْحَامِ‌ۖ وَمَا تَدْرِى نَفْسٌ مَّاذَا تَكْسِبُ غَدًا‌ۖ وَمَا تَدْرِى نَفْسُۢ بِأَىِّ أَرْضٍ تَمُوتُ‌ۚ إِنَّ ٱللَّهَ عَلِيمٌ خَبِيرُۢ",
+      "tw": "إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ عِ<tajweed class=ikhafa>ند</tajweed>َهُ<tajweed class=madda_normal>ۥ</tajweed> عِلْمُ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّاعَةِ وَيُنَزِّلُ <tajweed class=ham_wasl>ٱ</tajweed>لْغَيْثَ وَيَعْلَمُ مَا فِى <tajweed class=ham_wasl>ٱ</tajweed>لْأَرْحَامِ‌ۖ وَمَا تَ<tajweed class=qalaqah>دْ</tajweed>رِى نَفْ<tajweed class=idgham_ghunnah>سٌ م</tajweed>َّاذَا تَكْسِبُ غَ<tajweed class=idgham_ghunnah>دًا‌ۖ و</tajweed>َمَا تَ<tajweed class=qalaqah>دْ</tajweed>رِى نَفْ<tajweed class=iqlab>سُۢ ب</tajweed>ِأَىِّ أَرْ<tajweed class=ikhafa>ضٍ ت</tajweed>َمُوتُ‌ۚ إِ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ عَلِيمٌ خَب<tajweed class=madda_permissible>ِي</tajweed>رُۢ <span class=end>٣٤</span>",
+      "tr": "Поистине, лишь Аллах знает (время наступления) Судного дня. Он низводит (с неба) дождь и знает, что в утробах (матерей). Ни один человек не знает, что приобретет завтра, и ни один человек не знает, в какой земле он умрет. Поистине, Аллах - Всезнающий.",
+      "tf": "Имам Ибн Касир пишет:\n\n\"Эти (пять упомянутых в аяте вещей) и есть \"ключи тайного\" (мафатих аль-гайб), знание о которых Аллах сохранил за Собой. Никто не знает о них, пока Всевышний не сообщит. Так, время наступления Судного дня не знает ни приближенный ангел, ни один из посланников...\"1\n\nПередается, что Посланник Аллаха (да благословит его Всевышний и да приветствует) сказал:\n\n\"Пять вещей знает только Всевышний Аллах\", - и затем прочитал этот аят2.\n\nВ другой версии слова хадиса такие:\n\n\"Ключей тайного пять. Не знает о них никто, кроме Аллаха\", - а затем он прочитал аят3.\n\nДа, Всевышний в свое время раскрывает знание чего-либо из названного отдельным своим рабам: например, знание о времени начала дождя или знание участи того, кто в утробе матери, может быть передано уполномоченным ангелам. Но в целом же знание об этом - лишь у Господа миров.\n\nОднако прогноз погоды и определение пола ребенка при помощи УЗИ не являются попытками узнать тайное, ведь ни один прибор не способен определить, здоровым родится ребенок или нет, богатым или бедным, верующим или неверующим. Прогнозы погоды - это тоже всего лишь предположение, часто не сбывающееся4.\n\nЗдесь по Милости Аллаха заканчивается комментарий к суре \"Лукман\".\n\n1 Ибн Касир (Тайба), 6/352.\n\n2 Передал Ахмад (№5133).\n\n3 Передал Бухари (№1344).\n\n4 \"Куран-и-Меджид\".",
+      "tfBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Имам Ибн Касир пишет:",
+          "sourceOrder": [
+            0
+          ]
+        },
+        {
+          "type": "quote",
+          "kind": "scholar",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "\"Эти (пять упомянутых в аяте вещей) и есть \"ключи тайного\" (мафатих аль-гайб), знание о которых Аллах сохранил за Собой. Никто не знает о них, пока Всевышний не сообщит. Так, время наступления Судного дня не знает ни приближенный ангел, ни один из посланников...\"",
+              "refs": [
+                1
+              ]
+            }
+          ],
+          "sourceOrder": [
+            1
+          ],
+          "refs": [
+            1
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Передается, что Посланник Аллаха (да благословит его Всевышний и да приветствует) сказал:",
+          "sourceOrder": [
+            2
+          ]
+        },
+        {
+          "type": "quote",
+          "kind": "hadith",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "\"Пять вещей знает только Всевышний Аллах\", - и затем прочитал этот аят.",
+              "refs": [
+                2
+              ]
+            }
+          ],
+          "sourceOrder": [
+            3
+          ],
+          "refs": [
+            2
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "В другой версии слова хадиса такие:",
+          "sourceOrder": [
+            4
+          ]
+        },
+        {
+          "type": "quote",
+          "kind": "hadith",
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "\"Ключей тайного пять. Не знает о них никто, кроме Аллаха\", - а затем он прочитал аят.",
+              "refs": [
+                3
+              ]
+            }
+          ],
+          "sourceOrder": [
+            5
+          ],
+          "refs": [
+            3
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Да, Всевышний в свое время раскрывает знание чего-либо из названного отдельным своим рабам: например, знание о времени начала дождя или знание участи того, кто в утробе матери, может быть передано уполномоченным ангелам. Но в целом же знание об этом - лишь у Господа миров.",
+          "sourceOrder": [
+            6
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Однако прогноз погоды и определение пола ребенка при помощи УЗИ не являются попытками узнать тайное, ведь ни один прибор не способен определить, здоровым родится ребенок или нет, богатым или бедным, верующим или неверующим. Прогнозы погоды - это тоже всего лишь предположение, часто не сбывающееся.",
+          "sourceOrder": [
+            7
+          ],
+          "refs": [
+            4
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Здесь по Милости Аллаха заканчивается комментарий к суре \"Лукман\".",
+          "sourceOrder": [
+            8
+          ]
+        },
+        {
+          "type": "footnotes",
+          "items": [
+            {
+              "id": 1,
+              "text": "Ибн Касир (Тайба), 6/352."
+            },
+            {
+              "id": 2,
+              "text": "Передал Ахмад (№5133)."
+            },
+            {
+              "id": 3,
+              "text": "Передал Бухари (№1344)."
+            },
+            {
+              "id": 4,
+              "text": "\"Куран-и-Меджид\"."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tafsirSchemaVersion": 3
+}

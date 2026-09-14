@@ -1,0 +1,19 @@
+{
+  "schema": 2,
+  "pages": 604,
+  "mandatory_assets": 1812,
+  "layout": {
+    "count": 604,
+    "pattern": "layout/page-%03d.json"
+  },
+  "v4_tajweed": {
+    "count": 604,
+    "pattern": "fonts/v4/p%d.ttf"
+  },
+  "v2_plain": {
+    "count": 604,
+    "pattern": "fonts/v2/p%d.ttf"
+  },
+  "ready_marker": "OFFLINE_ASSETS_READY.txt",
+  "note": "The ready marker is created only after all 1812 files pass the external audit."
+}

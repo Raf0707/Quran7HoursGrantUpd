@@ -1,4 +1,4 @@
-package raf.quran7hours.app
+package raf.console.quran7hours
 
 import android.Manifest
 import android.content.Intent
@@ -32,6 +32,7 @@ import androidx.compose.material.icons.filled.FastRewind
 import androidx.compose.material.icons.filled.FolderOpen
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Repeat
 import androidx.compose.material.icons.filled.RepeatOne
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.SkipNext
@@ -76,6 +77,21 @@ import androidx.media3.exoplayer.ExoPlayer
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import raf.console.quran7hours.AdaptiveMetrics
+import raf.console.quran7hours.AppNavigator
+import raf.console.quran7hours.AppPreferences
+import raf.console.quran7hours.AppRoute
+import raf.console.quran7hours.LoadingPane
+import raf.console.quran7hours.PageHeading
+import raf.console.quran7hours.QuranAudioController
+import raf.console.quran7hours.QuranFont
+import raf.console.quran7hours.QuranMeta
+import raf.console.quran7hours.QuranRepository
+import raf.console.quran7hours.RECITERS
+import raf.console.quran7hours.ReciterDropdown
+import raf.console.quran7hours.TrackKind
+import raf.console.quran7hours.formatTime
+import raf.console.quran7hours.pluralizeAyah
 
 private enum class AudioMode { AYAH, HADR, CUSTOM }
 
@@ -84,20 +100,19 @@ fun AudioScreen(
     m: AdaptiveMetrics,
     repository: QuranRepository,
     preferences: AppPreferences,
-    audio: QuranAudioController
+    audio: QuranAudioController,
+    navigator: AppNavigator
 ) {
     val meta by produceState<QuranMeta?>(null) { value = repository.meta() }
     val all = meta ?: return LoadingPane(m, "Открываем аудио…")
     var mode by remember { mutableStateOf(AudioMode.AYAH) }
     var selectedSurah by remember { mutableIntStateOf(1) }
     var selectedAyah by remember { mutableIntStateOf(1) }
-    var showDownloadManager by remember { mutableStateOf(false) }
     val track by audio.track.collectAsState()
 
     val context = LocalContext.current
     val appContext = context.applicationContext
     val downloadRequired by audio.downloadRequired.collectAsState()
-    var pendingDownloadReciter by remember { mutableStateOf<String?>(null) }
     var pendingAfterStoragePermission by remember { mutableStateOf<String?>(null) }
 
     fun enqueueDownload(reciterId: String) {
@@ -107,11 +122,7 @@ fun AudioScreen(
 
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
-    ) { granted ->
-        val id = pendingDownloadReciter
-        pendingDownloadReciter = null
-        if (granted && id != null) enqueueDownload(id)
-    }
+    ) { /* Permission controls visibility only; WorkManager download has already started. */ }
 
     val storagePermissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -134,6 +145,9 @@ fun AudioScreen(
             return
         }
 
+        // Start first. On Android 13+ POST_NOTIFICATIONS only affects whether the
+        // foreground progress notification is visible; denying it must not cancel the download.
+        enqueueDownload(reciterId)
         if (
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
             ContextCompat.checkSelfPermission(
@@ -141,12 +155,8 @@ fun AudioScreen(
                 Manifest.permission.POST_NOTIFICATIONS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            pendingDownloadReciter = reciterId
             notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-            return
         }
-
-        enqueueDownload(reciterId)
     }
 
     downloadRequired?.let { reciterId ->
@@ -182,18 +192,6 @@ fun AudioScreen(
         }
     }
 
-    BackHandler(enabled = showDownloadManager) { showDownloadManager = false }
-
-    if (showDownloadManager) {
-        ReciterDownloadsScreen(
-            m = m,
-            preferences = preferences,
-            onBack = { showDownloadManager = false },
-            onStartDownload = ::startReciterDownload
-        )
-        return
-    }
-
     LazyColumn(contentPadding = m.pagePadding, verticalArrangement = Arrangement.spacedBy(m.md)) {
         item {
             PageHeading(
@@ -209,7 +207,7 @@ fun AudioScreen(
             ) {
                 FilterChip(selected = mode == AudioMode.AYAH, onClick = { mode = AudioMode.AYAH }, label = { Text("По аятам", fontSize = m.bodySmall) })
                 FilterChip(selected = mode == AudioMode.HADR, onClick = { mode = AudioMode.HADR }, label = { Text("Хадр · 7 часов", fontSize = m.bodySmall) })
-                FilterChip(selected = false, onClick = { showDownloadManager = true }, label = { Text("Загрузки", fontSize = m.bodySmall) })
+                FilterChip(selected = false, onClick = { navigator.go(AppRoute.AudioDownloads) }, label = { Text("Загрузки", fontSize = m.bodySmall) })
                 FilterChip(selected = mode == AudioMode.CUSTOM, onClick = { mode = AudioMode.CUSTOM }, label = { Text("Мой чтец", fontSize = m.bodySmall) })
             }
         }
@@ -228,7 +226,7 @@ fun AudioScreen(
                         selectedAyah = a
                     },
                     onDownloadCurrent = { startReciterDownload(preferences.settings.value.reciter) },
-                    onManageDownloads = { showDownloadManager = true }
+                    onManageDownloads = { navigator.go(AppRoute.AudioDownloads) }
                 )
                 AudioMode.HADR -> HadrAudioPanel(m, audio)
                 AudioMode.CUSTOM -> CustomAudioPanel(m, all, preferences, selectedSurah) { selectedSurah = it }
@@ -406,17 +404,53 @@ private fun HadrAudioPanel(m: AdaptiveMetrics, audio: QuranAudioController) {
 }
 
 @Composable
-private fun ReciterDownloadsScreen(
+fun ReciterDownloadsScreen(
     m: AdaptiveMetrics,
     preferences: AppPreferences,
-    onBack: () -> Unit,
-    onStartDownload: (String) -> Unit
+    onBack: () -> Unit
 ) {
     val context = LocalContext.current
     val appContext = context.applicationContext
     val settings by preferences.settings.collectAsState()
     val store = remember { AudioOfflineStore(appContext) }
     val scope = rememberCoroutineScope()
+    val liveProgress by AudioDownloadScheduler.progress.collectAsState()
+    var pendingAfterStoragePermission by remember { mutableStateOf<String?>(null) }
+
+    fun enqueueDownload(reciterId: String) {
+        AudioDownloadScheduler.enqueueReciter(appContext, reciterId)
+    }
+
+    val notificationPermissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { /* Download continues even if notifications are denied. */ }
+
+    val storagePermissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        val id = pendingAfterStoragePermission
+        pendingAfterStoragePermission = null
+        if (granted && id != null) enqueueDownload(id)
+    }
+
+    fun startDownload(reciterId: String) {
+        if (
+            Build.VERSION.SDK_INT <= 28 &&
+            ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+        ) {
+            pendingAfterStoragePermission = reciterId
+            storagePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            return
+        }
+
+        enqueueDownload(reciterId)
+        if (
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) {
+            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
 
     var stats by remember { mutableStateOf<Map<String, ReciterOfflineStats>>(emptyMap()) }
     var states by remember { mutableStateOf<Map<String, androidx.work.WorkInfo.State?>>(emptyMap()) }
@@ -454,6 +488,7 @@ private fun ReciterDownloadsScreen(
                     AudioDownloadScheduler.cancel(appContext, id)
                     scope.launch {
                         store.deleteReciter(id)
+                        AudioDownloadScheduler.clearManualDownload(appContext, id)
                         refresh()
                         message = "Аудио ${reciter?.name ?: id} удалено с устройства."
                     }
@@ -472,7 +507,10 @@ private fun ReciterDownloadsScreen(
     }
     val totalStored = stats.values.sumOf { it.totalBytes }
     val completeCount = stats.values.count { it.complete }
-    val activeCount = states.values.count { it == androidx.work.WorkInfo.State.RUNNING || it == androidx.work.WorkInfo.State.ENQUEUED }
+    val activeCount = states.count { (id, state) ->
+        AudioDownloadScheduler.wasManualDownloadStarted(appContext, id) &&
+                (state == androidx.work.WorkInfo.State.RUNNING || state == androidx.work.WorkInfo.State.ENQUEUED)
+    }
 
     LazyColumn(
         contentPadding = m.pagePadding,
@@ -526,10 +564,29 @@ private fun ReciterDownloadsScreen(
                         }
                         Switch(
                             checked = wifiOnly,
-                            onCheckedChange = {
-                                wifiOnly = it
-                                AudioDownloadScheduler.setWifiOnly(appContext, it)
-                                message = "Настройка сети применяется к новым и возобновлённым загрузкам."
+                            onCheckedChange = { checked ->
+                                wifiOnly = checked
+                                AudioDownloadScheduler.setWifiOnly(appContext, checked)
+
+                                // ExistingWorkPolicy.REPLACE lets us immediately rebuild active
+                                // requests with the new network constraint. The current *.part and
+                                // all completed ayahs remain on disk, so no downloaded data is lost.
+                                val activeIds = states
+                                    .filter { (id, state) ->
+                                        AudioDownloadScheduler.wasManualDownloadStarted(appContext, id) &&
+                                                (state == androidx.work.WorkInfo.State.RUNNING ||
+                                                        state == androidx.work.WorkInfo.State.ENQUEUED)
+                                    }
+                                    .keys
+                                activeIds.forEach { id ->
+                                    AudioDownloadScheduler.enqueueReciter(appContext, id)
+                                }
+                                message = if (activeIds.isEmpty()) {
+                                    if (checked) "Для новых загрузок используется только Wi‑Fi / безлимитная сеть."
+                                    else "Мобильная сеть разрешена для новых загрузок."
+                                } else {
+                                    "Сетевое ограничение применено. Активные загрузки продолжатся с сохранённого места."
+                                }
                             }
                         )
                     }
@@ -554,16 +611,35 @@ private fun ReciterDownloadsScreen(
         items(filtered, key = { it.key }) { (id, reciter) ->
             val stat = stats[id] ?: ReciterOfflineStats()
             val state = states[id]
-            val count = stat.files.coerceAtMost(AudioOfflineStore.EXPECTED_AYAH_FILES)
+            val manualStarted = AudioDownloadScheduler.wasManualDownloadStarted(appContext, id)
+            val live = liveProgress[id]
+            val count = (if (manualStarted) {
+                maxOf(stat.files, live?.downloaded ?: 0)
+            } else {
+                stat.files
+            }).coerceAtMost(AudioOfflineStore.EXPECTED_AYAH_FILES)
             val progress = (count.toFloat() / AudioOfflineStore.EXPECTED_AYAH_FILES.toFloat()).coerceIn(0f, 1f)
-            val active = state == androidx.work.WorkInfo.State.RUNNING || state == androidx.work.WorkInfo.State.ENQUEUED
+            val liveActive = manualStarted &&
+                    (live?.status == "RUNNING" || live?.status == "RETRY" || live?.status == "ENQUEUED")
+            val active = manualStarted && (
+                    state == androidx.work.WorkInfo.State.RUNNING ||
+                            state == androidx.work.WorkInfo.State.ENQUEUED ||
+                            liveActive
+                    )
             val stateText = when {
                 stat.complete -> "Скачан полностью"
+                !manualStarted && stat.files > 0 -> "В офлайн-кэше ${stat.files} аятов"
+                !manualStarted -> "Не скачан"
+                live?.status == "ERROR" -> live.message.ifBlank { "Ошибка загрузки" }
+                live?.status == "RETRY" -> live.message.ifBlank { "Соединение прервано · повторяем" }
+                live?.status == "RUNNING" -> live.message.ifBlank { "Скачивается в фоне" }
                 state == androidx.work.WorkInfo.State.RUNNING -> "Скачивается в фоне"
-                state == androidx.work.WorkInfo.State.ENQUEUED -> if (wifiOnly) "Ожидает подходящую сеть" else "Ожидает запуска"
+                state == androidx.work.WorkInfo.State.ENQUEUED -> live?.message?.takeIf { it.isNotBlank() }
+                    ?: if (wifiOnly) "Ожидает подходящую сеть" else "Ожидает запуска"
                 state == androidx.work.WorkInfo.State.BLOCKED -> "Ожидает условий"
+                state == androidx.work.WorkInfo.State.FAILED -> "Ошибка загрузки · нажмите «Продолжить»"
                 count > 0 || stat.partialBytes > 0L -> "Загрузка приостановлена · можно продолжить"
-                else -> "Не скачан"
+                else -> "Готов к загрузке"
             }
 
             Surface(
@@ -601,9 +677,32 @@ private fun ReciterDownloadsScreen(
                     }
 
                     LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth())
+
+                    val currentTotal = live?.currentTotalBytes
+                    val currentBytes = live?.currentBytes ?: 0L
+                    if (active && currentTotal != null && currentTotal > 0L) {
+                        val fileProgress = (currentBytes.toFloat() / currentTotal.toFloat()).coerceIn(0f, 1f)
+                        LinearProgressIndicator(progress = { fileProgress }, modifier = Modifier.fillMaxWidth())
+                        Text(
+                            "Текущий файл: ${formatStorageSize(currentBytes)} / ${formatStorageSize(currentTotal)}",
+                            fontSize = m.bodySmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    } else if (active && count == 0) {
+                        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                        Text(
+                            "Устанавливаем соединение с GitHub…",
+                            fontSize = m.bodySmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+
                     Text(
                         "$count / ${AudioOfflineStore.EXPECTED_AYAH_FILES} аятов · ${formatStorageSize(stat.totalBytes)} на устройстве" +
-                                if (stat.partialBytes > 0L) " · ${formatStorageSize(stat.partialBytes)} ожидает продолжения" else "",
+                                if (stat.partialBytes > 0L) {
+                                    if (active) " · ${formatStorageSize(stat.partialBytes)} загружается сейчас"
+                                    else " · ${formatStorageSize(stat.partialBytes)} ожидает продолжения"
+                                } else "",
                         fontSize = m.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -623,8 +722,8 @@ private fun ReciterDownloadsScreen(
                             }
                         } else if (!stat.complete) {
                             Button(onClick = {
-                                onStartDownload(id)
-                                message = if (count > 0 || stat.partialBytes > 0L) {
+                                startDownload(id)
+                                message = if (manualStarted) {
                                     "Продолжаем загрузку ${reciter.name}."
                                 } else {
                                     "Загрузка ${reciter.name} запущена в фоне."
@@ -632,7 +731,7 @@ private fun ReciterDownloadsScreen(
                             }) {
                                 Icon(Icons.Default.CloudDownload, null, Modifier.size(m.iconSmall))
                                 Spacer(Modifier.width(m.xs))
-                                Text(if (count > 0 || stat.partialBytes > 0L) "Продолжить" else "Скачать", fontSize = m.bodySmall)
+                                Text(if (manualStarted) "Продолжить" else "Скачать", fontSize = m.bodySmall)
                             }
                         } else {
                             OutlinedButton(onClick = {}, enabled = false) {
@@ -763,3 +862,4 @@ private fun CustomAudioPanel(
         }
     }
 }
+

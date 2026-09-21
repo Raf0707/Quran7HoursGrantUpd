@@ -1,4 +1,4 @@
-package raf.quran7hours.app
+package raf.console.quran7hours
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -10,10 +10,12 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
@@ -26,6 +28,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.lazy.items
@@ -35,9 +38,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.CloudDownload
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.MenuBook
@@ -46,9 +51,11 @@ import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Translate
 import androidx.compose.material.icons.filled.Headphones
 import androidx.compose.material.icons.filled.FastForward
 import androidx.compose.material.icons.filled.FastRewind
+import androidx.compose.material.icons.filled.Repeat
 import androidx.compose.material.icons.filled.RepeatOne
 import androidx.compose.material.icons.filled.SkipNext
 import androidx.compose.material.icons.filled.SkipPrevious
@@ -57,6 +64,7 @@ import androidx.compose.material.icons.filled.ViewDay
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FilterChip
@@ -64,6 +72,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
@@ -71,6 +80,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -111,6 +121,18 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.floatOrNull
+import kotlinx.serialization.json.intOrNull
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import raf.console.quran7hours.AudioDownloadScheduler
+import raf.console.quran7hours.AudioOfflineStore
+import kotlin.math.abs
 
 private data class ReaderPayload(
     val meta: QuranMeta,
@@ -208,9 +230,24 @@ fun ReaderScreen(
         prewarmQpcAround(context.applicationContext, effectiveData.page, settings.tajweed)
     }
     LaunchedEffect(effectiveData.currentSurah) { repository.prewarmSurah(effectiveData.currentSurah) }
-    LaunchedEffect(effectiveData.currentSurah, effectiveData.currentAyah, effectiveData.page) {
+    LaunchedEffect(effectiveData.currentSurah, effectiveData.currentAyah, effectiveData.page, effectiveData.mode) {
         preferences.addRecent("${effectiveData.currentSurah}:${effectiveData.currentAyah}")
-        onCoordinate(ReaderCoordinate(effectiveData.currentSurah, effectiveData.currentAyah, effectiveData.page, effectiveData.juz, effectiveData.range))
+        val saved = preferences.readerCoordinate.value
+        val coordinate = if (
+            effectiveData.mode == ReadingMode.PAGE &&
+            saved.page == effectiveData.page
+        ) {
+            saved.copy(juz = effectiveData.juz, range = effectiveData.range)
+        } else {
+            ReaderCoordinate(
+                effectiveData.currentSurah,
+                effectiveData.currentAyah,
+                effectiveData.page,
+                effectiveData.juz,
+                effectiveData.range
+            )
+        }
+        onCoordinate(coordinate)
     }
     LaunchedEffect(data.mode) {
         if (settings.readingMode != data.mode) {
@@ -350,10 +387,43 @@ private fun StandardReader(
     } else data.pageAyahs
     val listState = rememberLazyListState()
 
-    LaunchedEffect(data.mode, data.currentSurah, data.currentAyah, ayahs.size) {
-        if (data.mode == ReadingMode.SURAH && data.currentAyah > 1) {
-            val verseIndex = ayahs.indexOfFirst { it.a == data.currentAyah }
-            if (verseIndex >= 0) listState.scrollToItem(2 + verseIndex)
+    val leadingItems = if (data.mode == ReadingMode.SURAH || (data.mode == ReadingMode.PAGE && data.page == 1)) 2 else 1
+
+    LaunchedEffect(data.mode, data.currentSurah, data.currentAyah, data.page, ayahs.size) {
+        val saved = preferences.readerCoordinate.value
+        val targetSurah = if (data.mode == ReadingMode.PAGE && saved.page == data.page) saved.surah else data.currentSurah
+        val targetAyah = if (data.mode == ReadingMode.PAGE && saved.page == data.page) saved.ayah else data.currentAyah
+        val verseIndex = ayahs.indexOfFirst { it.surah == targetSurah && it.a == targetAyah }
+        if (verseIndex >= 0 && (data.mode == ReadingMode.PAGE || targetAyah > 1)) {
+            listState.scrollToItem(leadingItems + verseIndex)
+        }
+    }
+
+    // Persist the first visible verse. This makes "Вернуться к чтению" restore not just
+    // the surah/page, but the verse the user was actually looking at before opening another screen.
+    LaunchedEffect(listState, data.mode, data.page, ayahs.size) {
+        var lastKey: String? = null
+        snapshotFlow {
+            listState.layoutInfo.visibleItemsInfo
+                .asSequence()
+                .map { it.index - leadingItems }
+                .firstOrNull { it in ayahs.indices }
+        }.collect { verseIndex ->
+            val row = verseIndex?.let { ayahs.getOrNull(it) } ?: return@collect
+            val key = "${row.surah}:${row.a}:${row.p}"
+            if (key != lastKey) {
+                lastKey = key
+                preferences.saveReaderCoordinate(
+                    ReaderCoordinate(
+                        surah = row.surah,
+                        ayah = row.a,
+                        page = row.p,
+                        juz = row.j,
+                        range = data.range
+                    )
+                )
+                onAyahSelected(row.surah, row.a)
+            }
         }
     }
 
@@ -814,65 +884,65 @@ private fun MushafReader(
                 HorizontalDivider(color = colors.mushafLine.copy(alpha = .82f))
 
                 Box(Modifier.fillMaxWidth().weight(1f)) {
-                if (qpcMode) {
-                    QpcV4MushafPage(
-                        m = m,
-                        page = data.page,
-                        repository = repository,
-                        settings = settings,
-                        audio = audio,
-                        onTip = { },
-                        onAyahSelected = onAyahSelected,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        if (elements.isNotEmpty()) {
-                            Column(Modifier.fillMaxSize()) {
-                                elements.forEach { element ->
-                                    when (element) {
-                                        is MushafElement.Header -> MushafHeader(m, element, settings, audio)
-                                        is MushafElement.Line -> MushafLineView(
-                                            m = m,
-                                            line = element,
-                                            page = data.page,
-                                            surahMap = surahMap,
-                                            settings = settings,
-                                            audio = audio,
-                                            onTip = { },
-                                            onAyahSelected = onAyahSelected
-                                        )
+                    if (qpcMode) {
+                        QpcV4MushafPage(
+                            m = m,
+                            page = data.page,
+                            repository = repository,
+                            settings = settings,
+                            audio = audio,
+                            onTip = { },
+                            onAyahSelected = onAyahSelected,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            if (elements.isNotEmpty()) {
+                                Column(Modifier.fillMaxSize()) {
+                                    elements.forEach { element ->
+                                        when (element) {
+                                            is MushafElement.Header -> MushafHeader(m, element, settings, audio)
+                                            is MushafElement.Line -> MushafLineView(
+                                                m = m,
+                                                line = element,
+                                                page = data.page,
+                                                surahMap = surahMap,
+                                                settings = settings,
+                                                audio = audio,
+                                                onTip = { },
+                                                onAyahSelected = onAyahSelected
+                                            )
+                                        }
                                     }
                                 }
-                            }
-                        } else {
-                            Text(
-                                "Загружаем локальный текст…",
-                                modifier = Modifier.fillMaxWidth().padding(m.md),
-                                textAlign = TextAlign.Center,
-                                color = colors.mushafMuted,
-                                fontSize = m.bodySmall
-                            )
-                        }
-                    }
-                } else if (elements.isNotEmpty()) {
-                    Column(Modifier.fillMaxSize()) {
-                        elements.forEach { element ->
-                            when (element) {
-                                is MushafElement.Header -> MushafHeader(m, element, settings, audio)
-                                is MushafElement.Line -> MushafLineView(
-                                    m = m,
-                                    line = element,
-                                    page = data.page,
-                                    surahMap = surahMap,
-                                    settings = settings,
-                                    audio = audio,
-                                    onTip = { },
-                                    onAyahSelected = onAyahSelected
+                            } else {
+                                Text(
+                                    "Загружаем локальный текст…",
+                                    modifier = Modifier.fillMaxWidth().padding(m.md),
+                                    textAlign = TextAlign.Center,
+                                    color = colors.mushafMuted,
+                                    fontSize = m.bodySmall
                                 )
+                            }
+                        }
+                    } else if (elements.isNotEmpty()) {
+                        Column(Modifier.fillMaxSize()) {
+                            elements.forEach { element ->
+                                when (element) {
+                                    is MushafElement.Header -> MushafHeader(m, element, settings, audio)
+                                    is MushafElement.Line -> MushafLineView(
+                                        m = m,
+                                        line = element,
+                                        page = data.page,
+                                        surahMap = surahMap,
+                                        settings = settings,
+                                        audio = audio,
+                                        onTip = { },
+                                        onAyahSelected = onAyahSelected
+                                    )
+                                }
                             }
                         }
                     }
                 }
-            }
 
                 HorizontalDivider(color = colors.mushafLine.copy(alpha = .72f))
                 MushafPagePosition(m, data.page)
@@ -901,7 +971,7 @@ private fun MushafTopLine(m: AdaptiveMetrics, data: ReaderPayload) {
 private fun MushafPagePosition(m: AdaptiveMetrics, page: Int) {
     val colors = LocalQuranColors.current
     val sideMode = MiniPlayerUiPrefs.presentation == MiniPlayerPresentation.BOTTOM ||
-        MushafUiPrefs.pageNumberPlacement == MushafPageNumberPlacement.SIDES
+            MushafUiPrefs.pageNumberPlacement == MushafPageNumberPlacement.SIDES
 
     if (sideMode) {
         Box(
@@ -1206,6 +1276,10 @@ private fun ReaderBottomSheet(
                                     onOpenAllSettings = {
                                         onDismiss()
                                         navigator.go(AppRoute.Settings)
+                                    },
+                                    onOpenDownloads = {
+                                        onDismiss()
+                                        navigator.go(AppRoute.AudioDownloads)
                                     }
                                 )
                                 Spacer(Modifier.height(m.lg))
@@ -1282,6 +1356,7 @@ private fun ReaderAudioSheet(
     val duration by audio.duration.collectAsState()
     val repeat by audio.repeat.collectAsState()
     val settings by preferences.settings.collectAsState()
+    val liveProgress by AudioDownloadScheduler.progress.collectAsState()
     val error by audio.error.collectAsState()
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -1291,24 +1366,50 @@ private fun ReaderAudioSheet(
     val offlineCount by produceState(0, settings.reciter) {
         while (isActive) {
             value = runCatching { offlineStore.downloadedCount(settings.reciter) }.getOrDefault(0)
-            delay(1_500L)
+            delay(700L)
         }
     }
+    val downloadState by produceState<androidx.work.WorkInfo.State?>(null, settings.reciter) {
+        while (isActive) {
+            value = AudioDownloadScheduler.state(appContext, settings.reciter)
+            delay(700L)
+        }
+    }
+    val manualDownloadStarted by produceState(
+        initialValue = AudioDownloadScheduler.wasManualDownloadStarted(appContext, settings.reciter),
+        settings.reciter
+    ) {
+        while (isActive) {
+            value = AudioDownloadScheduler.wasManualDownloadStarted(appContext, settings.reciter)
+            delay(700L)
+        }
+    }
+    val selectedLiveProgress = liveProgress[settings.reciter]
+    // Passive online listening contributes only real completed files. Live worker
+    // counters/messages are considered only after the user explicitly started
+    // the full-reciter install.
+    val effectiveOfflineCount = if (manualDownloadStarted) {
+        maxOf(offlineCount, selectedLiveProgress?.downloaded ?: 0)
+    } else {
+        offlineCount
+    }.coerceAtMost(AudioOfflineStore.EXPECTED_AYAH_FILES)
+    val downloadActive = manualDownloadStarted && (
+            downloadState == androidx.work.WorkInfo.State.RUNNING ||
+                    downloadState == androidx.work.WorkInfo.State.ENQUEUED ||
+                    selectedLiveProgress?.status == "RUNNING" ||
+                    selectedLiveProgress?.status == "RETRY" ||
+                    selectedLiveProgress?.status == "ENQUEUED"
+            )
 
     val downloadRequired by audio.downloadRequired.collectAsState()
-    var pendingNotificationDownload by remember { mutableStateOf<String?>(null) }
 
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
-        val reciterId = pendingNotificationDownload
-        pendingNotificationDownload = null
-        if (granted && reciterId != null) {
-            AudioDownloadScheduler.enqueueReciter(appContext, reciterId)
-            offlineMessage = "Скачивание запущено в фоне. Прогресс отображается в уведомлении."
-            audio.dismissDownloadRequest()
-        } else if (!granted) {
-            offlineMessage = "Для фоновой загрузки с видимым прогрессом разрешите уведомления."
+        offlineMessage = if (granted) {
+            "Скачивание идёт в фоне. Прогресс отображается в уведомлении."
+        } else {
+            "Скачивание идёт в фоне. Уведомление скрыто, пока разрешение не выдано."
         }
     }
 
@@ -1319,6 +1420,10 @@ private fun ReaderAudioSheet(
             return
         }
 
+        AudioDownloadScheduler.enqueueReciter(appContext, reciterId)
+        offlineMessage = "Скачивание запущено в фоне. Можно продолжать читать Коран."
+        audio.dismissDownloadRequest()
+
         if (
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
             ContextCompat.checkSelfPermission(
@@ -1326,14 +1431,8 @@ private fun ReaderAudioSheet(
                 Manifest.permission.POST_NOTIFICATIONS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            pendingNotificationDownload = reciterId
             notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-            return
         }
-
-        AudioDownloadScheduler.enqueueReciter(appContext, reciterId)
-        offlineMessage = "Скачивание запущено в фоне. Можно продолжать читать Коран."
-        audio.dismissDownloadRequest()
     }
 
     downloadRequired?.let { requiredId ->
@@ -1344,7 +1443,7 @@ private fun ReaderAudioSheet(
             text = {
                 Text(
                     "Не удалось получить аудио «$requiredName». Обычно достаточно проверить интернет и снова нажать на аят. " +
-                        "Полный комплект чтеца можно скачать отдельно для полностью оффлайн-режима."
+                            "Полный комплект чтеца можно скачать отдельно для полностью оффлайн-режима."
                 )
             },
             confirmButton = {
@@ -1361,8 +1460,8 @@ private fun ReaderAudioSheet(
     }
 
     val activeSelected = track?.kind == TrackKind.AYAH &&
-        track?.surah == selectedSurah &&
-        selectedAyah in (track?.ayah ?: -1)..(track?.endAyah ?: -1)
+            track?.surah == selectedSurah &&
+            selectedAyah in (track?.ayah ?: -1)..(track?.endAyah ?: -1)
 
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(m.md)) {
         Surface(
@@ -1392,10 +1491,44 @@ private fun ReaderAudioSheet(
                 val reciterName = RECITERS[settings.reciter]?.name ?: settings.reciter
                 Text("Аудио · GitHub + оффлайн-кэш", fontSize = m.body, fontWeight = FontWeight.SemiBold)
                 Text(
-                    "$reciterName · $offlineCount / ${AudioOfflineStore.EXPECTED_AYAH_FILES} файлов",
+                    if (manualDownloadStarted) {
+                        "$reciterName · $effectiveOfflineCount / ${AudioOfflineStore.EXPECTED_AYAH_FILES} файлов"
+                    } else {
+                        "$reciterName · загружено $offlineCount из ${AudioOfflineStore.EXPECTED_AYAH_FILES} аятов"
+                    },
                     fontSize = m.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+
+                val totalProgress = (effectiveOfflineCount.toFloat() / AudioOfflineStore.EXPECTED_AYAH_FILES.toFloat())
+                    .coerceIn(0f, 1f)
+                LinearProgressIndicator(
+                    progress = { totalProgress },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                val currentBytes = selectedLiveProgress?.currentBytes ?: 0L
+                val currentTotalBytes = selectedLiveProgress?.currentTotalBytes
+                if (downloadActive && currentTotalBytes != null && currentTotalBytes > 0L) {
+                    val currentProgress = (currentBytes.toFloat() / currentTotalBytes.toFloat()).coerceIn(0f, 1f)
+                    LinearProgressIndicator(
+                        progress = { currentProgress },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Text(
+                        "Текущий MP3: ${formatReaderAudioBytes(currentBytes)} / ${formatReaderAudioBytes(currentTotalBytes)}",
+                        fontSize = m.bodySmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                } else if (downloadActive && effectiveOfflineCount == 0) {
+                    LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                }
+
+                if (manualDownloadStarted) {
+                    selectedLiveProgress?.message?.takeIf { it.isNotBlank() }?.let {
+                        Text(it, fontSize = m.bodySmall, color = MaterialTheme.colorScheme.primary)
+                    }
+                }
                 offlineMessage?.let {
                     Text(it, fontSize = m.bodySmall, color = MaterialTheme.colorScheme.primary)
                 }
@@ -1406,32 +1539,40 @@ private fun ReaderAudioSheet(
                 ) {
                     Button(
                         onClick = { startFullReciterDownload(settings.reciter) },
-                        enabled = offlineCount < AudioOfflineStore.EXPECTED_AYAH_FILES
+                        enabled = !downloadActive && effectiveOfflineCount < AudioOfflineStore.EXPECTED_AYAH_FILES
                     ) {
                         Text(
                             when {
-                                offlineCount == 0 -> "Скачать чтеца"
-                                offlineCount < AudioOfflineStore.EXPECTED_AYAH_FILES -> "Продолжить загрузку"
-                                else -> "Установлено"
+                                downloadActive -> "Скачивается…"
+                                effectiveOfflineCount >= AudioOfflineStore.EXPECTED_AYAH_FILES -> "Установлено"
+                                manualDownloadStarted -> "Продолжить загрузку"
+                                else -> "Скачать чтеца"
                             },
                             fontSize = m.bodySmall
                         )
                     }
 
-                    if (offlineCount > 0 && offlineCount < AudioOfflineStore.EXPECTED_AYAH_FILES) {
+                    OutlinedButton(onClick = { navigator.go(AppRoute.AudioDownloads) }) {
+                        Icon(Icons.Default.CloudDownload, contentDescription = null, modifier = Modifier.size(m.iconSmall))
+                        Spacer(Modifier.width(m.xs))
+                        Text("Скачать других чтецов", fontSize = m.bodySmall)
+                    }
+
+                    if (downloadActive) {
                         Button(onClick = {
                             AudioDownloadScheduler.cancel(appContext, settings.reciter)
-                            offlineMessage = "Фоновая загрузка остановлена."
+                            offlineMessage = "Фоновая загрузка остановлена. Уже скачанные файлы сохранены."
                         }) {
                             Text("Остановить", fontSize = m.bodySmall)
                         }
                     }
 
-                    if (offlineCount > 0) {
+                    if (effectiveOfflineCount > 0) {
                         Button(onClick = {
                             AudioDownloadScheduler.cancel(appContext, settings.reciter)
                             scope.launch {
                                 offlineStore.deleteReciter(settings.reciter)
+                                AudioDownloadScheduler.clearManualDownload(appContext, settings.reciter)
                                 offlineMessage = "Локальные MP3 выбранного чтеца удалены."
                             }
                         }) {
@@ -1734,7 +1875,8 @@ private fun ReaderSettingsSheet(
     preferences: AppPreferences,
     settings: AppSettings,
     onModeChange: (ReadingMode) -> Unit,
-    onOpenAllSettings: () -> Unit
+    onOpenAllSettings: () -> Unit,
+    onOpenDownloads: () -> Unit
 ) {
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(m.md)) {
         Text("Режим чтения", fontSize = m.body, fontWeight = FontWeight.SemiBold)
@@ -1779,6 +1921,11 @@ private fun ReaderSettingsSheet(
                 MushafUiPrefs.pageNumberPlacement == MushafPageNumberPlacement.SIDES,
                 Modifier.weight(1f)
             ) { MushafUiPrefs.pageNumberPlacement = MushafPageNumberPlacement.SIDES }
+        }
+        Button(onClick = onOpenDownloads, modifier = Modifier.fillMaxWidth()) {
+            Icon(Icons.Default.CloudDownload, contentDescription = null, modifier = Modifier.size(m.iconSmall))
+            Spacer(Modifier.width(m.xs))
+            Text("Скачать других чтецов", fontSize = m.bodySmall)
         }
         Button(onClick = onOpenAllSettings, modifier = Modifier.fillMaxWidth()) {
             Text("Открыть все настройки", fontSize = m.bodySmall)
@@ -1857,3 +2004,11 @@ private fun HadrPlayer(m: AdaptiveMetrics, page: Int, audio: QuranAudioControlle
 }
 
 private fun toArabicDigits(n:Int):String=n.toString().map{if(it.isDigit())("٠١٢٣٤٥٦٧٨٩"[it-'0'])else it}.joinToString("")
+private fun formatReaderAudioBytes(bytes: Long): String = when {
+    bytes >= 1024L * 1024L * 1024L -> String.format(java.util.Locale.US, "%.1f ГБ", bytes / (1024.0 * 1024.0 * 1024.0))
+    bytes >= 1024L * 1024L -> String.format(java.util.Locale.US, "%.1f МБ", bytes / (1024.0 * 1024.0))
+    bytes >= 1024L -> String.format(java.util.Locale.US, "%.0f КБ", bytes / 1024.0)
+    else -> "$bytes Б"
+}
+
+

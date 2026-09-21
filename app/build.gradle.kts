@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "raf.quran7hours.app"
+    namespace = "raf.console.quran7hours"
     compileSdk = 37
 
     defaultConfig {

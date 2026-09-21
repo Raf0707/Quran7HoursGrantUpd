@@ -1,4 +1,4 @@
-package raf.quran7hours.app
+package raf.console.quran7hours
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -165,6 +165,7 @@ data class AppSettings(
 sealed interface AppRoute {
     data object Home : AppRoute
     data object Audio : AppRoute
+    data object AudioDownloads : AppRoute
     data object Bookmarks : AppRoute
     data object Settings : AppRoute
     data class AyahRoute(val surah: Int, val ayah: Int) : AppRoute

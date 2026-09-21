@@ -1,4 +1,4 @@
-package raf.quran7hours.app
+package raf.console.quran7hours
 
 import android.content.Context
 import android.net.Uri
@@ -15,11 +15,35 @@ class AppPreferences(context: Context) {
     val bookmarks: StateFlow<List<BookmarkItem>> = _bookmarks
     private val _recents = MutableStateFlow(readRecents())
     val recents: StateFlow<List<RecentItem>> = _recents
+    private val _readerCoordinate = MutableStateFlow(readReaderCoordinate())
+    val readerCoordinate: StateFlow<ReaderCoordinate> = _readerCoordinate
 
     fun updateSettings(transform: (AppSettings) -> AppSettings) {
         val next = transform(_settings.value)
         _settings.value = next
         prefs.edit().putString("settings", encodeSettings(next).toString()).apply()
+    }
+
+    /** Persists the exact place the reader was showing, independently of the current screen. */
+    fun saveReaderCoordinate(value: ReaderCoordinate) {
+        val safe = value.copy(
+            surah = value.surah.coerceIn(1, 114),
+            ayah = value.ayah.coerceAtLeast(1),
+            page = value.page.coerceIn(1, 604),
+            juz = value.juz.coerceIn(1, 30)
+        )
+        if (_readerCoordinate.value == safe) return
+        _readerCoordinate.value = safe
+        prefs.edit().putString(
+            "readerCoordinate",
+            JSONObject()
+                .put("surah", safe.surah)
+                .put("ayah", safe.ayah)
+                .put("page", safe.page)
+                .put("juz", safe.juz)
+                .put("range", safe.range)
+                .toString()
+        ).apply()
     }
 
     fun setBookmark(key: String, color: Long) {
@@ -132,4 +156,18 @@ class AppPreferences(context: Context) {
             buildList { for (i in 0 until arr.length()) arr.getJSONObject(i).let { add(RecentItem(it.getString("key"), it.getLong("at"))) } }
         }.getOrDefault(emptyList())
     }
+    private fun readReaderCoordinate(): ReaderCoordinate {
+        val raw = prefs.getString("readerCoordinate", null) ?: return ReaderCoordinate()
+        return runCatching {
+            val o = JSONObject(raw)
+            ReaderCoordinate(
+                surah = o.optInt("surah", 1).coerceIn(1, 114),
+                ayah = o.optInt("ayah", 1).coerceAtLeast(1),
+                page = o.optInt("page", 1).coerceIn(1, 604),
+                juz = o.optInt("juz", 1).coerceIn(1, 30),
+                range = o.optString("range", "1–7")
+            )
+        }.getOrDefault(ReaderCoordinate())
+    }
+
 }

@@ -1,4 +1,4 @@
-package raf.quran7hours.app
+package raf.console.quran7hours
 
 import android.content.Context
 import android.net.Uri
@@ -14,6 +14,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import raf.console.quran7hours.AudioOfflineStore
 
 class QuranAudioController(
     context: Context,
@@ -173,7 +174,12 @@ class QuranAudioController(
 
                         val github = githubBismillahAudioUrl(reciterId, track.surah)
                         if (local == null) {
-                            cacheOnlineCopy(reciterId, track.surah, providerAyah, github)
+                            cacheOnlineCopy(
+                                reciterId,
+                                track.surah,
+                                providerAyah,
+                                listOf(github)
+                            )
                         }
 
                         // Playback itself never waits for caching: ExoPlayer starts streaming immediately.
@@ -191,7 +197,15 @@ class QuranAudioController(
 
                         val github = githubAyahAudioUrl(reciterId, track.surah, spec.providerAyah)
                         if (local == null) {
-                            cacheOnlineCopy(reciterId, track.surah, spec.providerAyah, github)
+                            cacheOnlineCopy(
+                                reciterId,
+                                track.surah,
+                                spec.providerAyah,
+                                listOf(
+                                    github,
+                                    everyAyahAudioUrl(reciterId, track.surah, spec.providerAyah)
+                                )
+                            )
                         }
 
                         add(Uri.parse(github))
@@ -224,15 +238,19 @@ class QuranAudioController(
         reciterId: String,
         surah: Int,
         providerAyah: Int,
-        url: String
+        candidates: List<String>
     ) {
         scope.launch(Dispatchers.IO) {
+            // Best-effort and completely silent. This never creates WorkManager work,
+            // never posts a notification and never publishes full-download progress.
+            // On success the final MP3 still lands in the normal offline structure,
+            // so an explicit full-reciter install skips it later.
             runCatching {
-                offlineStore.ensureDownloaded(
+                offlineStore.cacheOnlineAyah(
                     reciterId = reciterId,
                     surah = surah,
                     providerAyah = providerAyah,
-                    candidates = listOf(url)
+                    candidates = candidates
                 )
             }
         }
@@ -382,3 +400,4 @@ class QuranAudioController(
         hadrPlayer.release()
     }
 }
+

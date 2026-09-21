@@ -1,5 +1,6 @@
-package raf.quran7hours.app
+package raf.console.quran7hours
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -7,11 +8,14 @@ import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
 import android.net.Uri
 import android.os.Build
+import android.os.SystemClock
 import android.os.Environment
 import android.provider.MediaStore
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.BackoffPolicy
@@ -27,15 +31,26 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import raf.console.quran7hours.MainActivity
+import raf.console.quran7hours.QuranRepository
+import raf.console.quran7hours.RECITERS
+import raf.console.quran7hours.everyAyahAudioUrl
+import raf.console.quran7hours.githubAyahAudioUrl
 import java.io.File
 import java.io.FileOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.TimeUnit
+import kotlin.math.min
 
 /**
  * Final offline audio lives in the public Downloads collection:
@@ -54,12 +69,29 @@ data class ReciterOfflineStats(
     val complete: Boolean get() = files >= AudioOfflineStore.EXPECTED_AYAH_FILES
 }
 
+/** Live progress shared between WorkManager, reader sheet and download manager. */
+data class ReciterDownloadProgress(
+    val reciterId: String,
+    val downloaded: Int = 0,
+    val total: Int = AudioOfflineStore.EXPECTED_AYAH_FILES,
+    val surah: Int = 0,
+    val ayah: Int = 0,
+    val currentBytes: Long = 0L,
+    val currentTotalBytes: Long? = null,
+    val status: String = "IDLE",
+    val message: String = ""
+)
+
 class AudioOfflineStore(private val context: Context) {
     companion object {
         const val EXPECTED_AYAH_FILES = 6236
         private const val MIN_AUDIO_BYTES = 512L
         private const val ROOT = "Download/Quran7Hours/audio"
         private const val PARTS_ROOT = "q7_audio_parts"
+        // Short-lived temp files used only by automatic online-listening cache.
+        // They are intentionally separate from resumable full-reciter *.part files,
+        // so listening to one ayah can never masquerade as a manual bulk download.
+        private const val STREAM_CACHE_ROOT = "q7_audio_stream_cache"
 
         private val fileLocks = ConcurrentHashMap<String, Mutex>()
 
@@ -70,13 +102,14 @@ class AudioOfflineStore(private val context: Context) {
     private fun relativePath(reciterId: String) = "$ROOT/$reciterId/"
     private fun partialDir(reciterId: String) = File(context.filesDir, "$PARTS_ROOT/$reciterId")
     private fun partialFile(reciterId: String, name: String) = File(partialDir(reciterId), "$name.part")
+    private fun streamCacheDir(reciterId: String) = File(context.cacheDir, "$STREAM_CACHE_ROOT/$reciterId")
     private fun lockKey(reciterId: String, name: String) = "$reciterId/$name"
 
     suspend fun localUri(reciterId: String, surah: Int, providerAyah: Int): Uri? = withContext(Dispatchers.IO) {
         val name = fileName(surah, providerAyah)
         if (Build.VERSION.SDK_INT >= 29) {
             val projection = arrayOf(MediaStore.Downloads._ID, MediaStore.Downloads.SIZE)
-            val selection = "${MediaStore.Downloads.RELATIVE_PATH}=? AND ${MediaStore.Downloads.DISPLAY_NAME}=?"
+            val selection = "${MediaStore.Downloads.RELATIVE_PATH}=? AND ${MediaStore.Downloads.DISPLAY_NAME}=? AND ${MediaStore.Downloads.IS_PENDING}=0"
             val args = arrayOf(relativePath(reciterId), name)
             context.contentResolver.query(
                 MediaStore.Downloads.EXTERNAL_CONTENT_URI,
@@ -123,7 +156,7 @@ class AudioOfflineStore(private val context: Context) {
                     MediaStore.Downloads.RELATIVE_PATH,
                     MediaStore.Downloads.SIZE
                 )
-                val selection = "${MediaStore.Downloads.RELATIVE_PATH} LIKE ?"
+                val selection = "${MediaStore.Downloads.RELATIVE_PATH} LIKE ? AND ${MediaStore.Downloads.IS_PENDING}=0"
                 val args = arrayOf("$ROOT/%")
 
                 context.contentResolver.query(
@@ -194,14 +227,109 @@ class AudioOfflineStore(private val context: Context) {
         val parts = partialDir(reciterId)
         val partCount = parts.listFiles()?.size ?: 0
         parts.deleteRecursively()
+        // Passive listening cache uses only temporary files here. Final cached MP3s
+        // are already counted in deletedFinal because they live in the same final
+        // Downloads/Quran7Hours/audio/<reciter>/ structure.
+        streamCacheDir(reciterId).deleteRecursively()
         deletedFinal + partCount
+    }
+
+    /**
+     * Quietly cache one ayah that is already being streamed by ExoPlayer.
+     *
+     * Important differences from ensureDownloaded():
+     *  - no WorkManager task is created;
+     *  - no ReciterDownloadProgress is published;
+     *  - no resumable bulk-download *.part file is created;
+     *  - failures are swallowed because online playback itself must stay primary.
+     *
+     * The successful MP3 is committed into the SAME final reciter/surah structure,
+     * so a later manual full-reciter download sees it through localUri() and skips it.
+     */
+    suspend fun cacheOnlineAyah(
+        reciterId: String,
+        surah: Int,
+        providerAyah: Int,
+        candidates: List<String>
+    ): Uri? = withContext(Dispatchers.IO) {
+        localUri(reciterId, surah, providerAyah)?.let { return@withContext it }
+
+        // A user-requested full download has priority. Do not make the bulk worker
+        // wait behind an automatic cache copy started by merely pressing Play.
+        if (AudioDownloadScheduler.isManualTransferActive(reciterId)) return@withContext null
+
+        val name = fileName(surah, providerAyah)
+        val mutex = fileLocks.getOrPut(lockKey(reciterId, name)) { Mutex() }
+
+        mutex.withLock {
+            localUri(reciterId, surah, providerAyah)?.let { return@withLock it }
+            if (AudioDownloadScheduler.isManualTransferActive(reciterId)) return@withLock null
+
+            val dir = streamCacheDir(reciterId).apply { mkdirs() }
+            val temp = File(dir, "$name.tmp")
+            for (remote in candidates.distinct()) {
+                try {
+                    if (AudioDownloadScheduler.isManualTransferActive(reciterId)) {
+                        temp.delete()
+                        return@withLock null
+                    }
+                    temp.delete()
+                    downloadEphemeralCache(reciterId, temp, remote)
+                    if (AudioDownloadScheduler.isManualTransferActive(reciterId)) {
+                        temp.delete()
+                        return@withLock null
+                    }
+                    return@withLock commitPart(reciterId, name, temp)
+                } catch (cancelled: CancellationException) {
+                    temp.delete()
+                    throw cancelled
+                } catch (_: Throwable) {
+                    // Silent cache is best-effort. Try the next source and never
+                    // turn an online Play tap into a visible download error.
+                    temp.delete()
+                }
+            }
+            null
+        }
+    }
+
+    private fun downloadEphemeralCache(reciterId: String, temp: File, url: String) {
+        val connection = openRemote(url, 0L)
+        try {
+            val response = connection.responseCode
+            if (response !in 200..299) error("HTTP $response: $url")
+            val expected = connection.contentLengthLong.takeIf { it > 0L }
+            var copied = 0L
+            FileOutputStream(temp, false).buffered().use { out ->
+                connection.inputStream.buffered().use { input ->
+                    val buffer = ByteArray(32 * 1024)
+                    while (true) {
+                        if (AudioDownloadScheduler.isManualTransferActive(reciterId)) {
+                            error("manual-download-started")
+                        }
+                        val read = input.read(buffer)
+                        if (read < 0) break
+                        out.write(buffer, 0, read)
+                        copied += read
+                    }
+                    out.flush()
+                }
+            }
+            if (copied < MIN_AUDIO_BYTES) error("Скачан пустой/повреждённый MP3")
+            if (expected != null && copied < expected) {
+                error("Загрузка прервана: $copied / $expected байт")
+            }
+        } finally {
+            connection.disconnect()
+        }
     }
 
     suspend fun ensureDownloaded(
         reciterId: String,
         surah: Int,
         providerAyah: Int,
-        candidates: List<String>
+        candidates: List<String>,
+        onBytesProgress: suspend (downloadedBytes: Long, totalBytes: Long?) -> Unit = { _, _ -> }
     ): Uri = withContext(Dispatchers.IO) {
         localUri(reciterId, surah, providerAyah)?.let { return@withContext it }
         val name = fileName(surah, providerAyah)
@@ -212,7 +340,7 @@ class AudioOfflineStore(private val context: Context) {
             var lastError: Throwable? = null
             for (remote in candidates.distinct()) {
                 try {
-                    return@withLock downloadOneResumable(reciterId, name, remote)
+                    return@withLock downloadOneResumable(reciterId, name, remote, onBytesProgress)
                 } catch (cancelled: CancellationException) {
                     throw cancelled
                 } catch (t: Throwable) {
@@ -241,7 +369,12 @@ class AudioOfflineStore(private val context: Context) {
     }
 
     /** Downloads to a persistent *.part file and resumes it with HTTP Range. */
-    private fun downloadOneResumable(reciterId: String, name: String, url: String): Uri {
+    private suspend fun downloadOneResumable(
+        reciterId: String,
+        name: String,
+        url: String,
+        onBytesProgress: suspend (downloadedBytes: Long, totalBytes: Long?) -> Unit
+    ): Uri {
         val dir = partialDir(reciterId).apply { mkdirs() }
         val part = File(dir, "$name.part")
         var offset = part.length().coerceAtLeast(0L)
@@ -251,6 +384,7 @@ class AudioOfflineStore(private val context: Context) {
             if (connection.responseCode == 416 && offset > 0L) {
                 val remoteTotal = contentRangeTotal(connection.getHeaderField("Content-Range"))
                 if (remoteTotal != null && remoteTotal == offset && offset >= MIN_AUDIO_BYTES) {
+                    onBytesProgress(offset, remoteTotal)
                     return commitPart(reciterId, name, part)
                 }
                 connection.disconnect()
@@ -275,9 +409,27 @@ class AudioOfflineStore(private val context: Context) {
                 else -> connection.contentLengthLong.takeIf { it > 0 }
             }
 
+            var copied = offset
+            var lastReported = copied
+            onBytesProgress(copied, expectedTotal)
             FileOutputStream(part, append).buffered().use { out ->
-                connection.inputStream.buffered().use { input -> input.copyTo(out) }
+                connection.inputStream.buffered().use { input ->
+                    val buffer = ByteArray(32 * 1024)
+                    while (true) {
+                        val read = input.read(buffer)
+                        if (read < 0) break
+                        out.write(buffer, 0, read)
+                        copied += read
+                        if (copied - lastReported >= 256 * 1024) {
+                            out.flush()
+                            onBytesProgress(copied, expectedTotal)
+                            lastReported = copied
+                        }
+                    }
+                    out.flush()
+                }
             }
+            onBytesProgress(part.length(), expectedTotal)
 
             val actual = part.length()
             if (actual < MIN_AUDIO_BYTES) error("Скачан пустой/повреждённый MP3")
@@ -300,22 +452,32 @@ class AudioOfflineStore(private val context: Context) {
                 put(MediaStore.Downloads.RELATIVE_PATH, relativePath(reciterId))
                 put(MediaStore.Downloads.IS_PENDING, 1)
             }
+            val sourceSize = part.length()
+            if (sourceSize < MIN_AUDIO_BYTES) error("Скачан пустой/повреждённый MP3")
+
             val uri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values)
                 ?: error("Не удалось создать файл в Downloads")
             try {
-                resolver.openOutputStream(uri, "w")!!.buffered().use { out ->
+                // Do not validate MediaStore.SIZE while IS_PENDING=1. On some Samsung/Android
+                // builds that column is still 0 immediately after closing the stream even though
+                // all bytes were successfully written. Validate the actual copy count instead.
+                val copied = resolver.openOutputStream(uri, "w")?.buffered()?.use { out ->
                     part.inputStream().buffered().use { input -> input.copyTo(out) }
+                } ?: error("Не удалось открыть файл в Downloads для записи")
+
+                if (copied < MIN_AUDIO_BYTES || copied != sourceSize) {
+                    error("Не удалось сохранить MP3 полностью: $copied / $sourceSize байт")
                 }
-                val size = resolver.query(uri, arrayOf(MediaStore.Downloads.SIZE), null, null, null)?.use { c ->
-                    if (c.moveToFirst()) c.getLong(0) else 0L
-                } ?: 0L
-                if (size < MIN_AUDIO_BYTES) error("Не удалось сохранить MP3")
-                resolver.update(
+
+                val updated = resolver.update(
                     uri,
                     ContentValues().apply { put(MediaStore.Downloads.IS_PENDING, 0) },
                     null,
                     null
                 )
+                if (updated <= 0) error("Не удалось завершить сохранение MP3")
+
+                // Only remove the resumable part after MediaStore has accepted the final file.
                 part.delete()
                 return uri
             } catch (t: Throwable) {
@@ -358,7 +520,6 @@ class ReciterFullDownloadWorker(
     companion object {
         private const val CHANNEL_ID = "q7_audio_download"
         private const val CHANNEL_NAME = "Скачивание аудио Корана"
-        private const val PROGRESS_STEP = 8
     }
 
     private val reciterId: String
@@ -370,70 +531,201 @@ class ReciterFullDownloadWorker(
         val store = AudioOfflineStore(applicationContext)
 
         ensureNotificationChannel()
-        setForeground(
-            createForegroundInfo(
-                reciter.name,
-                store.downloadedCount(reciterId),
-                AudioOfflineStore.EXPECTED_AYAH_FILES,
-                "Проверяем уже сохранённые аяты…"
+        var installed = store.downloadedCount(reciterId)
+            .coerceIn(0, AudioOfflineStore.EXPECTED_AYAH_FILES)
+
+        suspend fun publish(
+            status: String,
+            message: String,
+            surah: Int = 0,
+            ayah: Int = 0,
+            currentBytes: Long = 0L,
+            currentTotalBytes: Long? = null,
+            foreground: Boolean = true
+        ) {
+            val safeInstalled = installed.coerceIn(0, AudioOfflineStore.EXPECTED_AYAH_FILES)
+            val data = workDataOf(
+                "reciter" to reciterId,
+                "downloaded" to safeInstalled,
+                "total" to AudioOfflineStore.EXPECTED_AYAH_FILES,
+                "surah" to surah,
+                "ayah" to ayah,
+                "status" to status,
+                "message" to message,
+                "currentBytes" to currentBytes,
+                "currentTotalBytes" to (currentTotalBytes ?: -1L)
             )
-        )
+            setProgress(data)
+            AudioDownloadScheduler.publish(
+                ReciterDownloadProgress(
+                    reciterId = reciterId,
+                    downloaded = safeInstalled,
+                    surah = surah,
+                    ayah = ayah,
+                    currentBytes = currentBytes,
+                    currentTotalBytes = currentTotalBytes,
+                    status = status,
+                    message = message
+                )
+            )
+            if (foreground) {
+                setForeground(
+                    createForegroundInfo(
+                        reciter.name,
+                        safeInstalled,
+                        AudioOfflineStore.EXPECTED_AYAH_FILES,
+                        message
+                    )
+                )
+            }
+        }
+
+        publish("RUNNING", "Запуск загрузки · $installed / ${AudioOfflineStore.EXPECTED_AYAH_FILES}")
 
         try {
-            var installed = store.downloadedCount(reciterId)
-                .coerceIn(0, AudioOfflineStore.EXPECTED_AYAH_FILES)
-            var processed = 0
-
             for (surah in 1..114) {
                 val ayahCount = repository.surah(surah).ayahs.size
                 for (providerAyah in 1..ayahCount) {
-                    if (isStopped) return@withContext Result.retry()
-                    processed++
-
-                    if (store.localUri(reciterId, surah, providerAyah) == null) {
-                        // Full packs use exactly the same GitHub repository structure as online playback.
-                        store.ensureDownloaded(
-                            reciterId = reciterId,
-                            surah = surah,
-                            providerAyah = providerAyah,
-                            candidates = listOf(githubAyahAudioUrl(reciterId, surah, providerAyah))
-                        )
-                        installed++
+                    if (isStopped) {
+                        publish("PAUSED", "Загрузка остановлена", surah, providerAyah, foreground = false)
+                        return@withContext Result.success()
                     }
 
-                    if (
-                        processed % PROGRESS_STEP == 0 ||
-                        providerAyah == ayahCount ||
-                        installed >= AudioOfflineStore.EXPECTED_AYAH_FILES
-                    ) {
-                        val safeInstalled = installed.coerceIn(0, AudioOfflineStore.EXPECTED_AYAH_FILES)
-                        val text = "Сура $surah · аят $providerAyah · $safeInstalled / ${AudioOfflineStore.EXPECTED_AYAH_FILES}"
-                        setProgress(
-                            workDataOf(
-                                "reciter" to reciterId,
-                                "downloaded" to safeInstalled,
-                                "total" to AudioOfflineStore.EXPECTED_AYAH_FILES,
-                                "surah" to surah,
-                                "ayah" to providerAyah
-                            )
+                    if (store.localUri(reciterId, surah, providerAyah) != null) {
+                        // Existing online cache / previous full download: count it and move on.
+                        installed = store.downloadedCount(reciterId)
+                            .coerceIn(0, AudioOfflineStore.EXPECTED_AYAH_FILES)
+                        continue
+                    }
+
+                    var attempt = 0
+                    while (store.localUri(reciterId, surah, providerAyah) == null) {
+                        if (isStopped) {
+                            publish("PAUSED", "Загрузка остановлена", surah, providerAyah, foreground = false)
+                            return@withContext Result.success()
+                        }
+
+                        val fileLabel = AudioOfflineStore.fileName(surah, providerAyah)
+                        publish(
+                            "RUNNING",
+                            "Скачиваем $fileLabel · $installed / ${AudioOfflineStore.EXPECTED_AYAH_FILES}",
+                            surah,
+                            providerAyah
                         )
-                        setForeground(
-                            createForegroundInfo(
-                                reciter.name,
-                                safeInstalled,
-                                AudioOfflineStore.EXPECTED_AYAH_FILES,
-                                text
+
+                        var lastForegroundAt = 0L
+                        try {
+                            store.ensureDownloaded(
+                                reciterId = reciterId,
+                                surah = surah,
+                                providerAyah = providerAyah,
+                                candidates = listOf(
+                                    githubAyahAudioUrl(reciterId, surah, providerAyah),
+                                    everyAyahAudioUrl(reciterId, surah, providerAyah)
+                                )
+                            ) { bytes, totalBytes ->
+                                val now = SystemClock.elapsedRealtime()
+                                val byteText = if (totalBytes != null && totalBytes > 0L) {
+                                    "${humanBytes(bytes)} / ${humanBytes(totalBytes)}"
+                                } else {
+                                    humanBytes(bytes)
+                                }
+                                val text = "Сура $surah · аят $providerAyah · $byteText"
+                                AudioDownloadScheduler.publish(
+                                    ReciterDownloadProgress(
+                                        reciterId = reciterId,
+                                        downloaded = installed,
+                                        surah = surah,
+                                        ayah = providerAyah,
+                                        currentBytes = bytes,
+                                        currentTotalBytes = totalBytes,
+                                        status = "RUNNING",
+                                        message = text
+                                    )
+                                )
+                                if (now - lastForegroundAt >= 800L) {
+                                    setProgress(
+                                        workDataOf(
+                                            "reciter" to reciterId,
+                                            "downloaded" to installed,
+                                            "total" to AudioOfflineStore.EXPECTED_AYAH_FILES,
+                                            "surah" to surah,
+                                            "ayah" to providerAyah,
+                                            "status" to "RUNNING",
+                                            "message" to text,
+                                            "currentBytes" to bytes,
+                                            "currentTotalBytes" to (totalBytes ?: -1L)
+                                        )
+                                    )
+                                    setForeground(
+                                        createForegroundInfo(
+                                            reciter.name,
+                                            installed,
+                                            AudioOfflineStore.EXPECTED_AYAH_FILES,
+                                            text
+                                        )
+                                    )
+                                    lastForegroundAt = now
+                                }
+                            }
+
+                            installed = store.downloadedCount(reciterId)
+                                .coerceIn(0, AudioOfflineStore.EXPECTED_AYAH_FILES)
+                            attempt = 0
+                            publish(
+                                "RUNNING",
+                                "Готово: $installed / ${AudioOfflineStore.EXPECTED_AYAH_FILES} · следующий аят…",
+                                surah,
+                                providerAyah
                             )
-                        )
+                        } catch (cancelled: CancellationException) {
+                            throw cancelled
+                        } catch (error: Throwable) {
+                            val message = error.message.orEmpty()
+                            val httpCode = Regex("HTTP (\\d{3})").find(message)
+                                ?.groupValues?.getOrNull(1)?.toIntOrNull()
+                            val permanentHttpError = httpCode != null &&
+                                    httpCode in 400..499 &&
+                                    httpCode !in setOf(408, 425, 429)
+
+                            if (permanentHttpError) {
+                                val text = "Ошибка $httpCode для $fileLabel. Файл отсутствует в репозитории."
+                                publish("ERROR", text, surah, providerAyah)
+                                postErrorNotification(reciter.name, text)
+                                return@withContext Result.failure(
+                                    workDataOf(
+                                        "reciter" to reciterId,
+                                        "error" to text,
+                                        "surah" to surah,
+                                        "ayah" to providerAyah
+                                    )
+                                )
+                            }
+
+                            attempt++
+                            val waitSeconds = min(30, 1 shl min(attempt, 4))
+                            val text = buildString {
+                                append("Соединение прервано на суре $surah, аяте $providerAyah")
+                                if (message.isNotBlank()) append(" · ").append(message.take(90))
+                                append(" · повтор через $waitSeconds с")
+                            }
+                            publish("RETRY", text, surah, providerAyah)
+                            delay(waitSeconds * 1_000L)
+                        }
                     }
                 }
             }
 
             val finalCount = store.downloadedCount(reciterId)
+            installed = finalCount
             if (finalCount < AudioOfflineStore.EXPECTED_AYAH_FILES) {
-                error("Скачано $finalCount из ${AudioOfflineStore.EXPECTED_AYAH_FILES} файлов")
+                val text = "Скачано $finalCount из ${AudioOfflineStore.EXPECTED_AYAH_FILES} файлов"
+                publish("ERROR", text)
+                postErrorNotification(reciter.name, text)
+                return@withContext Result.failure(workDataOf("reciter" to reciterId, "error" to text))
             }
 
+            publish("SUCCEEDED", "Скачано полностью · $finalCount файлов")
             postFinishedNotification(reciter.name, finalCount)
             Result.success(
                 workDataOf(
@@ -443,11 +735,34 @@ class ReciterFullDownloadWorker(
                 )
             )
         } catch (cancelled: CancellationException) {
+            AudioDownloadScheduler.publish(
+                ReciterDownloadProgress(
+                    reciterId = reciterId,
+                    downloaded = installed,
+                    status = "PAUSED",
+                    message = "Загрузка остановлена"
+                )
+            )
             throw cancelled
         } catch (error: Throwable) {
-            if (!isStopped) postErrorNotification(reciter.name, error.message ?: "Ошибка загрузки")
-            Result.retry()
+            val text = error.message ?: "Неизвестная ошибка загрузки"
+            AudioDownloadScheduler.publish(
+                ReciterDownloadProgress(
+                    reciterId = reciterId,
+                    downloaded = installed,
+                    status = "ERROR",
+                    message = text
+                )
+            )
+            postErrorNotification(reciter.name, text)
+            Result.failure(workDataOf("reciter" to reciterId, "error" to text))
         }
+    }
+
+    private fun humanBytes(value: Long): String = when {
+        value >= 1024L * 1024L -> String.format(java.util.Locale.US, "%.1f МБ", value / (1024.0 * 1024.0))
+        value >= 1024L -> String.format(java.util.Locale.US, "%.0f КБ", value / 1024.0)
+        else -> "$value Б"
     }
 
     private fun notificationId(): Int =
@@ -489,12 +804,13 @@ class ReciterFullDownloadWorker(
             .setSmallIcon(android.R.drawable.stat_sys_download)
             .setContentTitle("Скачивание Корана · $reciterName")
             .setContentText(text)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setContentIntent(openAppIntent())
             .setOnlyAlertOnce(true)
             .setOngoing(true)
             .setCategory(NotificationCompat.CATEGORY_PROGRESS)
             .setPriority(NotificationCompat.PRIORITY_LOW)
-            .setProgress(total, downloaded.coerceIn(0, total), downloaded <= 0)
+            .setProgress(total, downloaded.coerceIn(0, total), false)
             .addAction(
                 android.R.drawable.ic_menu_close_clear_cancel,
                 "Остановить",
@@ -523,6 +839,20 @@ class ReciterFullDownloadWorker(
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
         runCatching {
+            if (ActivityCompat.checkSelfPermission(
+                    applicationContext,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
             NotificationManagerCompat.from(applicationContext).notify(notificationId(), notification)
         }
     }
@@ -530,13 +860,28 @@ class ReciterFullDownloadWorker(
     private fun postErrorNotification(reciterName: String, message: String) {
         val notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(android.R.drawable.stat_notify_error)
-            .setContentTitle("Загрузка аудио приостановлена")
+            .setContentTitle("Загрузка аудио требует внимания")
             .setContentText("$reciterName · $message")
+            .setStyle(NotificationCompat.BigTextStyle().bigText("$reciterName · $message"))
             .setContentIntent(openAppIntent())
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
         runCatching {
+            if (ActivityCompat.checkSelfPermission(
+                    applicationContext,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
             NotificationManagerCompat.from(applicationContext).notify(notificationId(), notification)
         }
     }
@@ -545,13 +890,48 @@ class ReciterFullDownloadWorker(
 object AudioDownloadScheduler {
     private const val PREFS = "q7_audio_download_settings"
     private const val KEY_WIFI_ONLY = "wifi_only"
+    private const val KEY_MANUAL_PREFIX = "manual_started_"
+
+    private val _progress = MutableStateFlow<Map<String, ReciterDownloadProgress>>(emptyMap())
+    val progress: StateFlow<Map<String, ReciterDownloadProgress>> = _progress.asStateFlow()
+
+    internal fun publish(value: ReciterDownloadProgress) {
+        _progress.update { old -> old + (value.reciterId to value) }
+    }
+
+    fun clearProgress(reciterId: String) {
+        _progress.update { old -> old - reciterId }
+    }
 
     private fun unique(reciterId: String) = "q7-audio-full-$reciterId"
+
+    private fun prefs(context: Context) =
+        context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+
+    /** True only after the user explicitly pressed Download/Continue for this reciter. */
+    fun wasManualDownloadStarted(context: Context, reciterId: String): Boolean =
+        prefs(context).getBoolean(KEY_MANUAL_PREFIX + reciterId, false)
+
+    private fun markManualDownloadStarted(context: Context, reciterId: String) {
+        prefs(context).edit().putBoolean(KEY_MANUAL_PREFIX + reciterId, true).apply()
+    }
+
+    /** Used after deleting a reciter: cached listening alone must not look like a paused bulk install. */
+    fun clearManualDownload(context: Context, reciterId: String) {
+        prefs(context).edit().remove(KEY_MANUAL_PREFIX + reciterId).apply()
+        clearProgress(reciterId)
+    }
+
+    /** In-memory fast path used by quiet online caching to yield to an explicit full download. */
+    fun isManualTransferActive(reciterId: String): Boolean {
+        val status = _progress.value[reciterId]?.status
+        return status == "ENQUEUED" || status == "RUNNING" || status == "RETRY"
+    }
 
     fun wifiOnly(context: Context): Boolean =
         context.applicationContext
             .getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-            .getBoolean(KEY_WIFI_ONLY, true)
+            .getBoolean(KEY_WIFI_ONLY, false)
 
     fun setWifiOnly(context: Context, value: Boolean) {
         context.applicationContext
@@ -564,6 +944,9 @@ object AudioDownloadScheduler {
     fun enqueueReciter(context: Context, reciterId: String) {
         if (reciterId !in RECITERS) return
         val appContext = context.applicationContext
+        // This flag is set ONLY by an explicit UI action that calls enqueueReciter().
+        // Merely listening online never touches it.
+        markManualDownloadStarted(appContext, reciterId)
         val networkType = if (wifiOnly(appContext)) NetworkType.UNMETERED else NetworkType.CONNECTED
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(networkType)
@@ -576,12 +959,27 @@ object AudioDownloadScheduler {
             .addTag(unique(reciterId))
             .build()
 
+        publish(
+            ReciterDownloadProgress(
+                reciterId = reciterId,
+                status = "ENQUEUED",
+                message = if (wifiOnly(appContext)) "Поставлено в очередь · ожидаем Wi‑Fi" else "Поставлено в очередь"
+            )
+        )
         WorkManager.getInstance(appContext)
-            .enqueueUniqueWork(unique(reciterId), ExistingWorkPolicy.KEEP, request)
+            // REPLACE removes a stale ENQUEUED/FAILED request; completed files and *.part remain resumable.
+            .enqueueUniqueWork(unique(reciterId), ExistingWorkPolicy.REPLACE, request)
     }
 
     fun cancel(context: Context, reciterId: String) {
         WorkManager.getInstance(context.applicationContext).cancelUniqueWork(unique(reciterId))
+        _progress.update { old ->
+            val current = old[reciterId]
+            old + (reciterId to (current ?: ReciterDownloadProgress(reciterId)).copy(
+                status = "PAUSED",
+                message = "Загрузка приостановлена"
+            ))
+        }
     }
 
     suspend fun state(context: Context, reciterId: String): WorkInfo.State? =
@@ -597,3 +995,4 @@ object AudioDownloadScheduler {
             }.getOrNull()
         }
 }
+

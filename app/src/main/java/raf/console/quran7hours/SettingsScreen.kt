@@ -1,4 +1,4 @@
-package raf.quran7hours.app
+package raf.console.quran7hours
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult

@@ -1,9 +1,10 @@
-package raf.quran7hours.app
+package raf.console.quran7hours
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Color as AndroidColor
 import android.graphics.Typeface
@@ -77,7 +78,14 @@ data class QpcV4Line(
     val surah: Int?,
     val qpcGlyphs: String,
     val words: List<QpcV4Word>,
-    val centered: Boolean = false
+    val centered: Boolean = false,
+
+    // Exact visual word/glyph units exported by QUL layout 19.
+    //
+    // These units are authoritative for Mushaf rendering. `words` remains only
+    // metadata for taps/translations/audio; it must never be allowed to recompute
+    // the physical line break.
+    val layoutGlyphs: List<String> = emptyList()
 )
 
 data class QpcV4Page(val page: Int, val lines: List<QpcV4Line>)
@@ -95,96 +103,266 @@ private data class QulV4LineSpec(
     val surahNumber: Int?,
     val firstWordId: Int?,
     val lastWordId: Int?,
-    val content: String
+    val content: String,
+    val glyphs: List<String> = emptyList()
 )
 
 private object QulV4LayoutSource {
-    private const val ASSET = "quran/qpc-v4/qul/quran_pages.json"
+    /*
+     * QUL layout 19 — KFGQPC V4 (1441H), 604 pages / 15 physical rows.
+     *
+     * New QUL exports are page-by-page JSON files:
+     *   { "page": 2, "lines": { "1": {...}, "2": {...} } }
+     *
+     * The project already used an older all-pages export:
+     *   quran/qpc-v4/qul/quran_pages.json
+     *
+     * Support both. The per-page official JSON is preferred whenever it is bundled.
+     */
+    private const val MONOLITHIC_ASSET = "quran/qpc-v4/qul/quran_pages.json"
+    private val OFFICIAL_PAGE_DIRS = arrayOf(
+        "quran/qpc-v4/qul/layout19",
+        "quran/qpc-v4/qul/19",
+        "quran/qpc-v4/qul/pages"
+    )
+
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val loadStarted = AtomicBoolean(false)
-    @Volatile private var loaded: Map<Int, List<QulV4LineSpec>>? = null
-    @Volatile private var unavailable = false
+    private val pageCache = ConcurrentHashMap<Int, List<QulV4LineSpec>>()
+
+    @Volatile
+    private var monolithic: Map<Int, List<QulV4LineSpec>>? = null
+
     private var job: kotlinx.coroutines.Deferred<Map<Int, List<QulV4LineSpec>>>? = null
 
     fun start(context: Context) {
         if (!loadStarted.compareAndSet(false, true)) return
         val app = context.applicationContext
         synchronized(this) {
-            if (job == null) job = scope.async { load(app) }
+            if (job == null) {
+                job = scope.async { loadMonolithic(app) }
+            }
         }
     }
 
     suspend fun page(context: Context, page: Int): List<QulV4LineSpec>? {
-        loaded?.let { return it[page] }
-        if (unavailable) return null
-        start(context)
-        val current = synchronized(this) { job } ?: return null
-        return runCatching { current.await()[page] }.getOrNull()
-    }
+        val p = page.coerceIn(1, 604)
+        pageCache[p]?.let { return it }
 
-    private fun load(context: Context): Map<Int, List<QulV4LineSpec>> {
-        val raw = try {
-            context.assets.open(ASSET).bufferedReader(Charsets.UTF_8).use { it.readText() }
-        } catch (_: Throwable) {
-            unavailable = true
-            return emptyMap()
+        val app = context.applicationContext
+
+        // Prefer the current official JSON export if it has been installed.
+        loadOfficialPage(app, p)?.let { exact ->
+            pageCache[p] = exact
+            return exact
         }
-        val result = parse(raw)
-        if (result.size < 604) {
-            unavailable = true
-            return emptyMap()
+
+        monolithic?.get(p)?.let {
+            pageCache[p] = it
+            return it
         }
-        loaded = result
+
+        start(app)
+        val current = synchronized(this) { job }
+        val loaded = current?.let { runCatching { it.await() }.getOrNull() }.orEmpty()
+        val result = loaded[p]
+        if (result != null) pageCache[p] = result
         return result
     }
 
-    private fun parse(raw: String): Map<Int, List<QulV4LineSpec>> {
+    private fun readGlyphArray(line: JSONObject): List<String> {
+        val data = line.optJSONArray("data") ?: return emptyList()
+        return buildList {
+            for (i in 0 until data.length()) {
+                val glyph = data.optString(i).trim()
+                if (glyph.isNotBlank()) add(glyph)
+            }
+        }
+    }
+
+    private fun parseOfficialPage(raw: String, expectedPage: Int): List<QulV4LineSpec>? {
+        val root = runCatching { JSONObject(raw) }.getOrNull() ?: return null
+        val pageNumber = root.optInt("page", root.optInt("page_number", expectedPage))
+        if (pageNumber != expectedPage) return null
+
+        val linesObject = root.optJSONObject("lines") ?: return null
+        val keys = buildList {
+            val iterator = linesObject.keys()
+            while (iterator.hasNext()) {
+                iterator.next().toIntOrNull()?.let(::add)
+            }
+        }.sorted()
+
+        val parsed = buildList {
+            keys.forEach { lineNumber ->
+                val line = linesObject.optJSONObject(lineNumber.toString()) ?: return@forEach
+                val type = line.optString("type", line.optString("line_type", "ayah"))
+                val alignment = line.optString("alignment")
+                val glyphs = readGlyphArray(line)
+                add(
+                    QulV4LineSpec(
+                        lineNumber = lineNumber,
+                        lineType = type,
+                        centered = when {
+                            alignment.equals("centered", ignoreCase = true) -> true
+                            alignment.equals("justified", ignoreCase = true) -> false
+                            else -> line.optBoolean("is_centered", false)
+                        },
+                        surahNumber = line.optInt("surah_number").takeIf { it > 0 },
+                        firstWordId = line.optInt("first_word_id").takeIf { it > 0 },
+                        lastWordId = line.optInt("last_word_id").takeIf { it > 0 },
+                        content = glyphs.joinToString(" "),
+                        glyphs = glyphs
+                    )
+                )
+            }
+        }
+
+        return parsed.takeIf { it.isNotEmpty() }
+    }
+
+    private fun loadOfficialPage(context: Context, page: Int): List<QulV4LineSpec>? {
+        val names = listOf(
+            "$page.json",
+            "page-$page.json",
+            "page-${page.toString().padStart(3, '0')}.json"
+        )
+
+        for (dir in OFFICIAL_PAGE_DIRS) {
+            for (name in names) {
+                val path = "$dir/$name"
+                val raw = runCatching {
+                    context.assets.open(path)
+                        .bufferedReader(Charsets.UTF_8)
+                        .use { it.readText() }
+                }.getOrNull() ?: continue
+
+                parseOfficialPage(raw, page)?.let { return it }
+            }
+        }
+        return null
+    }
+
+    private fun loadMonolithic(context: Context): Map<Int, List<QulV4LineSpec>> {
+        monolithic?.let { return it }
+
+        val raw = runCatching {
+            context.assets.open(MONOLITHIC_ASSET)
+                .bufferedReader(Charsets.UTF_8)
+                .use { it.readText() }
+        }.getOrNull() ?: return emptyMap()
+
+        val result = parseMonolithic(raw)
+        monolithic = result
+        result.forEach { (page, lines) -> pageCache.putIfAbsent(page, lines) }
+        return result
+    }
+
+    private fun parseMonolithic(raw: String): Map<Int, List<QulV4LineSpec>> {
         val out = LinkedHashMap<Int, List<QulV4LineSpec>>(604)
         val root = JSONTokener(raw).nextValue()
 
         fun parsePage(obj: JSONObject, fallbackPage: Int? = null) {
-            val pageNumber = obj.optInt("page_number", fallbackPage ?: 0)
+            val pageNumber = obj.optInt("page_number", obj.optInt("page", fallbackPage ?: 0))
             if (pageNumber !in 1..604) return
-            val lines = obj.optJSONArray("lines") ?: return
+
+            val array = obj.optJSONArray("lines")
+            if (array != null) {
+                val parsed = buildList {
+                    for (i in 0 until array.length()) {
+                        val line = array.optJSONObject(i) ?: continue
+                        val lineNumber = line.optInt("line_number", line.optInt("line", i + 1))
+                        if (lineNumber !in 1..15) continue
+
+                        val glyphs = readGlyphArray(line)
+                        val alignment = line.optString("alignment")
+                        add(
+                            QulV4LineSpec(
+                                lineNumber = lineNumber,
+                                lineType = line.optString(
+                                    "line_type",
+                                    line.optString("type", "ayah")
+                                ),
+                                centered = when {
+                                    alignment.equals("centered", true) -> true
+                                    alignment.equals("justified", true) -> false
+                                    else -> line.optBoolean("is_centered", false)
+                                },
+                                surahNumber = line.optInt("surah_number").takeIf { it > 0 },
+                                firstWordId = line.optInt("first_word_id").takeIf { it > 0 },
+                                lastWordId = line.optInt("last_word_id").takeIf { it > 0 },
+                                content = line.optString("content").ifBlank {
+                                    glyphs.joinToString(" ")
+                                },
+                                glyphs = glyphs
+                            )
+                        )
+                    }
+                }.sortedBy { it.lineNumber }
+
+                if (parsed.isNotEmpty()) out[pageNumber] = parsed
+                return
+            }
+
+            // Also accept the new QUL object-shaped "lines" representation when
+            // somebody concatenates page JSON files into one asset.
+            val lineObj = obj.optJSONObject("lines") ?: return
+            val keys = buildList {
+                val iterator = lineObj.keys()
+                while (iterator.hasNext()) iterator.next().toIntOrNull()?.let(::add)
+            }.sorted()
+
             val parsed = buildList {
-                for (i in 0 until lines.length()) {
-                    val line = lines.optJSONObject(i) ?: continue
-                    val lineNumber = line.optInt("line_number", i + 1)
-                    if (lineNumber <= 0) continue
+                keys.forEach { lineNumber ->
+                    val line = lineObj.optJSONObject(lineNumber.toString()) ?: return@forEach
+                    val glyphs = readGlyphArray(line)
+                    val alignment = line.optString("alignment")
                     add(
                         QulV4LineSpec(
                             lineNumber = lineNumber,
-                            lineType = line.optString("line_type", "ayah"),
-                            centered = line.optBoolean("is_centered", false),
+                            lineType = line.optString("type", line.optString("line_type", "ayah")),
+                            centered = when {
+                                alignment.equals("centered", true) -> true
+                                alignment.equals("justified", true) -> false
+                                else -> line.optBoolean("is_centered", false)
+                            },
                             surahNumber = line.optInt("surah_number").takeIf { it > 0 },
                             firstWordId = line.optInt("first_word_id").takeIf { it > 0 },
                             lastWordId = line.optInt("last_word_id").takeIf { it > 0 },
-                            content = line.optString("content")
+                            content = line.optString("content").ifBlank {
+                                glyphs.joinToString(" ")
+                            },
+                            glyphs = glyphs
                         )
                     )
                 }
-            }.sortedBy { it.lineNumber }
+            }
             if (parsed.isNotEmpty()) out[pageNumber] = parsed
         }
 
         when (root) {
             is JSONArray -> {
-                for (i in 0 until root.length()) root.optJSONObject(i)?.let { parsePage(it) }
+                for (i in 0 until root.length()) {
+                    root.optJSONObject(i)?.let { parsePage(it) }
+                }
             }
+
             is JSONObject -> {
                 val pages = root.optJSONArray("pages")
                 if (pages != null) {
-                    for (i in 0 until pages.length()) pages.optJSONObject(i)?.let { parsePage(it) }
+                    for (i in 0 until pages.length()) {
+                        pages.optJSONObject(i)?.let { parsePage(it) }
+                    }
                 } else {
                     val keys = root.keys()
                     while (keys.hasNext()) {
                         val key = keys.next()
-                        val obj = root.optJSONObject(key) ?: continue
-                        parsePage(obj, key.toIntOrNull())
+                        root.optJSONObject(key)?.let { parsePage(it, key.toIntOrNull()) }
                     }
                 }
             }
         }
+
         return out
     }
 }
@@ -362,7 +540,14 @@ private object QpcV4Source {
                         surah = line.optString("surah").toIntOrNull(),
                         qpcGlyphs = line.optString("qpcV2"),
                         words = words,
-                        centered = false
+                        centered = when {
+                            line.has("is_centered") -> line.optBoolean("is_centered", false)
+                            line.optString("alignment").equals("centered", ignoreCase = true) -> true
+                            line.optString("alignment").equals("justified", ignoreCase = true) -> false
+                            page <= 2 -> true
+                            line.optString("type", "text") == "basmala" -> true
+                            else -> false
+                        }
                     )
                 )
             }
@@ -383,22 +568,71 @@ private object QpcV4Source {
      * line breaks. If a line cannot be associated safely, visual rendering still
      * uses QUL's exact `content` and only per-word taps are omitted for that line.
      */
-    private fun applyQulLayout(legacy: QpcV4Page, specs: List<QulV4LineSpec>): QpcV4Page {
+    private fun splitQulContent(content: String): List<String> {
+        val clean = content
+            .replace("\u200e", "")
+            .replace("\u200f", "")
+            .replace("\u061c", "")
+            .replace("\ufeff", "")
+            .trim()
+
+        if (clean.isBlank()) return emptyList()
+
+        val words = clean.split(Regex("\\s+")).filter(String::isNotBlank)
+        return if (words.size > 1) words else listOf(clean)
+    }
+
+    /**
+     * QUL layout 19 is immutable page geometry.
+     *
+     * The renderer is NOT allowed to:
+     * - move a word to another row;
+     * - derive a new line break;
+     * - squeeze/stretch a QCF word;
+     * - replace a long kaf/lam/meem with Unicode text.
+     *
+     * `line_number`, line type and alignment come directly from QUL. The visible
+     * glyph stream also comes directly from QUL when the official JSON contains
+     * `data`; the existing local page JSON is retained only for interaction metadata.
+     */
+    private fun applyQulLayout(
+        legacy: QpcV4Page,
+        specs: List<QulV4LineSpec>
+    ): QpcV4Page {
         val legacyAyahWords = legacy.lines
-            .filterNot { it.type == "surah-header" || it.type == "surah_name" || it.type == "basmala" || it.type == "basmallah" }
+            .filterNot {
+                it.type == "surah-header" ||
+                        it.type == "surah_name" ||
+                        it.type == "basmala" ||
+                        it.type == "basmallah"
+            }
             .flatMap { it.words }
+
         var cursor = 0
 
-        fun consumeWords(content: String): List<QpcV4Word> {
-            val target = normalizedGlyphs(content)
+        fun consumeMetadata(spec: QulV4LineSpec): List<QpcV4Word> {
+            val source = when {
+                spec.glyphs.isNotEmpty() -> spec.glyphs.joinToString("")
+                else -> spec.content
+            }
+            val target = normalizedGlyphs(source)
+
             if (target.isBlank() || cursor >= legacyAyahWords.size) return emptyList()
-            val maxProbe = min(legacyAyahWords.lastIndex, cursor + 6)
+
+            /*
+             * This search is metadata-only. It does not control visual layout.
+             * A failed match merely disables per-word tap metadata for that line;
+             * the exact QUL visual line remains untouched.
+             */
+            val maxProbe = min(legacyAyahWords.lastIndex, cursor + 8)
             for (start in cursor..maxProbe) {
                 val acc = StringBuilder()
                 var end = start
-                while (end < legacyAyahWords.size && acc.length <= target.length + 8) {
+
+                while (end < legacyAyahWords.size && acc.length <= target.length + 16) {
                     acc.append(normalizedGlyphs(legacyAyahWords[end].glyph))
                     end++
+
                     val current = acc.toString()
                     if (current == target) {
                         cursor = end
@@ -407,34 +641,75 @@ private object QpcV4Source {
                     if (!target.startsWith(current)) break
                 }
             }
+
             return emptyList()
         }
 
-        val mapped = specs.sortedBy { it.lineNumber }.map { spec ->
-            val type = when (spec.lineType.lowercase()) {
-                "surah_name", "surah-name", "surah_header", "surah-header" -> "surah-header"
-                "basmallah", "basmala", "bismillah" -> "basmala"
-                else -> "text"
+        val mapped = specs
+            .filter { it.lineNumber in 1..15 }
+            .sortedBy { it.lineNumber }
+            .map { spec ->
+                val type = when (spec.lineType.lowercase()) {
+                    "surah_name", "surah-name", "surah_header", "surah-header", "surah" ->
+                        "surah-header"
+
+                    "basmallah", "basmala", "bismillah" ->
+                        "basmala"
+
+                    else ->
+                        "text"
+                }
+
+                val legacySameLine = legacy.lines.firstOrNull { it.line == spec.lineNumber }
+                val metadata = if (type == "text") consumeMetadata(spec) else emptyList()
+
+                val exactGlyphs = when {
+                    spec.glyphs.isNotEmpty() ->
+                        spec.glyphs.filter(String::isNotBlank)
+
+                    spec.content.isNotBlank() -> {
+                        val units = splitQulContent(spec.content)
+
+                        /*
+                         * Old all-pages exports sometimes stored the complete QCF
+                         * stream without whitespace. If metadata matched exactly,
+                         * retain its word boundaries while keeping the same glyphs.
+                         */
+                        if (
+                            units.size == 1 &&
+                            metadata.isNotEmpty() &&
+                            normalizedGlyphs(metadata.joinToString("") { it.glyph }) ==
+                            normalizedGlyphs(spec.content)
+                        ) {
+                            metadata.map { it.glyph }
+                        } else {
+                            units
+                        }
+                    }
+
+                    metadata.isNotEmpty() ->
+                        metadata.map { it.glyph }
+
+                    else ->
+                        splitQulContent(legacySameLine?.qpcGlyphs.orEmpty())
+                }
+
+                QpcV4Line(
+                    line = spec.lineNumber,
+                    type = type,
+                    text = legacySameLine?.text.orEmpty(),
+                    surah = spec.surahNumber ?: legacySameLine?.surah,
+                    qpcGlyphs = exactGlyphs.joinToString(" "),
+                    words = metadata,
+                    centered = spec.centered,
+                    layoutGlyphs = exactGlyphs
+                )
             }
-            val words = if (type == "text") consumeWords(spec.content) else emptyList()
-            val legacySameLine = legacy.lines.firstOrNull { it.line == spec.lineNumber }
-            QpcV4Line(
-                line = spec.lineNumber,
-                type = type,
-                text = legacySameLine?.text.orEmpty(),
-                surah = spec.surahNumber ?: legacySameLine?.surah,
-                qpcGlyphs = spec.content.ifBlank {
-                    if (words.isNotEmpty()) words.joinToString("") { it.glyph } else legacySameLine?.qpcGlyphs.orEmpty()
-                },
-                words = words,
-                // The first two Madani pages are a special opening spread.
-                // In QUL/Tarteel they are not justified like ordinary pages:
-                // every Quranic line keeps its natural width and is centered,
-                // which creates the characteristic rounded/oval silhouette.
-                centered = if (legacy.page <= 2 && type != "surah-header") true else spec.centered
-            )
-        }
-        return QpcV4Page(legacy.page, mapped)
+
+        return QpcV4Page(
+            page = legacy.page,
+            lines = mapped
+        )
     }
 }
 
@@ -774,7 +1049,7 @@ fun QpcV4MushafPage(
         fallbackContent()
         return
     }
-    val (qpcPage, typeface) = data
+    var (qpcPage, typeface) = data
 
     val fatihaMarkers = if (page == 1) buildMap<Int, String> {
         qpcPage.lines.flatMap { it.words }.forEach { word ->
@@ -815,14 +1090,53 @@ fun QpcV4MushafPage(
     }
 
     fun segmentsFor(line: QpcV4Line): List<MushafGlyphSegment> {
+        /*
+         * Exact QUL glyphs are the visual source of truth. Metadata is attached
+         * only when there is an unambiguous one-to-one correspondence.
+         */
+        if (line.layoutGlyphs.isNotEmpty()) {
+            val exact = line.layoutGlyphs.filter(String::isNotBlank)
+
+            if (exact.size == line.words.size && exact.isNotEmpty()) {
+                return buildList {
+                    exact.forEachIndexed { index, glyph ->
+                        val word = line.words[index]
+                        val key = canonicalToAppKey(word.location)
+                        val translation = translations[word.location].orEmpty()
+
+                        /*
+                         * In QCF V4 a verse-ending medallion may be encoded together
+                         * with the final word glyph. Do not split/re-shape it here:
+                         * QUL's exported glyph unit must stay byte-for-byte intact.
+                         */
+                        add(
+                            MushafGlyphSegment(
+                                glyph = glyph,
+                                key = key,
+                                translation = translation,
+                                active = key?.let(::activeKey) == true,
+                                isAyahMarker = false
+                            )
+                        )
+                    }
+                }
+            }
+
+            // Exact rendering wins over interaction metadata if counts differ.
+            return exact.map { MushafGlyphSegment(glyph = it) }
+        }
+
+        // Compatibility fallback for an older local asset without QUL glyph data.
         if (line.words.isEmpty()) {
             return splitGlyphUnits(line.qpcGlyphs).map { MushafGlyphSegment(glyph = it) }
         }
+
         return buildList {
             line.words.forEach { word ->
                 val key = canonicalToAppKey(word.location)
                 val translation = translations[word.location].orEmpty()
                 val (wordGlyph, originalMarker) = splitQpcGlyph(word.glyph, word.word)
+
                 if (wordGlyph.isNotBlank()) {
                     add(
                         MushafGlyphSegment(
@@ -834,21 +1148,15 @@ fun QpcV4MushafPage(
                     )
                 }
 
-                val loc = word.location.split(':').mapNotNull(String::toIntOrNull)
-                val canonicalSurah = loc.getOrNull(0) ?: 0
-                val canonicalAyah = loc.getOrNull(1) ?: 0
-                val canonicalPosition = loc.getOrNull(2) ?: 0
-                if (page == 1 && canonicalSurah == 1 && canonicalAyah == 7 && canonicalPosition == 4) {
-                    fatihaMarkers[6]?.takeIf(String::isNotBlank)?.let { marker ->
-                        add(MushafGlyphSegment(marker, "1:6", active = activeKey("1:6"), isAyahMarker = true))
-                    }
-                }
                 if (originalMarker.isNotBlank() && key != null && key != "bismillah") {
-                    val appAyah = key.substringAfter(':').toIntOrNull() ?: 0
-                    val marker = if (page == 1 && canonicalSurah == 1) {
-                        fatihaMarkers[appAyah].orEmpty().ifBlank { originalMarker }
-                    } else originalMarker
-                    add(MushafGlyphSegment(marker, key, active = activeKey(key), isAyahMarker = true))
+                    add(
+                        MushafGlyphSegment(
+                            glyph = originalMarker,
+                            key = key,
+                            active = activeKey(key),
+                            isAyahMarker = true
+                        )
+                    )
                 }
             }
         }
@@ -857,57 +1165,123 @@ fun QpcV4MushafPage(
     BoxWithConstraints(modifier = modifier.fillMaxSize()) {
         val density = LocalDensity.current
 
-        // QUL gives us the physical 15-line Madani layout. Do not derive the page
-        // geometry from the phone's *height*: on tall screens that stretches the
-        // printed page vertically. The physical line pitch is instead anchored to
-        // page width, just like a real Mushaf. 1.74 is the measured 15-line body
-        // height/width ratio of the QPC Madani page; maxHeight is only a safety cap
-        // for short devices / split-screen.
-        val physicalSlots = 15
-        val qulGridHeight = minOf(maxHeight, maxWidth * 1.74f)
-        val slotHeight = qulGridHeight / physicalSlots.toFloat()
-
-        // QUL/QPC v4 is a 15-line print layout: the rows are tall, but the glyph body
-        // occupies only about half of that pitch. Using most of the row height (the old
-        // .75 factor) made the exact QUL word groups wider than the page and clipped the
-        // first/last words. Keep one *physical* glyph size for all 604 pages, derived
-        // only from the 15-line grid. This matches the proportions of the QUL preview
-        // much more closely and deliberately does not depend on how many words a page has.
-        val lineFontSize = with(density) { (slotHeight * .52f).toSp() }
-
+        /*
+         * DEVICE-ADAPTIVE QUL PAGE GEOMETRY
+         * ---------------------------------
+         * QUL layout 19 owns the line breaks. The device only decides how large the
+         * already-defined page can be drawn inside the available Mushaf viewport.
+         *
+         * Pages 3..604:
+         * - exactly 15 equal-height physical rows;
+         * - the grid always occupies the complete available height;
+         * - one common font size is used for every Quran row on the page;
+         * - the common size is reduced only when the widest REAL glyph ink would not
+         *   fit horizontally.
+         *
+         * Pages 1..2 are the printed opening spread. QUL contains only the visible
+         * opening rows there (8 rows in the supplied layout), and all Quran rows are
+         * centered. Spreading those rows over 15 slots would push the opening into the
+         * upper half of the screen, so the opening uses its own equal-height row grid.
+         * This preserves the characteristic rounded silhouette.
+         */
         val sortedLines = qpcPage.lines.sortedBy { it.line }
+        val openingPage = page <= 2
+        val physicalSlots = if (openingPage) {
+            sortedLines.maxOfOrNull { it.line }?.coerceAtLeast(1) ?: 8
+        } else {
+            15
+        }
+
+        // Small page frame only. Glyph overhang protection is handled again inside
+        // QpcMushafLineView using the exact same safety model.
+        val outerHorizontalInset = maxWidth * .012f
+        val contentWidth = (maxWidth - outerHorizontalInset * 2f)
+            .coerceAtLeast(maxWidth * .80f)
+        val contentWidthPx = with(density) { contentWidth.toPx() }.coerceAtLeast(1f)
+        val viewportHeightPx = with(density) { maxHeight.toPx() }.coerceAtLeast(1f)
+        val slotHeightPx = viewportHeightPx / physicalSlots.toFloat()
 
         /*
-         * Pages 1–2 are the Madani opening spread and intentionally do NOT use the
-         * ordinary full-width page geometry. QUL/Tarteel renders those lines as one
-         * compact centered block with natural line widths. The empty rows are real
-         * page space; we must not enlarge the glyphs to fill them.
-         *
-         * We keep the same 15-row pitch and the same font size as pages 3–604, but
-         * move the complete opening block into the middle/top-middle of that frame.
-         * This preserves the familiar "round" opening-page silhouette.
+         * Width normally determines the familiar Mushaf text size. Height is only a
+         * hard ceiling so unusually short devices, split-screen and landscape can
+         * never clip harakat vertically. This also keeps the text size stable when
+         * there is ordinary spare vertical room.
          */
-        val isOpeningSpread = page == 1 || page == 2
-        val exportedMinLine = sortedLines.minOfOrNull { it.line } ?: 1
-        val exportedMaxLine = sortedLines.maxOfOrNull { it.line } ?: 1
-        val exportedSpan = (exportedMaxLine - exportedMinLine + 1).coerceAtLeast(1)
+        val widthDrivenFontPx = contentWidthPx * if (openingPage) .078f else .064f
+        val heightDrivenFontPx = slotHeightPx * if (openingPage) .58f else .62f
+        val candidateFontPx = min(widthDrivenFontPx, heightDrivenFontPx).coerceAtLeast(1f)
 
-        val openingStartSlot = if (isOpeningSpread) {
-            // QUL opening pages occupy a compact block rather than all 15 rows.
-            // Bias the block slightly upward, matching the printed/Tarteel spread.
-            ((physicalSlots - exportedSpan) / 2).coerceAtLeast(0)
-        } else 0
+        val fitPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.SUBPIXEL_TEXT_FLAG).apply {
+            typeface = typeface
+            textSize = candidateFontPx
+            textScaleX = 1f
+            isAntiAlias = true
+            isSubpixelText = true
+        }
 
-        val lineBySlot = sortedLines.associateBy { line ->
-            if (isOpeningSpread) {
-                (line.line - exportedMinLine + 1 + openingStartSlot).coerceIn(1, physicalSlots)
+        fun measuredInkWidth(segments: List<MushafGlyphSegment>, gapPx: Float): Float {
+            if (segments.isEmpty()) return 0f
+
+            val bounds = Rect()
+            var cursorRight = 0f
+            var minInk = Float.POSITIVE_INFINITY
+            var maxInk = Float.NEGATIVE_INFINITY
+
+            segments.forEachIndexed { index, segment ->
+                val glyph = segment.glyph
+                val advance = fitPaint.measureText(glyph).coerceAtLeast(0f)
+                val drawX = cursorRight - advance
+
+                bounds.setEmpty()
+                if (glyph.isNotEmpty()) {
+                    fitPaint.getTextBounds(glyph, 0, glyph.length, bounds)
+                }
+
+                minInk = min(minInk, drawX + bounds.left.toFloat())
+                maxInk = max(maxInk, drawX + bounds.right.toFloat())
+
+                cursorRight = drawX
+                if (index != segments.lastIndex) cursorRight -= gapPx
+            }
+
+            return if (minInk.isFinite() && maxInk.isFinite()) {
+                (maxInk - minInk).coerceAtLeast(0f)
             } else {
-                line.line.coerceIn(1, physicalSlots)
+                0f
             }
         }
 
+        // Centered opening rows keep a visible natural word gap. Rectangular pages
+        // are measured with the minimum safe gap; any remaining width is distributed
+        // by the Canvas renderer as justification spacing.
+        val fitGapPx = candidateFontPx * if (openingPage) .10f else .035f
+        val widestQuranLinePx = sortedLines
+            .filter { it.type != "surah-header" }
+            .maxOfOrNull { line -> measuredInkWidth(segmentsFor(line), fitGapPx) }
+            ?: 0f
+
+        // Same formula is used inside QpcMushafLineView. The extra 0.99 factor covers
+        // integer glyph bounds / anti-aliasing rounding differences across Android GPUs.
+        val pageSafetyPx = max(candidateFontPx * .18f, contentWidthPx * .014f)
+        val printableWidthPx = (contentWidthPx - pageSafetyPx * 2f).coerceAtLeast(1f)
+        val widthScale = if (widestQuranLinePx > printableWidthPx && widestQuranLinePx > 0f) {
+            (printableWidthPx / widestQuranLinePx).coerceIn(.01f, 1f)
+        } else {
+            1f
+        }
+        val fittedFontPx = (candidateFontPx * widthScale * .99f).coerceAtLeast(1f)
+        val lineFontSize = with(density) { fittedFontPx.toSp() }
+
+        val lineBySlot = sortedLines.associateBy { line ->
+            line.line.coerceIn(1, physicalSlots)
+        }
+
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
-            Column(Modifier.fillMaxWidth().height(qulGridHeight)) {
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = outerHorizontalInset)
+            ) {
                 for (slot in 1..physicalSlots) {
                     val line = lineBySlot[slot]
                     val rowModifier = Modifier
@@ -925,17 +1299,14 @@ fun QpcV4MushafPage(
                             val surah = surahId?.let { id -> quranMeta?.surahs?.firstOrNull { it.id == id } }
                             Box(rowModifier, contentAlignment = Alignment.Center) {
                                 surah?.let { sm ->
-                                    // Keep the title inside one physical Mushaf row. The old
-                                    // Russian pill changed the page geometry and made pages 1/2
-                                    // unlike a real Mushaf opening.
                                     androidx.compose.material3.Surface(
                                         shape = androidx.compose.foundation.shape.RoundedCornerShape(m.corner * .18f),
                                         color = androidx.compose.ui.graphics.Color.Transparent,
                                         border = androidx.compose.foundation.BorderStroke(m.xs * .055f, colors.mushafLineStrong),
-                                        modifier = Modifier.fillMaxWidth(.94f)
+                                        modifier = Modifier.fillMaxWidth(if (openingPage) .74f else .94f)
                                     ) {
                                         Box(
-                                            Modifier.fillMaxWidth().padding(horizontal = m.sm, vertical = m.xs * .12f),
+                                            Modifier.fillMaxWidth().padding(horizontal = m.sm, vertical = m.xs * .10f),
                                             contentAlignment = Alignment.Center
                                         ) {
                                             Text(
@@ -951,11 +1322,9 @@ fun QpcV4MushafPage(
                                 }
                             }
                         }
+
                         "basmala" -> {
                             val ready = bismillahPayload
-                            // QUL normally carries surah_number on the basmala line.
-                            // Fall back to the next Quranic line so the basmala still
-                            // belongs to the surah it visually introduces.
                             val nextQuranLine = sortedLines.firstOrNull { candidate ->
                                 candidate.line > line.line && candidate.type != "surah-header" && candidate.type != "basmala"
                             }
@@ -965,11 +1334,36 @@ fun QpcV4MushafPage(
                                 ?: 1
                             val basmalaKey = "bismillah:$basmalaSurah"
                             Box(rowModifier, contentAlignment = Alignment.Center) {
-                                if (ready != null && ready.first.isNotEmpty()) {
+                                val exactBasmala = line.layoutGlyphs
+                                    .filter(String::isNotBlank)
+                                    .map {
+                                        MushafGlyphSegment(
+                                            glyph = it,
+                                            key = basmalaKey,
+                                            active = activeKey(basmalaKey)
+                                        )
+                                    }
+
+                                if (exactBasmala.isNotEmpty()) {
+                                    QpcMushafCanvasLine(
+                                        segments = exactBasmala,
+                                        typeface = typeface,
+                                        centered = true,
+                                        fontSize = lineFontSize,
+                                        textColor = colors.mushafInk.toArgb(),
+                                        onSegmentClick = ::clickSegment,
+                                        modifier = Modifier.fillMaxSize()
+                                    )
+                                } else if (ready != null && ready.first.isNotEmpty()) {
                                     val segments = ready.first.map { word ->
                                         val glyph = stripVerseNumberGlyph(word.glyph, word.word)
-                                        MushafGlyphSegment(glyph = glyph, key = basmalaKey, active = activeKey(basmalaKey))
+                                        MushafGlyphSegment(
+                                            glyph = glyph,
+                                            key = basmalaKey,
+                                            active = activeKey(basmalaKey)
+                                        )
                                     }.filter { it.glyph.isNotBlank() }
+
                                     QpcMushafCanvasLine(
                                         segments = segments,
                                         typeface = ready.second,
@@ -991,15 +1385,16 @@ fun QpcV4MushafPage(
                                 }
                             }
                         }
+
                         else -> {
                             val segments = segmentsFor(line)
                             QpcMushafCanvasLine(
                                 segments = segments,
                                 typeface = typeface,
-                                // Pages 1–2 are the special opening spread: never justify
-                                // them edge-to-edge. Natural centered widths are what form
-                                // the rounded Tarteel/QUL geometry.
-                                centered = if (isOpeningSpread) true else line.centered,
+                                // QUL page 1/2 rows are all centered. If the bundled
+                                // per-page fallback lacks is_centered metadata, keep
+                                // the opening spread faithful anyway.
+                                centered = openingPage || line.centered,
                                 fontSize = lineFontSize,
                                 textColor = colors.mushafInk.toArgb(),
                                 onSegmentClick = ::clickSegment,
@@ -1023,17 +1418,23 @@ private data class MushafGlyphSegment(
 
 private fun splitGlyphUnits(text: String): List<String> {
     if (text.isBlank()) return emptyList()
-    val out = ArrayList<String>()
-    var index = 0
-    while (index < text.length) {
-        val cp = Character.codePointAt(text, index)
-        val unit = String(Character.toChars(cp))
-        if (!unit.all(Char::isWhitespace) && cp != 0x200E && cp != 0x200F && cp != 0x061C && cp != 0xFEFF) {
-            out += unit
-        }
-        index += Character.charCount(cp)
-    }
-    return out
+
+    val clean = text
+        .replace("\u200e", "")
+        .replace("\u200f", "")
+        .replace("\u061c", "")
+        .replace("\ufeff", "")
+        .trim()
+
+    if (clean.isBlank()) return emptyList()
+
+    /*
+     * Never split a QCF visual word into individual Unicode code points.
+     * A single exported QUL word can itself contain multiple glyph codes
+     * (for example a word plus its verse-ending ornament).
+     */
+    val words = clean.split(Regex("\\s+")).filter(String::isNotBlank)
+    return if (words.size > 1) words else listOf(clean)
 }
 
 @Composable
@@ -1070,8 +1471,8 @@ private fun QpcMushafCanvasLine(
  * QUL explicitly marks each line as centered or fully justified. TextView's
  * single-line AutoSize/RTL layout repeatedly clipped the first glyph and changed
  * scale when the player appeared. This view measures the real page-font glyphs,
- * draws them right-to-left on Canvas, distributes only the inter-glyph space for
- * justified lines, and shrinks one line only when its measured ink cannot fit.
+ * draws them right-to-left on Canvas and never changes one row's font size.
+ * QUL line breaks are immutable: this class only positions the exported glyphs.
  */
 private class QpcMushafLineView(context: Context) : View(context) {
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.SUBPIXEL_TEXT_FLAG)
@@ -1141,8 +1542,16 @@ private class QpcMushafLineView(context: Context) : View(context) {
         val baseline: Float
     )
 
+    private data class InkMetrics(
+        val minX: Float,
+        val maxX: Float
+    ) {
+        val width: Float get() = (maxX - minX).coerceAtLeast(0f)
+    }
+
     private fun calculateLayout(): LayoutResult? {
         if (width <= 0 || height <= 0 || segments.isEmpty()) return null
+
         paint.typeface = pageTypeface
         paint.textSize = targetTextSizePx
         paint.textScaleX = 1f
@@ -1150,50 +1559,136 @@ private class QpcMushafLineView(context: Context) : View(context) {
         paint.isAntiAlias = true
         paint.isSubpixelText = true
 
-        fun measure(): FloatArray = FloatArray(segments.size) { i ->
+        /*
+         * IMPORTANT: Paint.measureText() returns ADVANCE width, not actual painted
+         * bounds. QCF/KFGQPC glyphs very often overhang their advance: a long kaf or
+         * lam stroke, dots/harakat and the ayah medallion can extend to either side.
+         *
+         * The previous implementation justified the sum of advances exactly to the
+         * View width. The logical row therefore "fit", but the visible ink could lie
+         * outside x=0..width and Android clipped it. That is what the tester screenshot
+         * shows: several rows lose the first/last strokes even though maxWidth itself
+         * is correct.
+         *
+         * Keep one common font size. Fit only by inter-word spacing and by positioning
+         * the logical row so the REAL ink bounds stay inside the View.
+         */
+        val widths = FloatArray(segments.size) { i ->
             paint.measureText(segments[i].glyph).coerceAtLeast(0f)
         }
 
-        // Preserve the native QPC glyph proportions. QUL owns the line breaks, while
-        // is_centered tells us whether the row is centered or justified. Never use
-        // textScaleX: if a device/font rasterizer produces a tiny width overshoot, the
-        // emergency fit below changes X and Y together, so letters keep their shape.
-        val safety = max(3f, width.toFloat() * .014f)
-        val available = (width.toFloat() - safety * 2f).coerceAtLeast(1f)
-        val countGaps = (segments.size - 1).coerceAtLeast(0)
-
-        var widths = measure()
-        var ink = widths.sum()
-        var naturalGap = max(paint.measureText(" "), paint.textSize * .010f)
-        val naturalTotal = ink + naturalGap * countGaps
-        if (naturalTotal > available) {
-            // This is only a safety net. With the QUL .52 grid scale it normally stays
-            // at 1.0 on all 604 pages. Unlike horizontal squeezing, this is isotropic.
-            val fit = (available / naturalTotal).coerceIn(.86f, 1f)
-            paint.textSize *= fit
-            widths = measure()
-            ink = widths.sum()
-            naturalGap = max(paint.measureText(" "), paint.textSize * .010f)
+        val glyphBounds = Array(segments.size) { Rect() }
+        segments.forEachIndexed { index, segment ->
+            val glyph = segment.glyph
+            if (glyph.isNotEmpty()) {
+                paint.getTextBounds(glyph, 0, glyph.length, glyphBounds[index])
+            }
         }
+
+        fun inkMetrics(gapPx: Float): InkMetrics {
+            var cursorRight = 0f
+            var minInk = Float.POSITIVE_INFINITY
+            var maxInk = Float.NEGATIVE_INFINITY
+
+            segments.forEachIndexed { index, _ ->
+                val advance = widths[index]
+                val drawX = cursorRight - advance
+                val b = glyphBounds[index]
+
+                val inkLeft = drawX + b.left.toFloat()
+                val inkRight = drawX + b.right.toFloat()
+                minInk = min(minInk, inkLeft)
+                maxInk = max(maxInk, inkRight)
+
+                cursorRight = drawX
+                if (index != segments.lastIndex) cursorRight -= gapPx
+            }
+
+            if (!minInk.isFinite() || !maxInk.isFinite()) return InkMetrics(0f, 0f)
+            return InkMetrics(minInk, maxInk)
+        }
+
+        // Keep real painted ink away from the View edge. This safety is deliberately
+        // larger than a typographic space because QCF glyphs and ayah medallions can
+        // overhang their logical advance. The page-level scaler uses the same formula.
+        val safety = max(paint.textSize * .18f, width.toFloat() * .014f)
+        val availableInk = (width.toFloat() - safety * 2f).coerceAtLeast(1f)
+        val countGaps = (segments.size - 1).coerceAtLeast(0)
+        val zeroGapInk = inkMetrics(0f)
 
         val gap: Float
-        val rightEdge: Float
-        if (centered || segments.size <= 1) {
-            gap = naturalGap
-            val total = ink + gap * countGaps
-            rightEdge = width / 2f + total / 2f
+        val metrics: InkMetrics
+
+        if (countGaps <= 0) {
+            gap = 0f
+            metrics = zeroGapInk
         } else {
-            // QUL is_centered=false => fully justified line. We fill the remaining
-            // width with inter-word spacing, exactly as the layout data requests.
-            gap = if (segments.size > 1 && ink < available) {
-                (available - ink) / countGaps
-            } else 0f
-            rightEdge = width.toFloat() - safety
+            // Largest gap that is guaranteed to keep the ACTUAL painted ink inside
+            // the row. If rounding on a particular device leaves less room than the
+            // preferred gap, fitting wins over appearance -- glyphs are never clipped.
+            val maxFitGap = ((availableInk - zeroGapInk.width) / countGaps).coerceAtLeast(0f)
+            gap = if (centered) {
+                val naturalGap = paint.textSize * .10f
+                naturalGap.coerceAtMost(maxFitGap)
+            } else {
+                /*
+                 * QUL non-centered lines are fully justified. Use all remaining space
+                 * between exported word-glyph units instead of stretching the glyphs
+                 * themselves. This keeps pages 3..604 rectangular while preserving
+                 * the exact QPC shapes (textScaleX always stays 1f).
+                 */
+                maxFitGap
+            }
+            metrics = inkMetrics(gap)
         }
 
-        val fm = paint.fontMetrics
-        val baseline = height / 2f - (fm.ascent + fm.descent) / 2f
-        return LayoutResult(paint.textSize, widths, gap, rightEdge, baseline)
+        /*
+         * `metrics` is measured with a logical cursorRight of 0. Translate that row
+         * into the View by choosing rightEdge. For a normal row the rightmost painted
+         * pixel lands at width-safety; for a centred row the painted ink (not the
+         * logical advances) is centred. This removes both left and right clipping.
+         */
+        val rightEdge = if (centered || segments.size <= 1) {
+            val desired = width / 2f - (metrics.minX + metrics.maxX) / 2f
+            val minShift = safety - metrics.minX
+            val maxShift = width.toFloat() - safety - metrics.maxX
+            if (minShift <= maxShift) desired.coerceIn(minShift, maxShift) else maxShift
+        } else {
+            width.toFloat() - safety - metrics.maxX
+        }
+
+        /*
+         * Center vertically by REAL glyph ink as well. FontMetrics describes the
+         * entire font, not necessarily the current QCF glyphs, so using it alone can
+         * place dots/harakat outside a short row on some Android rasterizers.
+         */
+        var minTop = Float.POSITIVE_INFINITY
+        var maxBottom = Float.NEGATIVE_INFINITY
+        glyphBounds.forEach { b ->
+            if (!b.isEmpty) {
+                minTop = min(minTop, b.top.toFloat())
+                maxBottom = max(maxBottom, b.bottom.toFloat())
+            }
+        }
+
+        val baseline = if (minTop.isFinite() && maxBottom.isFinite()) {
+            val desired = height / 2f - (minTop + maxBottom) / 2f
+            val verticalSafety = max(1f, min(height.toFloat() * .06f, paint.textSize * .12f))
+            val minBaseline = verticalSafety - minTop
+            val maxBaseline = height.toFloat() - verticalSafety - maxBottom
+            if (minBaseline <= maxBaseline) desired.coerceIn(minBaseline, maxBaseline) else desired
+        } else {
+            val fm = paint.fontMetrics
+            height / 2f - (fm.ascent + fm.descent) / 2f
+        }
+
+        return LayoutResult(
+            textSize = targetTextSizePx,
+            widths = widths,
+            gap = gap,
+            rightEdge = rightEdge,
+            baseline = baseline
+        )
     }
 
     private fun drawGlyphs(canvas: Canvas, collectHits: Boolean) {

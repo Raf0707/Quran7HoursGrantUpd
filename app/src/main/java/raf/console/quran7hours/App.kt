@@ -1,4 +1,4 @@
-package raf.quran7hours.app
+package raf.console.quran7hours
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
@@ -35,7 +35,9 @@ import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Navigation
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -62,6 +64,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import raf.console.quran7hours.AudioScreen
+import raf.console.quran7hours.ReciterDownloadsScreen
 
 private data class NavItem(val label: String, val icon: ImageVector, val route: AppRoute)
 
@@ -94,7 +98,7 @@ fun Quran7HoursApp() {
     val playerTrack by audio.track.collectAsState()
     val hadrVisible by audio.hadrVisible.collectAsState()
     val navigator = remember { AppNavigator() }
-    var coordinate by remember { mutableStateOf(ReaderCoordinate()) }
+    val coordinate by preferences.readerCoordinate.collectAsState()
     var menuSheet by remember { mutableStateOf(false) }
     var jumpDialog by remember { mutableStateOf(false) }
     var readerMenuRequest by remember { mutableStateOf(0) }
@@ -171,6 +175,14 @@ fun Quran7HoursApp() {
                             },
                             onMenu = { menuSheet = true }
                         )
+                        if (!isReadingRoute(navigator.route)) {
+                            ReturnToReadingBar(
+                                m = metrics,
+                                coordinate = coordinate,
+                                mode = settings.readingMode,
+                                onReturn = { navigator.go(readRoute) }
+                            )
+                        }
                         Box(Modifier.weight(1f).fillMaxWidth()) {
                             AnimatedContent(
                                 targetState = navigator.route,
@@ -193,11 +205,12 @@ fun Quran7HoursApp() {
                             ) { route ->
                                 when (route) {
                                     AppRoute.Home -> HomeScreen(metrics, repository, preferences, navigator)
-                                    AppRoute.Audio -> AudioScreen(metrics, repository, preferences, audio)
+                                    AppRoute.Audio -> AudioScreen(metrics, repository, preferences, audio, navigator)
+                                    AppRoute.AudioDownloads -> ReciterDownloadsScreen(metrics, preferences) { navigator.back() }
                                     AppRoute.Bookmarks -> BookmarksScreen(metrics, repository, preferences, navigator)
                                     AppRoute.Settings -> SettingsScreen(metrics, repository, preferences)
-                                    is AppRoute.AyahRoute -> ReaderScreen(metrics, repository, preferences, audio, navigator, route, menuRequest = readerMenuRequest, onCoordinate = { coordinate = it })
-                                    is AppRoute.PageRoute -> ReaderScreen(metrics, repository, preferences, audio, navigator, route, menuRequest = readerMenuRequest, onCoordinate = { coordinate = it })
+                                    is AppRoute.AyahRoute -> ReaderScreen(metrics, repository, preferences, audio, navigator, route, menuRequest = readerMenuRequest, onCoordinate = { preferences.saveReaderCoordinate(it) })
+                                    is AppRoute.PageRoute -> ReaderScreen(metrics, repository, preferences, audio, navigator, route, menuRequest = readerMenuRequest, onCoordinate = { preferences.saveReaderCoordinate(it) })
                                 }
                             }
 
@@ -248,6 +261,42 @@ fun Quran7HoursApp() {
                     jumpDialog = false
                     navigator.go(route)
                 }
+            }
+        }
+    }
+}
+
+private fun isReadingRoute(route: AppRoute): Boolean =
+    route is AppRoute.AyahRoute || route is AppRoute.PageRoute
+
+@Composable
+private fun ReturnToReadingBar(
+    m: AdaptiveMetrics,
+    coordinate: ReaderCoordinate,
+    mode: ReadingMode,
+    onReturn: () -> Unit
+) {
+    val location = when (mode) {
+        ReadingMode.SURAH -> "Сура ${coordinate.surah} · аят ${coordinate.ayah}"
+        ReadingMode.PAGE -> "Страница ${coordinate.page}"
+        ReadingMode.MUSHAF -> "Мусхаф · страница ${coordinate.page}"
+    }
+    Surface(
+        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = .45f),
+        tonalElevation = m.xs * .10f
+    ) {
+        Row(
+            Modifier.fillMaxWidth().padding(horizontal = m.md, vertical = m.xs),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(m.sm)
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text(location, fontSize = m.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Button(onClick = onReturn) {
+                Icon(Icons.Default.MenuBook, contentDescription = null, modifier = Modifier.width(m.iconSmall).height(m.iconSmall))
+                Spacer(Modifier.width(m.xs))
+                Text("Вернуться к чтению", fontSize = m.bodySmall)
             }
         }
     }
@@ -428,7 +477,8 @@ private fun RailItem(m: AdaptiveMetrics, item: NavItem, current: AppRoute, onNav
 
 private fun sameSection(current: AppRoute, target: AppRoute): Boolean = when (target) {
     AppRoute.Home -> current == AppRoute.Home
-    AppRoute.Audio -> current == AppRoute.Audio
+    AppRoute.Audio -> current == AppRoute.Audio || current == AppRoute.AudioDownloads
+    AppRoute.AudioDownloads -> current == AppRoute.Audio || current == AppRoute.AudioDownloads
     AppRoute.Bookmarks -> current == AppRoute.Bookmarks
     AppRoute.Settings -> current == AppRoute.Settings
     is AppRoute.AyahRoute -> current is AppRoute.AyahRoute || current is AppRoute.PageRoute
